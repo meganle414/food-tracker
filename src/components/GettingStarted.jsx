@@ -1,13 +1,16 @@
 import React from 'react';
 import {View, Text, Image, ScrollView, TextInput, StyleSheet, Dimensions} from 'react-native';
-import Carousel from 'react-native-snap-carousel'
 
 const screenwidth = Dimensions.get("window").width;
 const screenheight = Dimensions.get("window").height;
 
 const App = () => {
     const cards = [
-        {"id": 1, "image": require("../images/hazel_swimming.png"), "text": "deez"},
+        {"id": 1, "image": require("../images/hazel_swimming.png"), "text": "deez 1"},
+        {"id": 2, "image": require("../images/business.png"), "text": "deez 2"},
+        {"id": 3, "image": require("../images/pleasure.png"), "text": "deez 3"},
+        {"id": 4, "image": require("../images/owo7.png"), "text": "deez 4"},
+        {"id": 5, "image": require("../images/tired.png"), "text": "deez 5"},
     ]
     return (
         <>
@@ -19,6 +22,7 @@ const App = () => {
                         <Image
                             source={card.image}
                             style={styles.image}
+                            resizeMode='contain'
                         >
                         </Image>
                         <Text style={styles.text}>{card.text}</Text>
