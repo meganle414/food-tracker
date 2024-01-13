@@ -26,7 +26,7 @@ const App = () => {
                 })
             }
         </View>
-        <View style={style.overlay}>
+        <View style={styles.overlay}>
             {/* put  left and right arrows here*/}
             
         </View>
