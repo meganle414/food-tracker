@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 25,
     top: '50%',
-    transform: [{ translateY: 250 }],
+    transform: [{ translateY: 325 }],
     width: 50,
     height: 50,
     alignItems: 'center',
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 25,
     top: '50%',
-    transform: [{ translateY: 250 }],
+    transform: [{ translateY: 325 }],
     width: 50,
     height: 50,
     alignItems: 'center',
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   dotContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 140,
+    marginBottom: 65,
   },
   dot: {
     width: 10,
