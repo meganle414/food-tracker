@@ -5,8 +5,6 @@ import GettingStarted from './src/components/GettingStarted'
 import PropTypes from 'prop-types';
 
 export default function App() {
-  console.warn('ViewPropTypes has been removed from React Native. Please use PropTypes instead.');
-
   return (
     <GettingStarted></GettingStarted>
   );

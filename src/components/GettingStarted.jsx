@@ -1,22 +1,48 @@
-import React, { useRef } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Carousel from 'react-native-snap-carousel';
 import PropTypes from 'deprecated-react-native-prop-types';
 
 const cards = [
-  { id: 1, image: require('../images/hazel_swimming.png'), text: 'Welcome', subtext: 'Thank you for choosing Food Tracker by Megan L' },
-  { id: 2, image: require('../images/business.png'), text: 'What is your calories intake goal per day?', subtext: 'On average, a woman should eat 2000 calories per day to maintain her weight, and she should limit her caloric intake to 1500 or less in order to lose one pound per week. For the average male to maintain his body weight, he should eat 2500 calories per day, or 2000 a day if he wants to lose one pound per week.' },
+  { id: 1, image: require('../images/hazel_swimming.png'), text: 'Welcome', subtext: 'Thank you for choosing Food Tracker by Megan L\n\n\n\n\n\n' },
+  { id: 2, image: require('../images/business.png'), text: 'What is your calories intake goal?', subtext: '' },
   { id: 3, image: require('../images/pleasure.png'), text: 'deez 3', subtext: 'deez 3' },
   { id: 4, image: require('../images/owo7.png'), text: 'deez 4', subtext: 'deez 4' },
-  { id: 5, image: require('../images/tired.png'), text: 'deez 5', subtext: 'deez 5' },
+  { id: 5, image: require('../images/tired.png'), text: 'All set!', subtext: 'Press the "Finish" button to continue' },
 ];
 
 const App = () => {
   const carouselRef = useRef(null);
-  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedValue, setSelectedValue] = useState(null);
 
   const renderItem = ({ item }) => {
+    // if at the calorie intake goal selection card, provide calories choices
+    if (item.id === 2) {
+      return (
+        <View style={styles.cardContainer}>
+          <Image source={item.image} style={styles.cardImage} />
+          <Text style={styles.cardText}>{item.text}</Text>
+          <FlatList
+            data={Array.from({ length: 14 }, (_, i) => i * 100 + 1200)}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={[styles.optionContainer, selectedValue === item ? styles.selectedOption : null]}
+                onPress={() => {
+                  setSelectedValue(item);
+                }}
+              >
+                <Text style={styles.optionText}>{item}</Text>
+              </TouchableOpacity>
+            )}
+            keyExtractor={item => item.toString()}
+            contentContainerStyle={styles.optionList}
+            extraData={selectedValue}
+          />
+        </View>
+      );
+    }
     return (
       <View style={styles.cardContainer}>
         <Image source={item.image} style={styles.cardImage} />
@@ -31,24 +57,27 @@ const App = () => {
   };
 
   const renderArrow = (direction) => {
-    if (direction === 'left') {
+    if (direction === 'left' && activeIndex !== 0) {
       return (
         <TouchableOpacity
           style={styles.arrowContainer}
-          onPress={() => carouselRef.current?.snapToPrev()}>
+          onPress={() => carouselRef.current?.snapToPrev()}
+        >
           <Image source={require('../images/left_arrow.png')} style={styles.arrowImage} />
         </TouchableOpacity>
-      );
-    } else {
+      )
+    } else if (direction === 'right' && activeIndex !== cards.length - 1) {
       return (
         <TouchableOpacity
           style={styles.arrowContainer}
-          onPress={() => carouselRef.current?.snapToNext()}>
+          onPress={() => carouselRef.current?.snapToNext()}
+        >
           <Image source={require('../images/right_arrow.png')} style={styles.arrowImage} />
         </TouchableOpacity>
-      );
+      )
     }
-  };
+    return null
+  }
 
   const renderDots = () => {
     const dots = [];
@@ -96,10 +125,11 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     color: '#222222',
     marginTop: 50,
+    textAlign: 'center',
   },
   cardContainer: {
     width: 300,
-    height: 300,
+    height: 500,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -116,7 +146,6 @@ const styles = StyleSheet.create({
   },
   cardSubText: {
     fontSize: 18,
-    marginTop: 32,
     marginBottom: 16,
   },
   arrowContainerLeft: {
@@ -158,6 +187,19 @@ const styles = StyleSheet.create({
   },
   activeDot: {
     backgroundColor: 'black',
+  },
+  optionContainer: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  optionText: {
+    fontSize: 18,
+  },
+  optionList: {
+    marginTop: 16,
+  },
+  selectedOption: {
+    backgroundColor: 'lightgray',
   },
 });
 
