@@ -1,21 +1,23 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Carousel from 'react-native-snap-carousel';
-import PropTypes from 'deprecated-react-native-prop-types';
+import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 
+// image carousel slides and text
 const cards = [
   { id: 1, image: require('../images/hazel_swimming.png'), text: 'Welcome', subtext: 'Thank you for choosing Food Tracker by Megan L\n\n\n\n\n\n' },
   { id: 2, image: require('../images/business.png'), text: 'What is your calories intake goal?', subtext: '' },
   { id: 3, image: require('../images/pleasure.png'), text: 'deez 3', subtext: 'deez 3' },
-  { id: 4, image: require('../images/owo7.png'), text: 'deez 4', subtext: 'deez 4' },
-  { id: 5, image: require('../images/tired.png'), text: 'All set!', subtext: 'Press the "Finish" button to continue' },
+  { id: 4, image: require('../images/pleasure.png'), text: 'deez 4', subtext: 'deez 4' },
+  { id: 5, image: require('../images/pleasure.png'), text: 'All set!', subtext: 'Press the "Finish" button to continue' },
 ];
 
 const App = () => {
   const carouselRef = useRef(null);
+  // index of calorie list
   const [activeIndex, setActiveIndex] = useState(0);
-  const [selectedValue, setSelectedValue] = useState(null);
+  // values of calories (e.g. 1200, 1300, etc.)
+  const calorieGoalContext = useContext(CalorieGoalContext);
 
   const renderItem = ({ item }) => {
     // if at the calorie intake goal selection card, provide calories choices
@@ -27,10 +29,12 @@ const App = () => {
           <FlatList
             data={Array.from({ length: 14 }, (_, i) => i * 100 + 1200)}
             renderItem={({ item }) => (
+              // when item pressed, highlight item
               <TouchableOpacity
-                style={[styles.optionContainer, selectedValue === item ? styles.selectedOption : null]}
+                style={[styles.optionContainer, calorieGoalContext.calorieGoal === item ? styles.selectedOption : null]}
                 onPress={() => {
-                  setSelectedValue(item);
+                  // set as currently selected calorie goal
+                  calorieGoalContext.setCalorieGoal(item);
                 }}
               >
                 <Text style={styles.optionText}>{item}</Text>
@@ -38,11 +42,12 @@ const App = () => {
             )}
             keyExtractor={item => item.toString()}
             contentContainerStyle={styles.optionList}
-            extraData={selectedValue}
+            extraData={calorieGoalContext.calorieGoal}
           />
         </View>
       );
     }
+
     return (
       <View style={styles.cardContainer}>
         <Image source={item.image} style={styles.cardImage} />

@@ -1,12 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { Component } from 'react';
+import { Component, createContext, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import GettingStarted from './src/components/GettingStarted'
-import PropTypes from 'prop-types';
+import { CalorieGoalContext } from './src/contexts/CalorieGoalContext';
 
 export default function App() {
+  const [calorieGoal, setCalorieGoal] = useState();
   return (
-    <GettingStarted></GettingStarted>
+    <CalorieGoalContext.Provider value={{calorieGoal, setCalorieGoal}}>
+      <GettingStarted></GettingStarted>
+    </CalorieGoalContext.Provider>
   );
 }
 
