@@ -1,14 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import { Component, createContext, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 import GettingStarted from './src/components/GettingStarted'
+import Home from './src/components/Home'
 import { CalorieGoalContext } from './src/contexts/CalorieGoalContext';
 
 export default function App() {
   const [calorieGoal, setCalorieGoal] = useState();
+  const Stack = createStackNavigator()
+
+  function AppNavigator() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="GettingStarted" component={GettingStarted} options={{headerShown: false}} />
+        <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+      </Stack.Navigator>
+    )
+  }
+
   return (
     <CalorieGoalContext.Provider value={{calorieGoal, setCalorieGoal}}>
-      <GettingStarted></GettingStarted>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
     </CalorieGoalContext.Provider>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useRef, useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native'
 import Carousel from 'react-native-snap-carousel';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 
@@ -18,6 +19,14 @@ const App = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   // values of calories (e.g. 1200, 1300, etc.)
   const calorieGoalContext = useContext(CalorieGoalContext);
+
+  const navigation = useNavigation()
+
+  function handleFinish() {
+    console.log("home time!");
+    // Navigate to the Home screen
+    navigation.navigate('Home')
+  }
 
   const renderItem = ({ item }) => {
     // if at the calorie intake goal selection card, provide calories choices
@@ -43,6 +52,20 @@ const App = () => {
             keyExtractor={item => item.toString()}
             contentContainerStyle={styles.optionList}
             extraData={calorieGoalContext.calorieGoal}
+          />
+        </View>
+      );
+    } else if (item.id === 5) {
+      return (
+        <View styles={styles.cardContainer}>
+          <Image source={item.image} style={styles.cardImage} />
+          <Text style={styles.cardText}>{item.text}</Text>
+          <Text style={styles.cardSubText}>{item.subtext}</Text>
+          <Button
+            title="Finish"
+            buttonStyle={styles.finishButton}
+            titleStyle={styles.finishButtonText}
+            onPress={handleFinish}
           />
         </View>
       );
@@ -205,6 +228,21 @@ const styles = StyleSheet.create({
   },
   selectedOption: {
     backgroundColor: 'lightgray',
+  },
+  finishButton: {
+    position: 'absolute',
+    top: '75%',
+    // transform: [{ translateY: 400 }],
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: 'black',
+  },
+  finishButtonText: {
+    color: 'white',
+    fontSize: 16,
   },
 });
 
