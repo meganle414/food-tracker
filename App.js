@@ -23,7 +23,8 @@ export default function App() {
   return (
     <CalorieGoalContext.Provider value={{calorieGoal, setCalorieGoal}}>
       <NavigationContainer>
-        <AppNavigator />
+        {/* <AppNavigator /> */}
+        <GettingStarted></GettingStarted>
       </NavigationContainer>
     </CalorieGoalContext.Provider>
   );

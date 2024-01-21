@@ -1,6 +1,7 @@
 import React, { useRef, useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Button, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import Carousel from 'react-native-snap-carousel';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 
@@ -23,8 +24,6 @@ const App = () => {
   const navigation = useNavigation()
 
   function handleFinish() {
-    console.log("home time!");
-    // Navigate to the Home screen
     navigation.navigate('Home')
   }
 
@@ -32,28 +31,30 @@ const App = () => {
     // if at the calorie intake goal selection card, provide calories choices
     if (item.id === 2) {
       return (
-        <View style={styles.cardContainer}>
-          <Image source={item.image} style={styles.cardImage} />
-          <Text style={styles.cardText}>{item.text}</Text>
-          <FlatList
-            data={Array.from({ length: 14 }, (_, i) => i * 100 + 1200)}
-            renderItem={({ item }) => (
-              // when item pressed, highlight item
-              <TouchableOpacity
-                style={[styles.optionContainer, calorieGoalContext.calorieGoal === item ? styles.selectedOption : null]}
-                onPress={() => {
-                  // set as currently selected calorie goal
-                  calorieGoalContext.setCalorieGoal(item);
-                }}
-              >
-                <Text style={styles.optionText}>{item}</Text>
-              </TouchableOpacity>
-            )}
-            keyExtractor={item => item.toString()}
-            contentContainerStyle={styles.optionList}
-            extraData={calorieGoalContext.calorieGoal}
-          />
-        </View>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <View style={styles.cardContainer}>
+            <Image source={item.image} style={styles.cardImage} />
+            <Text style={styles.cardText}>{item.text}</Text>
+            <FlatList
+              data={Array.from({ length: 14 }, (_, i) => i * 100 + 1200)}
+              renderItem={({ item }) => (
+                // when item pressed, highlight item
+                <TouchableOpacity
+                  style={[styles.optionContainer, calorieGoalContext.calorieGoal === item ? styles.selectedOption : null]}
+                  onPress={() => {
+                    // set as currently selected calorie goal
+                    calorieGoalContext.setCalorieGoal(item);
+                  }}
+                >
+                  <Text style={styles.optionText}>{item}</Text>
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.toString()}
+              contentContainerStyle={styles.optionList}
+              extraData={activeIndex}
+            />
+          </View>
+        </GestureHandlerRootView>
       );
     } else if (item.id === 5) {
       return (
@@ -61,12 +62,17 @@ const App = () => {
           <Image source={item.image} style={styles.cardImage} />
           <Text style={styles.cardText}>{item.text}</Text>
           <Text style={styles.cardSubText}>{item.subtext}</Text>
-          <Button
-            title="Finish"
-            buttonStyle={styles.finishButton}
-            titleStyle={styles.finishButtonText}
+          <Pressable
+            style={styles.finishButton}
             onPress={handleFinish}
-          />
+          >
+            <Button
+              title="Finish"
+              buttonStyle={styles.finishButton}
+              titleStyle={styles.finishButtonText}
+              color="white"
+            />
+          </Pressable>
         </View>
       );
     }
@@ -165,12 +171,15 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     resizeMode: 'contain',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   cardText: {
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 16,
     marginBottom: 16,
+    textAlign: 'center',
   },
   cardSubText: {
     fontSize: 18,
@@ -231,14 +240,15 @@ const styles = StyleSheet.create({
   },
   finishButton: {
     position: 'absolute',
-    top: '75%',
-    // transform: [{ translateY: 400 }],
-    width: 50,
+    top: '105%',
+    left: '25%',
+    width: 150,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: 'black',
+    backgroundColor: '#338FFF',
   },
   finishButtonText: {
     color: 'white',
