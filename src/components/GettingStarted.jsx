@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Button, Pressable } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import Carousel from 'react-native-snap-carousel';
@@ -62,17 +62,12 @@ const App = () => {
           <Image source={item.image} style={styles.cardImage} />
           <Text style={styles.cardText}>{item.text}</Text>
           <Text style={styles.cardSubText}>{item.subtext}</Text>
-          <Pressable
+          <TouchableOpacity
             style={styles.finishButton}
             onPress={handleFinish}
           >
-            <Button
-              title="Finish"
-              buttonStyle={styles.finishButton}
-              titleStyle={styles.finishButtonText}
-              color="white"
-            />
-          </Pressable>
+            <Text style={styles.finishButtonText}>Finish</Text>
+          </TouchableOpacity>
         </View>
       );
     }

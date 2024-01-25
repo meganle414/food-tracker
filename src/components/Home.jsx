@@ -4,9 +4,9 @@ import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 
 const App = () => {
     return (
-        <View></View>
-        //   <Text style={styles.title}>Home</Text>
-        // </View>
+        <View>
+          <Text style={styles.title}>Home</Text>
+        </View>
       );
 }
 

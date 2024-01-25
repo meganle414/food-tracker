@@ -11,20 +11,13 @@ export default function App() {
   const [calorieGoal, setCalorieGoal] = useState();
   const Stack = createStackNavigator()
 
-  function AppNavigator() {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen name="GettingStarted" component={GettingStarted} options={{headerShown: false}} />
-        <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
-      </Stack.Navigator>
-    )
-  }
-
   return (
     <CalorieGoalContext.Provider value={{calorieGoal, setCalorieGoal}}>
       <NavigationContainer>
-        {/* <AppNavigator /> */}
-        <GettingStarted></GettingStarted>
+        <Stack.Navigator>
+          <Stack.Screen name="GettingStarted" component={GettingStarted} options={{headerShown: false}} />
+          <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+        </Stack.Navigator>
       </NavigationContainer>
     </CalorieGoalContext.Provider>
   );
