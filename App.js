@@ -8,7 +8,7 @@ import Home from './src/components/Home'
 import { CalorieGoalContext } from './src/contexts/CalorieGoalContext';
 
 export default function App() {
-  const [calorieGoal, setCalorieGoal] = useState();
+  const [calorieGoal, setCalorieGoal] = useState(0);
   const Stack = createStackNavigator()
 
   return (

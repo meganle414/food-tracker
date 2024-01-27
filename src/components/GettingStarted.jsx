@@ -1,5 +1,5 @@
-import React, { useRef, useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+import React, { useRef, useState, useContext, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import Carousel from 'react-native-snap-carousel';
@@ -82,6 +82,16 @@ const App = () => {
   };
 
   const onSnapToItem = (index) => {
+    // brings user back to calorie goal choice if it is not chosen and swiped past it
+    if (index > 1 && calorieGoalContext.calorieGoal === 0) {
+      carouselRef.current.snapToItem(1, false, false)
+      Alert.alert('Warning', 'Please choose a calorie goal to continue', [
+        {
+          text: 'OK',
+          onPress: () => console.log('Warning: Calorie Goal not chosen yet'),
+        }
+      ]);
+    }
     setActiveIndex(index);
   };
 
@@ -94,7 +104,17 @@ const App = () => {
         >
           <Image source={require('../images/left_arrow.png')} style={styles.arrowImage} />
         </TouchableOpacity>
-      )
+      );
+    } else if (direction === 'right' && activeIndex === 1 && calorieGoalContext.calorieGoal === 0) {
+      return (
+        <Image source={require('../images/right_arrow.png')}
+          style={{
+            width: 30,
+            height: 30,
+            resizeMode: 'contain',
+            opacity: 0.25
+          }} />
+      );
     } else if (direction === 'right' && activeIndex !== cards.length - 1) {
       return (
         <TouchableOpacity
@@ -103,10 +123,10 @@ const App = () => {
         >
           <Image source={require('../images/right_arrow.png')} style={styles.arrowImage} />
         </TouchableOpacity>
-      )
+      );
     }
-    return null
-  }
+    return null;
+  };
 
   const renderDots = () => {
     const dots = [];
