@@ -96,32 +96,36 @@ const App = () => {
         </GestureHandlerRootView>
       );
     } else if (item.id === 5) {return (
-      <View styles={styles.cardContainer}>
-        <Image source={item.image} style={styles.cardImage} />
-        <Text style={styles.cardText}>{item.text}</Text>
-        <Text style={styles.cardSubText}>{item.subtext}</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={nameContext.setName}
-          inputMode="text"
-          placeholder="John Doe"
-        />
-      </View>
-    );
-    } else if (item.id === 6) {
-      return (
+      <GestureHandlerRootView style={{ flex: 1 }}>
         <View styles={styles.cardContainer}>
           <Image source={item.image} style={styles.cardImage} />
           <Text style={styles.cardText}>{item.text}</Text>
           <Text style={styles.cardSubText}>{item.subtext}</Text>
-          {/* button to go to Home screen */}
-          <TouchableOpacity
-            style={styles.finishButton}
-            onPress={handleFinish}
-          >
-            <Text style={styles.finishButtonText}>Finish</Text>
-          </TouchableOpacity>
+          <TextInput
+            style={styles.input}
+            onChangeText={nameContext.setName}
+            inputMode="text"
+            placeholder="John Doe"
+          />
         </View>
+      </GestureHandlerRootView>
+    );
+    } else if (item.id === 6) {
+      return (
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <View styles={styles.cardContainer}>
+            <Image source={item.image} style={styles.cardImage} />
+            <Text style={styles.cardText}>{item.text}</Text>
+            <Text style={styles.cardSubText}>{item.subtext}</Text>
+            {/* button to go to Home screen */}
+            <TouchableOpacity
+              style={styles.finishButton}
+              onPress={handleFinish}
+            >
+              <Text style={styles.finishButtonText}>Finish</Text>
+            </TouchableOpacity>
+          </View>
+        </GestureHandlerRootView>
       );
     }
 
