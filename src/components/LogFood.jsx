@@ -18,7 +18,7 @@ const App = () => {
 
     return (
         <View>
-          <Text style={styles.title}>Home</Text>
+          <Text style={styles.title}>LogFood</Text>
         </View>
       );
 }
