@@ -13,10 +13,12 @@ import { WeightContext } from './src/contexts/WeightContext';
 import { NutritionGoalContext } from './src/contexts/NutritionGoalContext';
 import { ThemeContext } from './src/contexts/ThemeContext';
 import { NameContext } from './src/contexts/NameContext';
+import { WeightGoalContext } from './src/contexts/WeightGoalContext';
 
 export default function App() {
   const [calorieGoal, setCalorieGoal] = useState(0);
   const [weight, setWeight] = useState(0);
+  const [weightGoal, setWeightGoal] = useState(0);
   const [nutritionGoal, setNutritionGoal] = useState(0);
   const [name, setName] = useState(0);
   const [theme, setTheme] = useState('light');
@@ -27,19 +29,21 @@ export default function App() {
     <ThemeContext.Provider value={{theme, setTheme}}>
       <CalorieGoalContext.Provider value={{calorieGoal, setCalorieGoal}}>
         <WeightContext.Provider value={{weight, setWeight}}>
-          <NutritionGoalContext.Provider value={{nutritionGoal, setNutritionGoal}}>
-            <NameContext.Provider value={{name, setName}}>
-              <NavigationContainer>
-                <Stack.Navigator>
-                  <Stack.Screen name="GettingStarted" component={GettingStarted} options={{headerShown: false}} />
-                  <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
-                  <Stack.Screen name="LogFood" component={LogFood} options={{headerShown: false}} />
-                  <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}} />
-                  <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
-                </Stack.Navigator>
-              </NavigationContainer>
-            </NameContext.Provider>
-          </NutritionGoalContext.Provider>
+          <WeightGoalContext.Provider value={{weightGoal, setWeightGoal}}>
+            <NutritionGoalContext.Provider value={{nutritionGoal, setNutritionGoal}}>
+              <NameContext.Provider value={{name, setName}}>
+                <NavigationContainer>
+                  <Stack.Navigator>
+                    <Stack.Screen name="GettingStarted" component={GettingStarted} options={{headerShown: false}} />
+                    <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+                    <Stack.Screen name="LogFood" component={LogFood} options={{headerShown: false}} />
+                    <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}} />
+                    <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
+                  </Stack.Navigator>
+                </NavigationContainer>
+              </NameContext.Provider>
+            </NutritionGoalContext.Provider>
+          </WeightGoalContext.Provider>
         </WeightContext.Provider>
       </CalorieGoalContext.Provider>
     </ThemeContext.Provider>

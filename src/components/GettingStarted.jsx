@@ -5,6 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import Carousel from 'react-native-snap-carousel';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
+import { WeightGoalContext } from '../contexts/WeightGoalContext';
 import { NutritionGoalContext } from '../contexts/NutritionGoalContext';
 import { NameContext } from '../contexts/NameContext';
 
@@ -13,9 +14,10 @@ const cards = [
   { id: 1, image: require('../images/hazel_swimming.png'), text: 'Welcome', subtext: 'Thank you for choosing Food Tracker by Megan L\n\n\n\n\n\n' },
   { id: 2, image: require('../images/business.png'), text: 'What is your calories intake goal?', subtext: '' },
   { id: 3, image: require('../images/pleasure.png'), text: 'What is your current weight?', subtext: '' },
-  { id: 4, image: require('../images/pleasure.png'), text: 'What are your nutrition goals?', subtext: '' },
-  { id: 5, image: require('../images/pleasure.png'), text: 'What is your name?', subtext: '' },
-  { id: 6, image: require('../images/pleasure.png'), text: 'All set!', subtext: 'Press the "Finish" button to continue' },
+  { id: 4, image: require('../images/pleasure.png'), text: 'What is your goal weight?', subtext: '' },
+  { id: 5, image: require('../images/pleasure.png'), text: 'What are your nutrition goals?', subtext: '' },
+  { id: 6, image: require('../images/pleasure.png'), text: 'What is your name?', subtext: '' },
+  { id: 7, image: require('../images/pleasure.png'), text: 'All set!', subtext: 'Press the "Finish" button to continue' },
 ];
 
 const App = () => {
@@ -25,8 +27,11 @@ const App = () => {
   // values of calories (e.g. 1200, 1300, etc.)
   const calorieGoalContext = useContext(CalorieGoalContext);
 
-  // values of user's current weight
+  // value of user's current weight
   const weightContext = useContext(WeightContext);
+
+  // value of user's current weight
+  const weightGoalContext = useContext(WeightGoalContext);
 
   // values of nutritional goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
   const nutritionGoalContext = useContext(NutritionGoalContext);
@@ -36,12 +41,12 @@ const App = () => {
 
   const navigation = useNavigation()
 
-  function handleFinish() {
+  function handleFinish() {  // change screen to Home screen
     navigation.navigate('Home')
   }
 
   const renderItem = ({ item }) => {
-    if (item.id === 2) { // if at the calorie intake goal selection card, provide calories choices
+    if (item.id === 2) {  // if at calorie intake goal selection card, provide calories choices
       return (
         <GestureHandlerRootView style={{ flex: 1 }}>
           <View style={styles.cardContainer}>
@@ -68,7 +73,7 @@ const App = () => {
           </View>
         </GestureHandlerRootView>
       );
-    } else if (item.id === 3) { // if at the current weight selection card, provide weight choices
+    } else if (item.id === 3) {  // if at current weight selection card, provide weight choices
       return (
         <GestureHandlerRootView style={{ flex: 1 }}>
           <View style={styles.cardContainer}>
@@ -79,10 +84,10 @@ const App = () => {
               renderItem={({ item }) => (
                 // when item pressed, highlight item
                 <TouchableOpacity
-                  style={[styles.optionContainer, calorieGoalContext.calorieGoal === item ? styles.selectedOption : null]}
+                  style={[styles.optionContainer, weightContext.weight === item ? styles.selectedOption : null]}
                   onPress={() => {
                     // set as currently selected calorie goal
-                    calorieGoalContext.setCalorieGoal(item);
+                    weightContext.setWeight(item);
                   }}
                 >
                   <Text style={styles.optionText}>{item}</Text>
@@ -95,7 +100,61 @@ const App = () => {
           </View>
         </GestureHandlerRootView>
       );
-    } else if (item.id === 5) {return (
+    } else if (item.id === 4) {  // if at goal weight selection card, provide weight choices
+        return (
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <View style={styles.cardContainer}>
+              <Image source={item.image} style={styles.cardImage} />
+              <Text style={styles.cardText}>{item.text}</Text>
+              <FlatList
+                data={Array.from({ length: 14 }, (_, i) => i * 100 + 1200)}
+                renderItem={({ item }) => (
+                  // when item pressed, highlight item
+                  <TouchableOpacity
+                    style={[styles.optionContainer, weightGoalContext.weight === item ? styles.selectedOption : null]}
+                    onPress={() => {
+                      // set as currently selected calorie goal
+                      weightGoalContext.setWeightGoal(item);
+                    }}
+                  >
+                    <Text style={styles.optionText}>{item}</Text>
+                  </TouchableOpacity>
+                )}
+                keyExtractor={item => item.toString()}
+                contentContainerStyle={styles.optionList}
+                extraData={activeIndex}
+              />
+            </View>
+          </GestureHandlerRootView>
+        );
+    } else if (item.id === 5) {  // if at nutrition goal selection card, provide 3 col percentage choices
+      return (
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <View style={styles.cardContainer}>
+            <Image source={item.image} style={styles.cardImage} />
+            <Text style={styles.cardText}>{item.text}</Text>
+            <FlatList
+              data={Array.from({ length: 14 }, (_, i) => i * 100 + 1200)}
+              renderItem={({ item }) => (
+                // when item pressed, highlight item
+                <TouchableOpacity
+                  style={[styles.optionContainer, nutritionGoalContext.nutritionGoal === item ? styles.selectedOption : null]}
+                  onPress={() => {
+                    // set as currently selected calorie goal
+                    nutritionGoalContext.setNutritionGoal(item);
+                  }}
+                >
+                  <Text style={styles.optionText}>{item}</Text>
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.toString()}
+              contentContainerStyle={styles.optionList}
+              extraData={activeIndex}
+            />
+          </View>
+        </GestureHandlerRootView>
+      );
+  } else if (item.id === 6) {return (  // if at name input field, give text input box
       <GestureHandlerRootView style={{ flex: 1 }}>
         <View styles={styles.cardContainer}>
           <Image source={item.image} style={styles.cardImage} />
@@ -110,7 +169,7 @@ const App = () => {
         </View>
       </GestureHandlerRootView>
     );
-    } else if (item.id === 6) {
+    } else if (item.id === 7) {  // if at end of setup, give 'finish' button to proceed to Home
       return (
         <GestureHandlerRootView style={{ flex: 1 }}>
           <View styles={styles.cardContainer}>
@@ -139,8 +198,9 @@ const App = () => {
   };
 
   const onSnapToItem = (index) => {
-    // brings user back to calorie goal choice if it is not chosen and swiped past it
     if (index > 1 && calorieGoalContext.calorieGoal === 0) {
+      // brings user back to calorie goal choice if it is not chosen and swiped past it
+      setActiveIndex(1);
       carouselRef.current.snapToItem(1, false, false)
       Alert.alert('Warning', 'Please choose a calorie goal to continue', [
         {
@@ -148,13 +208,54 @@ const App = () => {
           onPress: () => console.log('Warning: Calorie Goal not chosen yet'),
         }
       ]);
+    } else if (index > 2 && weightContext.weight === 0) {
+      // brings user back to weight choice if it is not chosen and swiped past it
+      setActiveIndex(2);
+      carouselRef.current.snapToItem(2, false, false)
+      Alert.alert('Warning', 'Please choose a weight to continue', [
+        {
+          text: 'OK',
+          onPress: () => console.log('Warning: Weight Goal not chosen yet'),
+        }
+      ]);
+    } else if (index > 3 && calorieGoalContext.nutritionGoal === 0) {
+      // brings user back to weight goal choice if it is not chosen and swiped past it
+      setActiveIndex(3);
+      carouselRef.current.snapToItem(3, false, false)
+      Alert.alert('Warning', 'Please choose a weight goal to continue', [
+        {
+          text: 'OK',
+          onPress: () => console.log('Warning: Weight Goal not chosen yet'),
+        }
+      ]);
+    } else if (index > 4 && nutritionGoalContext.nutritionGoal === 0) {
+      // brings user back to nutrition goal choice if it is not chosen and swiped past it
+      setActiveIndex(4);
+      carouselRef.current.snapToItem(4, false, false)
+      Alert.alert('Warning', 'Please choose a nutrition goal to continue', [
+        {
+          text: 'OK',
+          onPress: () => console.log('Warning: Nutrition Goal not chosen yet'),
+        }
+      ]);
+    } else if (index > 5 && nameContext.name === 0) {
+      // brings user back to name if it is not chosen and swiped past it
+      setActiveIndex(5);
+      carouselRef.current.snapToItem(5, false, false)
+      Alert.alert('Warning', 'Please choose a name to continue', [
+        {
+          text: 'OK',
+          onPress: () => console.log('Warning: Name not chosen yet'),
+        }
+      ]);
+    } else {
+      setActiveIndex(index);
     }
-    setActiveIndex(index);
   };
 
   const renderArrow = (direction) => {
     if (direction === 'left' && activeIndex !== 0) {
-      // if not the first card in carousel, include a left arrow
+      // if not first card in carousel, include a left arrow
       return (
         <TouchableOpacity
           style={styles.arrowContainer}
@@ -163,19 +264,18 @@ const App = () => {
           <Image source={require('../images/left_arrow.png')} style={styles.arrowImage} />
         </TouchableOpacity>
       );
-    } else if (direction === 'right' && activeIndex === 1 && calorieGoalContext.calorieGoal === 0) {
-      // gray out the right arrow when the calorie goal isn't chosen yet
-      return (
-        <Image source={require('../images/right_arrow.png')}
-          style={{
-            width: 30,
-            height: 30,
-            resizeMode: 'contain',
-            opacity: 0.25
-          }} />
-      );
-    } else if (direction === 'right' && activeIndex !== cards.length - 1) {
-      // if not the last card in carousel, include a right arrow
+    } else if (direction === 'right' && activeIndex < cards.length - 1) {
+      if ((activeIndex === 1 && calorieGoalContext.calorieGoal === 0)
+        || (activeIndex === 2 && weightContext.weight === 0)
+        || (activeIndex === 3 && weightGoalContext.weightGoal === 0)
+        || (activeIndex === 4 && nutritionGoalContext.nutritionGoal === 0)
+        || (activeIndex === 5 && nameContext.name === 0)) {
+        // gray out right arrow when calorie goal, weight, nutrition goal, or name isn't chosen yet
+        return (
+          <Image source={require('../images/right_arrow.png')} style={styles.arrowImageDisabled} />
+        );
+      }
+      // if not last card in carousel, include a right arrow
       return (
         <TouchableOpacity
           style={styles.arrowContainer}
@@ -292,6 +392,12 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     resizeMode: 'contain',
+  },
+  arrowImageDisabled: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
+    opacity: 0.25,
   },
   dotContainer: {
     flexDirection: 'row',
