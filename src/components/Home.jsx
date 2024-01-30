@@ -5,7 +5,9 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { WeightGoalContext } from '../contexts/WeightGoalContext';
-import { NutritionGoalContext } from '../contexts/NutritionGoalContext';
+import { CarbGoalContext } from '../contexts/CarbGoalContext';
+import { ProteinGoalContext } from '../contexts/ProteinGoalContext';
+import { FatGoalContext } from '../contexts/FatGoalContext';
 import { NameContext } from '../contexts/NameContext';
 
 const App = () => {
