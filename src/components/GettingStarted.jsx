@@ -14,13 +14,13 @@ import { NameContext } from '../contexts/NameContext';
 
 // image carousel slides and text
 const cards = [
-  { id: 1, image: require('../images/hazel_swimming.png'), text: 'Welcome', subtext: 'Thank you for choosing Food Tracker by Megan L\n\n\n\n\n\n' },
+  { id: 1, image: require('../images/logo.png'), text: 'Welcome', subtext: 'Thank you for choosing Food Tracker\n\n\n\n\n\n\n\n\n' },
   { id: 2, image: require('../images/business.png'), text: 'What is your calories intake goal?', subtext: '' },
   { id: 3, image: require('../images/pleasure.png'), text: 'What is your current weight?', subtext: '' },
   { id: 4, image: require('../images/pleasure.png'), text: 'What is your goal weight?', subtext: '' },
   { id: 5, image: require('../images/pleasure.png'), text: 'What are your nutrition goals?', subtext: '' },
   { id: 6, image: require('../images/pleasure.png'), text: 'What is your name?', subtext: '' },
-  { id: 7, image: require('../images/pleasure.png'), text: 'All set!', subtext: 'Press the "Finish" button to continue' },
+  { id: 7, image: require('../images/pleasure.png'), text: 'All set!', subtext: '' },
 ];
 
 const App = () => {
@@ -36,10 +36,13 @@ const App = () => {
   // value of user's current weight
   const weightGoalContext = useContext(WeightGoalContext);
 
-  // values of nutritional goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
+  // values of nutrition goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
   const carbGoalContext = useContext(CarbGoalContext);
   const proteinGoalContext = useContext(ProteinGoalContext);
   const fatGoalContext = useContext(FatGoalContext);
+
+  // total percentage of nutrition goals
+  const [totalNutrition, setTotalNutrition] = useState(0);
 
   // user's name
   const nameContext = useContext(NameContext);
@@ -85,22 +88,22 @@ const App = () => {
             <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardText}>{item.text}</Text>
             <FlatList
-              data={Array.from({ length: 14 }, (_, i) => i * 100 + 1200)}
-              renderItem={({ item }) => (
-                // when item pressed, highlight item
-                <TouchableOpacity
-                  style={[styles.optionContainer, weightContext.weight === item ? styles.selectedOption : null]}
-                  onPress={() => {
-                    // set as currently selected calorie goal
-                    weightContext.setWeight(item);
-                  }}
-                >
-                  <Text style={styles.optionText}>{item}</Text>
-                </TouchableOpacity>
-              )}
-              keyExtractor={item => item.toString()}
-              contentContainerStyle={styles.optionList}
-              extraData={activeIndex}
+                data={Array.from({ length: 321 }, (_, i) => (i * 1 + 80) + ' lbs')}
+                renderItem={({ item }) => (
+                  // when item pressed, highlight item
+                  <TouchableOpacity
+                    style={[styles.optionContainer, weightContext.weight === item ? styles.selectedOption : null]}
+                    onPress={() => {
+                      // set as currently selected calorie goal
+                      weightContext.setWeight(item);
+                    }}
+                  >
+                    <Text style={styles.optionText}>{item}</Text>
+                  </TouchableOpacity>
+                )}
+                keyExtractor={item => item.toString()}
+                contentContainerStyle={styles.optionList}
+                extraData={activeIndex}
             />
           </View>
         </GestureHandlerRootView>
@@ -116,7 +119,7 @@ const App = () => {
                 renderItem={({ item }) => (
                   // when item pressed, highlight item
                   <TouchableOpacity
-                    style={[styles.optionContainer, weightGoalContext.weight === item ? styles.selectedOption : null]}
+                    style={[styles.optionContainer, weightGoalContext.weightGoal === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected calorie goal
                       weightGoalContext.setWeightGoal(item);
@@ -149,6 +152,7 @@ const App = () => {
                     onPress={() => {
                       // set as currently selected carb goal
                       carbGoalContext.setCarbGoal(item);
+                      setTotalNutrition(totalNutrition + Number(item));
                     }}
                   >
                     <Text style={styles.optionText}>{item}</Text>
@@ -167,6 +171,7 @@ const App = () => {
                     onPress={() => {
                       // set as currently selected protein goal
                       proteinGoalContext.setProteinGoal(item);
+                      setTotalNutrition(totalNutrition + item);
                     }}
                   >
                     <Text style={styles.optionText}>{item}</Text>
@@ -185,6 +190,7 @@ const App = () => {
                     onPress={() => {
                       // set as currently selected fat goal
                       fatGoalContext.setFatGoal(item);
+                      setTotalNutrition(totalNutrition + item);
                     }}
                   >
                     <Text style={styles.optionText}>{item}</Text>
@@ -195,6 +201,7 @@ const App = () => {
                 extraData={activeIndex}
               />
             </View>
+            <Text style={styles.totalNutrition}>Total: {totalNutrition}%</Text>
           </View>
         </GestureHandlerRootView>
       );
@@ -273,7 +280,7 @@ const App = () => {
         }
       ]);
     } else if (index > 4 && carbGoalContext.carbGoal === 0 && proteinGoalContext.proteinGoal === 0
-      && fatGoalContext.proteinGoal === 0) {
+      && fatGoalContext.fatGoal === 0) {
       // brings user back to nutrition goal choice if it is not chosen and swiped past it
       setActiveIndex(4);
       carouselRef.current.snapToItem(4, false, false)
@@ -281,6 +288,17 @@ const App = () => {
         {
           text: 'OK',
           onPress: () => console.log('Warning: Nutrition Goal not chosen yet'),
+        }
+      ]);
+    } else if (index > 4 && (carbGoalContext.carbGoal + proteinGoalContext.proteinGoal 
+      + fatGoalContext.fatGoal !== 100)) {
+        // brings user back to nutrition goal choice if nutrition percentages don't add up to 100%
+      setActiveIndex(4);
+      carouselRef.current.snapToItem(4, false, false)
+      Alert.alert('Warning', 'The nutrition goals you have chosen do not add up to 100%', [
+        {
+          text: 'OK',
+          onPress: () => console.log('Warning: Nutrition Goals chosen do not add up to 100%'),
         }
       ]);
     } else if (index > 5 && nameContext.name === 0) {
@@ -313,10 +331,10 @@ const App = () => {
       if ((activeIndex === 1 && calorieGoalContext.calorieGoal === 0)
         || (activeIndex === 2 && weightContext.weight === 0)
         || (activeIndex === 3 && weightGoalContext.weightGoal === 0)
-        || (activeIndex === 4 && carbGoalContext.carbGoal === 0 && proteinGoalContext.proteinGoal === 0
-          && fatGoalContext.proteinGoal === 0)
+        || (activeIndex === 4 && carbGoalContext.carbGoal + proteinGoalContext.proteinGoal 
+        + fatGoalContext.fatGoal !== 100)
         || (activeIndex === 5 && nameContext.name === 0)) {
-        // gray out right arrow when calorie goal, weight, nutrition goal, or name isn't chosen yet
+        // gray out right arrow when calorie goal, weight, nutrition goal, or name isn't chosen/correct yet
         return (
           <Image source={require('../images/right_arrow.png')} style={styles.arrowImageDisabled} />
         );
@@ -411,6 +429,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 175,
   },
+  totalNutrition: {
+    fontSize: 18,
+    marginTop: 16
+  },
   input: {
     height: 40,
     fontSize: 18,
@@ -473,13 +495,14 @@ const styles = StyleSheet.create({
   },
   optionList: {
     marginTop: 16,
+    height: 175,
   },
   selectedOption: {
     backgroundColor: 'lightgray',
   },
   finishButton: {
     position: 'absolute',
-    top: '135%',
+    top: '98%',
     left: '25%',
     width: 150,
     height: 50,
