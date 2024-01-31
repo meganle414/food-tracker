@@ -151,8 +151,8 @@ const App = () => {
                     style={[styles.optionContainer, carbGoalContext.carbGoal === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected carb goal
-                      carbGoalContext.setCarbGoal(item);
-                      setTotalNutrition(totalNutrition + Number(item));
+                      carbGoalContext.setCarbGoal(Number(item.slice(0, -1)));
+                      setTotalNutrition(Number(item.slice(0, -1)) + proteinGoalContext.proteinGoal + fatGoalContext.fatGoal);
                     }}
                   >
                     <Text style={styles.optionText}>{item}</Text>
@@ -164,14 +164,14 @@ const App = () => {
               />
               <FlatList
                 data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
-                renderItem={({ item }) => (
+                renderItem={({ item  }) => (
                   // when item pressed, highlight item
                   <TouchableOpacity
                     style={[styles.optionContainer, proteinGoalContext.proteinGoal === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected protein goal
-                      proteinGoalContext.setProteinGoal(item);
-                      setTotalNutrition(totalNutrition + item);
+                      proteinGoalContext.setProteinGoal(Number(item.slice(0, -1)));
+                      setTotalNutrition(carbGoalContext.carbGoal + Number(item.slice(0, -1)) + fatGoalContext.fatGoal);
                     }}
                   >
                     <Text style={styles.optionText}>{item}</Text>
@@ -189,8 +189,8 @@ const App = () => {
                     style={[styles.optionContainer, fatGoalContext.fatGoal === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected fat goal
-                      fatGoalContext.setFatGoal(item);
-                      setTotalNutrition(totalNutrition + item);
+                      fatGoalContext.setFatGoal(Number(item.slice(0, -1)));
+                      setTotalNutrition(carbGoalContext.carbGoal + proteinGoalContext.proteinGoal + Number(item.slice(0, -1)));
                     }}
                   >
                     <Text style={styles.optionText}>{item}</Text>
@@ -431,7 +431,8 @@ const styles = StyleSheet.create({
   },
   totalNutrition: {
     fontSize: 18,
-    marginTop: 16
+    marginTop: 32,
+    textAlign: 'center',
   },
   input: {
     height: 40,
