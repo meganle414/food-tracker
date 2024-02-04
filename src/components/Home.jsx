@@ -11,7 +11,6 @@ import { FatGoalContext } from '../contexts/FatGoalContext';
 import { NameContext } from '../contexts/NameContext';
 
 const App = () => {
-
   // index of calorie list
   const [activeIndex, setActiveIndex] = useState(0);
   // values of calories (e.g. 1200, 1300, etc.)
@@ -23,8 +22,13 @@ const App = () => {
   // value of user's current weight
   const weightGoalContext = useContext(WeightGoalContext);
 
-  // values of nutritional goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
-  const nutritionGoalContext = useContext(NutritionGoalContext);
+  // values of nutrition goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
+  const carbGoalContext = useContext(CarbGoalContext);
+  const proteinGoalContext = useContext(ProteinGoalContext);
+  const fatGoalContext = useContext(FatGoalContext);
+
+  // total percentage of nutrition goals
+  const [totalNutrition, setTotalNutrition] = useState(0);
 
   // user's name
   const nameContext = useContext(NameContext);

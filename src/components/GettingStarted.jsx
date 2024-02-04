@@ -14,13 +14,13 @@ import { NameContext } from '../contexts/NameContext';
 
 // image carousel slides and text
 const cards = [
-  { id: 1, image: require('../images/logo.png'), text: 'Welcome', subtext: 'Thank you for choosing Food Tracker\n\n\n\n\n\n\n\n\n' },
+  { id: 1, image: require('../images/logo.png'), text: 'Welcome', subtext: '\nThank you for choosing Food Tracker\n\n\n\n\n\n\n\n\n\n\n\n' },
   { id: 2, image: require('../images/business.png'), text: 'What is your calories intake goal?', subtext: '' },
   { id: 3, image: require('../images/pleasure.png'), text: 'What is your current weight?', subtext: '' },
   { id: 4, image: require('../images/pleasure.png'), text: 'What is your goal weight?', subtext: '' },
   { id: 5, image: require('../images/pleasure.png'), text: 'What are your nutrition goals?', subtext: '' },
-  { id: 6, image: require('../images/pleasure.png'), text: 'What is your name?', subtext: '' },
-  { id: 7, image: require('../images/pleasure.png'), text: 'All set!', subtext: '' },
+  { id: 6, image: require('../images/pleasure.png'), text: 'What is your name?', subtext: '\n\n\n\n\n\n\n\n\n\n\n\n' },
+  { id: 7, image: require('../images/pleasure.png'), text: 'All set!', subtext: '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n' },
 ];
 
 const App = () => {
@@ -60,8 +60,9 @@ const App = () => {
           <View style={styles.cardContainer}>
             <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardText}>{item.text}</Text>
+            <Text style={styles.optionText}>Generally, the recommended daily calorie intake is 2,000 calories a day for women and 2,500 for men</Text>
             <FlatList
-              data={Array.from({ length: 14 }, (_, i) => i * 100 + 1200)}
+              data={Array.from({ length: 29 }, (_, i) => i * 100 + 1200)}
               renderItem={({ item }) => (
                 // when item pressed, highlight item
                 <TouchableOpacity
@@ -141,14 +142,19 @@ const App = () => {
           <View style={styles.cardContainer}>
             <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardText}>{item.text}</Text>
-            <Text style={styles.cardSubText}>Carbs            Protein             Fats</Text>
+            <Text style={styles.optionText}>Carbs            Protein             Fats</Text>
+            <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (carbGoalContext.carbGoal/100)) + ' cal'}
+            {'          ' + Math.round(calorieGoalContext.calorieGoal * (proteinGoalContext.proteinGoal/100)) + ' cal'}
+            {'            ' + Math.round(calorieGoalContext.calorieGoal * (fatGoalContext.fatGoal/100)) + ' cal'}
+            </Text>
             <View style={styles.nutritionGoalsContainer}>
+              {/* <Text style={styles.optionText}>Carbs</Text> */}
               <FlatList
                 data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
                 renderItem={({ item }) => (
                   // when item pressed, highlight item
                   <TouchableOpacity
-                    style={[styles.optionContainer, carbGoalContext.carbGoal === item ? styles.selectedOption : null]}
+                    style={[styles.optionContainer, (carbGoalContext.carbGoal + '%') === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected carb goal
                       carbGoalContext.setCarbGoal(Number(item.slice(0, -1)));
@@ -167,7 +173,7 @@ const App = () => {
                 renderItem={({ item  }) => (
                   // when item pressed, highlight item
                   <TouchableOpacity
-                    style={[styles.optionContainer, proteinGoalContext.proteinGoal === item ? styles.selectedOption : null]}
+                    style={[styles.optionContainer, (proteinGoalContext.proteinGoal + '%') === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected protein goal
                       proteinGoalContext.setProteinGoal(Number(item.slice(0, -1)));
@@ -186,7 +192,7 @@ const App = () => {
                 renderItem={({ item }) => (
                   // when item pressed, highlight item
                   <TouchableOpacity
-                    style={[styles.optionContainer, fatGoalContext.fatGoal === item ? styles.selectedOption : null]}
+                    style={[styles.optionContainer, (fatGoalContext.fatGoal + '%') === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected fat goal
                       fatGoalContext.setFatGoal(Number(item.slice(0, -1)));
@@ -201,32 +207,32 @@ const App = () => {
                 extraData={activeIndex}
               />
             </View>
+            <Text style={styles.totalNutrition}>Calorie Goal: {calorieGoalContext.calorieGoal}</Text>
             <Text style={styles.totalNutrition}>Total: {totalNutrition}%</Text>
           </View>
         </GestureHandlerRootView>
       );
   } else if (item.id === 6) {return (  // if at name input field, give text input box
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <View styles={styles.cardContainer}>
-          <Image source={item.image} style={styles.cardImage} />
+        <View style={styles.cardContainer}>
+        <Image source={item.image} style={styles.cardImage} />
           <Text style={styles.cardText}>{item.text}</Text>
-          <Text style={styles.cardSubText}>{item.subtext}</Text>
           <TextInput
             style={styles.input}
             onChangeText={nameContext.setName}
             inputMode="text"
             placeholder="John Doe"
           />
+          <Text style={styles.cardSubText}>{item.subtext}</Text>
         </View>
       </GestureHandlerRootView>
     );
     } else if (item.id === 7) {  // if at end of setup, give 'finish' button to proceed to Home
       return (
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <View styles={styles.cardContainer}>
+          <View style={styles.cardContainer}>
             <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardText}>{item.text}</Text>
-            <Text style={styles.cardSubText}>{item.subtext}</Text>
             {/* button to go to Home screen */}
             <TouchableOpacity
               style={styles.finishButton}
@@ -234,6 +240,7 @@ const App = () => {
             >
               <Text style={styles.finishButtonText}>Finish</Text>
             </TouchableOpacity>
+            <Text style={styles.cardSubText}>{item.subtext}</Text>
           </View>
         </GestureHandlerRootView>
       );
@@ -403,7 +410,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     width: 300,
-    height: 500,
+    height: 600,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -411,8 +418,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     resizeMode: 'contain',
-    justifyContent: 'center',
-    alignItems: 'center',
+    top: '0%',
   },
   cardText: {
     fontSize: 24,
@@ -436,6 +442,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
+    width: 300,
     fontSize: 18,
     borderWidth: 1,
     padding: 10,
@@ -489,21 +496,20 @@ const styles = StyleSheet.create({
   },
   optionContainer: {
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 25,
   },
   optionText: {
     fontSize: 18,
   },
   optionList: {
     marginTop: 16,
-    height: 175,
   },
   selectedOption: {
     backgroundColor: 'lightgray',
   },
   finishButton: {
     position: 'absolute',
-    top: '98%',
+    top: '42%',
     left: '25%',
     width: 150,
     height: 50,
