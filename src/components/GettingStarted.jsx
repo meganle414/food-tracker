@@ -142,14 +142,11 @@ const App = () => {
           <View style={styles.cardContainer}>
             <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardText}>{item.text}</Text>
-            <Text style={styles.optionText}>Carbs            Protein             Fats</Text>
-            <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (carbGoalContext.carbGoal/100)) + ' cal'}
-            {'          ' + Math.round(calorieGoalContext.calorieGoal * (proteinGoalContext.proteinGoal/100)) + ' cal'}
-            {'            ' + Math.round(calorieGoalContext.calorieGoal * (fatGoalContext.fatGoal/100)) + ' cal'}
-            </Text>
             <View style={styles.nutritionGoalsContainer}>
-              {/* <Text style={styles.optionText}>Carbs</Text> */}
-              <FlatList
+              <View style={styles.carbCol}>
+                <Text style={styles.optionText}>Carbs</Text>
+                <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (carbGoalContext.carbGoal/100)) + ' cal'}</Text>
+                <FlatList
                 data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
                 renderItem={({ item }) => (
                   // when item pressed, highlight item
@@ -167,8 +164,12 @@ const App = () => {
                 keyExtractor={item => item.toString()}
                 contentContainerStyle={styles.optionList}
                 extraData={activeIndex}
-              />
-              <FlatList
+                />
+              </View>
+              <View style={styles.proteinCol}>
+                <Text style={styles.optionText}>Protein</Text>
+                <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (proteinGoalContext.proteinGoal/100)) + ' cal'}</Text>
+                <FlatList
                 data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
                 renderItem={({ item  }) => (
                   // when item pressed, highlight item
@@ -187,7 +188,11 @@ const App = () => {
                 contentContainerStyle={styles.optionList}
                 extraData={activeIndex}
               />
-              <FlatList
+              </View>
+              <View style={styles.fatCol}>
+              <Text style={styles.optionText}>Fat</Text>
+                <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (fatGoalContext.fatGoal/100)) + ' cal'}</Text>
+                <FlatList
                 data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
                 renderItem={({ item }) => (
                   // when item pressed, highlight item
@@ -205,7 +210,8 @@ const App = () => {
                 keyExtractor={item => item.toString()}
                 contentContainerStyle={styles.optionList}
                 extraData={activeIndex}
-              />
+                />
+              </View>
             </View>
             <Text style={styles.totalNutrition}>Calorie Goal: {calorieGoalContext.calorieGoal}</Text>
             <Text style={styles.totalNutrition}>Total: {totalNutrition}%</Text>
@@ -497,6 +503,18 @@ const styles = StyleSheet.create({
   optionContainer: {
     paddingVertical: 10,
     paddingHorizontal: 25,
+  },
+  carbCol: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  proteinCol: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  fatCol: {
+    flex: 1,
+    alignItems: 'center',
   },
   optionText: {
     fontSize: 18,
