@@ -1,7 +1,7 @@
 import React, { useRef, useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Alert, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler'
 import Carousel from 'react-native-snap-carousel';
 import {Picker} from '@react-native-picker/picker';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
@@ -14,13 +14,13 @@ import { NameContext } from '../contexts/NameContext';
 
 // image carousel slides and text
 const cards = [
-  { id: 1, image: require('../images/logo.png'), text: 'Welcome', subtext: '\nThank you for choosing Food Tracker\n\n\n\n\n\n\n\n\n\n\n\n' },
+  { id: 1, image: require('../images/logo.png'), text: 'Welcome\n', subtext: 'Thank you for choosing Food Tracker\n\n\n\n\n\n\n\n\n\n\n\n' },
   { id: 2, image: require('../images/calorie_intake.png'), text: 'What is your calories intake goal?', subtext: '' },
-  { id: 3, image: require('../images/scale.png'), text: 'What is your current weight?', subtext: '' },
-  { id: 4, image: require('../images/scale.png'), text: 'What is your goal weight?', subtext: '' },
-  { id: 5, image: require('../images/nutrition_goals.png'), text: 'What are your nutrition goals?', subtext: '' },
-  { id: 6, image: require('../images/name.png'), text: 'What is your name?', subtext: '\n\n\n\n\n\n\n\n\n\n\n\n' },
-  { id: 7, image: require('../images/celebrate.png'), text: 'All set!', subtext: '\n\n\n\n\n\n' },
+  { id: 3, image: require('../images/scale.png'), text: 'What is your current weight?', subtext: '\n\n\n\n\n\n' },
+  { id: 4, image: require('../images/scale.png'), text: 'What is your goal weight?\n', subtext: '' },
+  { id: 5, image: require('../images/nutrition_goals.png'), text: 'What are your nutrition goals?', subtext: '\n\n' },
+  { id: 6, image: require('../images/name.png'), text: 'What is your name?\n', subtext: '\n\n\n\n\n\n\n\n\n\n\n\n' },
+  { id: 7, image: require('../images/celebrate.png'), text: 'All set!\n', subtext: '\n\n\n\n\n\n' },
 ];
 
 const App = () => {
@@ -89,22 +89,24 @@ const App = () => {
             <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardText}>{item.text}</Text>
             <FlatList
-                data={Array.from({ length: 321 }, (_, i) => (i * 1 + 80) + ' lbs')}
-                renderItem={({ item }) => (
-                  // when item pressed, highlight item
-                  <TouchableOpacity
-                    style={[styles.optionContainer, weightContext.weight === item ? styles.selectedOption : null]}
-                    onPress={() => {
-                      // set as currently selected calorie goal
-                      weightContext.setWeight(item);
-                    }}
-                  >
-                    <Text style={styles.optionText}>{item}</Text>
-                  </TouchableOpacity>
-                )}
-                keyExtractor={item => item.toString()}
-                contentContainerStyle={styles.optionList}
-                extraData={activeIndex}
+              horizontal
+              style={styles.weightList}
+              data={Array.from({ length: 211 }, (_, i) => (i + 90))}
+              renderItem={({ item }) => (
+                // when item pressed, highlight item
+                <TouchableOpacity
+                  style={[styles.weightContainer, weightContext.weight === item ? styles.selectedOption : null]}
+                  onPress={() => {
+                    // set as currently selected calorie goal
+                    weightContext.setWeight(item);
+                  }}
+                >
+                <Text style={styles.optionText}>{item}</Text>
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.toString()}
+              contentContainerStyle={styles.weightList}
+              extraData={activeIndex}
             />
           </View>
         </GestureHandlerRootView>
@@ -116,7 +118,7 @@ const App = () => {
               <Image source={item.image} style={styles.cardImage} />
               <Text style={styles.cardText}>{item.text}</Text>
               <FlatList
-                data={Array.from({ length: 321 }, (_, i) => (i * 1 + 80) + ' lbs')}
+                data={Array.from({ length: 211 }, (_, i) => (i + 90) + ' lbs')}
                 renderItem={({ item }) => (
                   // when item pressed, highlight item
                   <TouchableOpacity
@@ -532,6 +534,22 @@ const styles = StyleSheet.create({
   },
   selectedOption: {
     backgroundColor: 'lightgray',
+  },
+  weightContainer: {
+    paddingVertical: 10,
+    paddingHorizontal: 25,
+  },
+  weightList: {
+    marginTop: 16,
+    height: 50,
+    width: 300,
+    alignItems: 'center',
+    alignContent: 'center',
+    flexDirection: 'row',
+  },
+  selectedWeight: {
+    fontWeight: 'bold',
+    // backgroundColor: 'lightgray',
   },
   finishButton: {
     position: 'absolute',
