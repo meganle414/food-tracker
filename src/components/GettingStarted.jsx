@@ -15,12 +15,12 @@ import { NameContext } from '../contexts/NameContext';
 // image carousel slides and text
 const cards = [
   { id: 1, image: require('../images/logo.png'), text: 'Welcome', subtext: '\nThank you for choosing Food Tracker\n\n\n\n\n\n\n\n\n\n\n\n' },
-  { id: 2, image: require('../images/business.png'), text: 'What is your calories intake goal?', subtext: '' },
-  { id: 3, image: require('../images/pleasure.png'), text: 'What is your current weight?', subtext: '' },
-  { id: 4, image: require('../images/pleasure.png'), text: 'What is your goal weight?', subtext: '' },
-  { id: 5, image: require('../images/pleasure.png'), text: 'What are your nutrition goals?', subtext: '' },
-  { id: 6, image: require('../images/pleasure.png'), text: 'What is your name?', subtext: '\n\n\n\n\n\n\n\n\n\n\n\n' },
-  { id: 7, image: require('../images/pleasure.png'), text: 'All set!', subtext: '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n' },
+  { id: 2, image: require('../images/calorie_intake.png'), text: 'What is your calories intake goal?', subtext: '' },
+  { id: 3, image: require('../images/scale.png'), text: 'What is your current weight?', subtext: '' },
+  { id: 4, image: require('../images/scale.png'), text: 'What is your goal weight?', subtext: '' },
+  { id: 5, image: require('../images/nutrition_goals.png'), text: 'What are your nutrition goals?', subtext: '' },
+  { id: 6, image: require('../images/name.png'), text: 'What is your name?', subtext: '\n\n\n\n\n\n\n\n\n\n\n\n' },
+  { id: 7, image: require('../images/celebrate.png'), text: 'All set!', subtext: '\n\n\n\n\n\n' },
 ];
 
 const App = () => {
@@ -143,7 +143,7 @@ const App = () => {
             <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardText}>{item.text}</Text>
             <View style={styles.nutritionGoalsContainer}>
-              <View style={styles.carbCol}>
+              <View style={styles.carbsCol}>
                 <Text style={styles.optionText}>Carbs</Text>
                 <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (carbGoalContext.carbGoal/100)) + ' cal'}</Text>
                 <FlatList
@@ -190,7 +190,7 @@ const App = () => {
               />
               </View>
               <View style={styles.fatCol}>
-              <Text style={styles.optionText}>Fat</Text>
+                <Text style={styles.optionText}>Fat</Text>
                 <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (fatGoalContext.fatGoal/100)) + ' cal'}</Text>
                 <FlatList
                 data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
@@ -239,6 +239,14 @@ const App = () => {
           <View style={styles.cardContainer}>
             <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardText}>{item.text}</Text>
+            <Text style={styles.cardSubText}>Name: {nameContext.name}</Text>
+            <Text style={styles.cardSubText}>Calorie Goal: {calorieGoalContext.calorieGoal}</Text>
+            <Text style={styles.cardSubText}>Current Weight: {weightContext.weight}</Text>
+            <Text style={styles.cardSubText}>Goal Weight: {weightGoalContext.weightGoal}</Text>
+            {/* unnecessary information for now */}
+            {/* <Text style={styles.cardSubText}>Carbs Goal: {Math.round(calorieGoalContext.calorieGoal * (carbGoalContext.carbGoal/100)) + ' cal'}</Text>
+            <Text style={styles.cardSubText}>Protein Goal: {Math.round(calorieGoalContext.calorieGoal * (proteinGoalContext.proteinGoal/100)) + ' cal'}</Text>
+            <Text style={styles.cardSubText}>Fat Goal: {Math.round(calorieGoalContext.calorieGoal * (fatGoalContext.fatGoal/100)) + ' cal'}</Text> */}
             {/* button to go to Home screen */}
             <TouchableOpacity
               style={styles.finishButton}
@@ -441,6 +449,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 175,
   },
+  carbsCol: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  proteinCol: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  fatCol: {
+    flex: 1,
+    alignItems: 'center',
+  },
   totalNutrition: {
     fontSize: 18,
     marginTop: 32,
@@ -452,7 +472,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderWidth: 1,
     padding: 10,
-    marginBottom: 16,
+    marginBottom: 8,
   },
   arrowContainerLeft: {
     position: 'absolute',
@@ -504,18 +524,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 25,
   },
-  carbCol: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  proteinCol: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  fatCol: {
-    flex: 1,
-    alignItems: 'center',
-  },
   optionText: {
     fontSize: 18,
   },
@@ -527,8 +535,7 @@ const styles = StyleSheet.create({
   },
   finishButton: {
     position: 'absolute',
-    top: '42%',
-    left: '25%',
+    top: '95%',
     width: 150,
     height: 50,
     alignItems: 'center',
