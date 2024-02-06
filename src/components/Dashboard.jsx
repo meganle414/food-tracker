@@ -1,7 +1,8 @@
 import React, { useRef, useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+import Svg, { G, Circle } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
+// import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { WeightGoalContext } from '../contexts/WeightGoalContext';
@@ -47,6 +48,12 @@ const App = () => {
 
   const navigation = useNavigation()
 
+  const radius = 70;
+  const circleCircumference = 2 * Math.PI * radius;
+
+  const percentageCarbs = ((carbGoalContext.carbGoal - carbContext.carbs) / carbGoalContext.carbGoal) * 100;
+  const strokeDashoffsetCarbs = circleCircumference - (circleCircumference * (percentageCarbs)) / 100;
+
     return (
         <View>
           <Text style={styles.title}>Food Tracker</Text>
@@ -63,11 +70,45 @@ const App = () => {
           </View>
           <View style={styles.container}>
             <Text style={styles.containerTitle}>Macros</Text>
-            <Text style={styles.containerText}>Carbs</Text>
+            <View style={styles.macrosContainer}>
+              <View style={styles.carbsCol}>
+                <Text style={styles.containerText}>Carbs</Text>
+                <View style={styles.graphWrapper}>
+                  <Svg height='160' width='160' viewBox='0 0 180 180'>
+                    <G rotation={-90} originX='90' originY='90'>
+                      <Circle
+                        cx='50%'
+                        cy='50%'
+                        r={radius}
+                        stroke='#F1F6F9'
+                        fill='transparent'
+                        strokeWidth='40'
+                      />
+                      <Circle
+                        cx='50%'
+                        cy='50%'
+                        r={radius}
+                        stroke='#14274E'
+                        fill='transparent'
+                        strokeWidth='40'
+                        strokeDasharray={circleCircumference}
+                        strokeDashoffset={strokeDashoffsetCarbs}
+                        strokeLinecap='round'
+                      />
+                    </G>
+                  </Svg>
+                  <Text style={styles.graphText}>{carbContext.carbs}</Text>
+                </View>
+              </View>
+              <View style={styles.proteinCol}>
+                <Text style={styles.containerText}>Protein</Text>
+              </View>
+              <View style={styles.fatCol}>
+                <Text style={styles.containerText}>Fat</Text>
+              </View>
+            </View>
             {/* <Text style={styles.containerText}>{carbContext.carbs}</Text> */}
-            <Text style={styles.containerText}>Protein</Text>
             {/* <Text style={styles.containerText}>{proteinContext.protein}</Text> */}
-            <Text style={styles.containerText}>Fat</Text>
             {/* <Text style={styles.containerText}>{fatContext.fat}</Text> */}
           </View>
           {/* need a bar at the bottom to go to Dashboard, Log Food, and Settings TAB NAVIGATION*/}
@@ -116,10 +157,45 @@ const styles = StyleSheet.create({
     },
     containerText: {
       fontSize: 18,
-      marginBottom: 16,
-      textAlign: 'left',
-      marginLeft: 32,
+      margin: 16,
+      textAlign: 'center',
       color: 'white',
+    },
+    macrosContainer: {
+      flexDirection: 'row',
+      flex: 1,
+      height: '35%',
+      width: '90%',
+      left: '5%',
+      minHeight: '35%',
+      minWidth: '80%',
+      borderWidth: 1,
+      borderColor: 'black',
+      backgroundColor: '#2E2E2E',
+      borderRadius: 10,
+    },
+    graphWrapper: {
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    graphText: {
+      position: 'absolute',
+      textAlign: 'center',
+      fontWeight: '600',
+      fontSize: 18,
+      color: 'white',
+    },
+    carbsCol: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    proteinCol: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    fatCol: {
+      flex: 1,
+      alignItems: 'center',
     },
 });
 
