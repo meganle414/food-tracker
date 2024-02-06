@@ -50,7 +50,7 @@ const App = () => {
   const navigation = useNavigation()
 
   function handleFinish() {  // change screen to Home screen
-    navigation.navigate('Home')
+    navigation.navigate('Dashboard')
   }
 
   const renderItem = ({ item }) => {
@@ -85,31 +85,29 @@ const App = () => {
     } else if (item.id === 3) {  // if at current weight selection card, provide weight choices
       return (
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <View style={styles.cardContainer}>
-            <Image source={item.image} style={styles.cardImage} />
-            <Text style={styles.cardText}>{item.text}</Text>
-            <FlatList
-              horizontal
-              style={styles.weightList}
-              data={Array.from({ length: 211 }, (_, i) => (i + 90))}
-              renderItem={({ item }) => (
-                // when item pressed, highlight item
-                <TouchableOpacity
-                  style={[styles.weightContainer, weightContext.weight === item ? styles.selectedOption : null]}
-                  onPress={() => {
-                    // set as currently selected calorie goal
-                    weightContext.setWeight(item);
-                  }}
-                >
-                <Text style={styles.optionText}>{item}</Text>
-                </TouchableOpacity>
-              )}
-              keyExtractor={item => item.toString()}
-              contentContainerStyle={styles.weightList}
-              extraData={activeIndex}
-            />
-          </View>
-        </GestureHandlerRootView>
+            <View style={styles.cardContainer}>
+              <Image source={item.image} style={styles.cardImage} />
+              <Text style={styles.cardText}>{item.text}</Text>
+              <FlatList
+                data={Array.from({ length: 211 }, (_, i) => (i + 90) + ' lbs')}
+                renderItem={({ item }) => (
+                  // when item pressed, highlight item
+                  <TouchableOpacity
+                    style={[styles.optionContainer, weightContext.weight === item ? styles.selectedOption : null]}
+                    onPress={() => {
+                      // set as currently selected weight
+                      weightContext.setWeight(item);
+                    }}
+                  >
+                    <Text style={styles.optionText}>{item}</Text>
+                  </TouchableOpacity>
+                )}
+                keyExtractor={item => item.toString()}
+                contentContainerStyle={styles.optionList}
+                extraData={activeIndex}
+              />
+            </View>
+          </GestureHandlerRootView>
       );
     } else if (item.id === 4) {  // if at goal weight selection card, provide weight choices
         return (
@@ -124,7 +122,7 @@ const App = () => {
                   <TouchableOpacity
                     style={[styles.optionContainer, weightGoalContext.weightGoal === item ? styles.selectedOption : null]}
                     onPress={() => {
-                      // set as currently selected calorie goal
+                      // set as currently selected weight goal
                       weightGoalContext.setWeightGoal(item);
                     }}
                   >
@@ -292,7 +290,7 @@ const App = () => {
           onPress: () => console.log('Warning: Weight Goal not chosen yet'),
         }
       ]);
-    } else if (index > 3 && calorieGoalContext.calorieGoal === 0) {
+    } else if (index > 3 && weightGoalContext.weightGoal === 0) {
       // brings user back to weight goal choice if it is not chosen and swiped past it
       setActiveIndex(3);
       carouselRef.current.snapToItem(3, false, false)
@@ -543,7 +541,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     height: 50,
     width: 300,
-    alignItems: 'center',
+    // alignItems: 'center',
     alignContent: 'center',
     flexDirection: 'row',
   },

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import GettingStarted from './src/components/GettingStarted'
-import Home from './src/components/Home'
+import Dashboard from './src/components/Dashboard'
 import LogFood from './src/components/LogFood'
 import Profile from './src/components/Profile'
 import Settings from './src/components/Settings'
@@ -14,6 +14,9 @@ import { WeightGoalContext } from './src/contexts/WeightGoalContext';
 import { CarbGoalContext } from './src/contexts/CarbGoalContext';
 import { ProteinGoalContext } from './src/contexts/ProteinGoalContext';
 import { FatGoalContext } from './src/contexts/FatGoalContext';
+import { CarbContext } from './src/contexts/CarbContext';
+import { ProteinContext } from './src/contexts/ProteinContext';
+import { FatContext } from './src/contexts/FatContext';
 import { ThemeContext } from './src/contexts/ThemeContext';
 import { NameContext } from './src/contexts/NameContext';
 
@@ -24,6 +27,9 @@ export default function App() {
   const [carbGoal, setCarbGoal] = useState(0);
   const [proteinGoal, setProteinGoal] = useState(0);
   const [fatGoal, setFatGoal] = useState(0);
+  const [carbs, setCarbs] = useState(0);
+  const [protein, setProtein] = useState(0);
+  const [fat, setFat] = useState(0);
   const [name, setName] = useState(0);
   const [theme, setTheme] = useState('light');
 
@@ -38,15 +44,21 @@ export default function App() {
               <ProteinGoalContext.Provider value={{proteinGoal, setProteinGoal}}>
                 <FatGoalContext.Provider value={{fatGoal, setFatGoal}}>
                   <NameContext.Provider value={{name, setName}}>
-                    <NavigationContainer>
-                      <Stack.Navigator>
-                        <Stack.Screen name="GettingStarted" component={GettingStarted} options={{headerShown: false}} />
-                        <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
-                        <Stack.Screen name="LogFood" component={LogFood} options={{headerShown: false}} />
-                        <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}} />
-                        <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
-                      </Stack.Navigator>
-                    </NavigationContainer>
+                    <CarbContext.Provider value={{carbs, setCarbs}}>
+                      <ProteinContext.Provider value={{protein, setProtein}}>
+                        <FatContext.Provider value={{fat, setFat}}>
+                          <NavigationContainer>
+                            <Stack.Navigator>
+                              {/* <Stack.Screen name="GettingStarted" component={GettingStarted} options={{headerShown: false}} /> */}
+                              <Stack.Screen name="Dashboard" component={Dashboard} options={{headerShown: false}} />
+                              <Stack.Screen name="LogFood" component={LogFood} options={{headerShown: false}} />
+                              <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
+                              <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}} />
+                            </Stack.Navigator>
+                          </NavigationContainer>
+                        </FatContext.Provider>
+                      </ProteinContext.Provider>
+                    </CarbContext.Provider>
                 </NameContext.Provider>
                 </FatGoalContext.Provider>
               </ProteinGoalContext.Provider>
