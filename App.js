@@ -10,10 +10,6 @@ import Profile from './src/components/Profile'
 import Settings from './src/components/Settings'
 import { CalorieGoalContext } from './src/contexts/CalorieGoalContext';
 import { WeightContext } from './src/contexts/WeightContext';
-import { WeightGoalContext } from './src/contexts/WeightGoalContext';
-import { CarbGoalContext } from './src/contexts/CarbGoalContext';
-import { ProteinGoalContext } from './src/contexts/ProteinGoalContext';
-import { FatGoalContext } from './src/contexts/FatGoalContext';
 import { CarbContext } from './src/contexts/CarbContext';
 import { ProteinContext } from './src/contexts/ProteinContext';
 import { FatContext } from './src/contexts/FatContext';
@@ -21,16 +17,16 @@ import { ThemeContext } from './src/contexts/ThemeContext';
 import { NameContext } from './src/contexts/NameContext';
 
 export default function App() {
-  const [calorieGoal, setCalorieGoal] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [weightGoal, setWeightGoal] = useState(0);
-  const [carbGoal, setCarbGoal] = useState(0);
-  const [proteinGoal, setProteinGoal] = useState(0);
-  const [fatGoal, setFatGoal] = useState(0);
+  const [calorieGoal, setCalorieGoal] = useState(1600);
+  const [weight, setWeight] = useState(150);
+  const [weightGoal, setWeightGoal] = useState(140);
+  const [carbGoal, setCarbGoal] = useState(35);
+  const [proteinGoal, setProteinGoal] = useState(35);
+  const [fatGoal, setFatGoal] = useState(30);
   const [carbs, setCarbs] = useState(150);
   const [protein, setProtein] = useState(350);
   const [fat, setFat] = useState(100);
-  const [name, setName] = useState(0);
+  const [name, setName] = useState('Apple');
   const [theme, setTheme] = useState('light');
 
   const Stack = createStackNavigator()
@@ -38,15 +34,11 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>
       <CalorieGoalContext.Provider value={{calorieGoal, setCalorieGoal}}>
-        <WeightContext.Provider value={{weight, setWeight}}>
-          <WeightGoalContext.Provider value={{weightGoal, setWeightGoal}}>
-            <CarbGoalContext.Provider value={{carbGoal, setCarbGoal}}>
-              <ProteinGoalContext.Provider value={{proteinGoal, setProteinGoal}}>
-                <FatGoalContext.Provider value={{fatGoal, setFatGoal}}>
+        <WeightContext.Provider value={{weight, setWeight, weightGoal, setWeightGoal}}>
+            <CarbContext.Provider value={{carbs, setCarbs, carbGoal, setCarbGoal}}>
+              <ProteinContext.Provider value={{protein, setProtein, proteinGoal, setProteinGoal}}>
+                <FatContext.Provider value={{fat, setFat, fatGoal, setFatGoal}}>
                   <NameContext.Provider value={{name, setName}}>
-                    <CarbContext.Provider value={{carbs, setCarbs}}>
-                      <ProteinContext.Provider value={{protein, setProtein}}>
-                        <FatContext.Provider value={{fat, setFat}}>
                           <NavigationContainer>
                             <Stack.Navigator>
                               <Stack.Screen name="GettingStarted" component={GettingStarted} options={{headerShown: false}} />
@@ -56,14 +48,10 @@ export default function App() {
                               <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}} />
                             </Stack.Navigator>
                           </NavigationContainer>
-                        </FatContext.Provider>
-                      </ProteinContext.Provider>
-                    </CarbContext.Provider>
-                </NameContext.Provider>
-                </FatGoalContext.Provider>
-              </ProteinGoalContext.Provider>
-            </CarbGoalContext.Provider>
-          </WeightGoalContext.Provider>
+                  </NameContext.Provider>
+                </FatContext.Provider>
+              </ProteinContext.Provider>
+            </CarbContext.Provider>
         </WeightContext.Provider>
       </CalorieGoalContext.Provider>
     </ThemeContext.Provider>

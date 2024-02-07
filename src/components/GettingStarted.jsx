@@ -6,10 +6,9 @@ import Carousel from 'react-native-snap-carousel';
 import {Picker} from '@react-native-picker/picker';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
-import { WeightGoalContext } from '../contexts/WeightGoalContext';
-import { CarbGoalContext } from '../contexts/CarbGoalContext';
-import { ProteinGoalContext } from '../contexts/ProteinGoalContext';
-import { FatGoalContext } from '../contexts/FatGoalContext';
+import { CarbContext } from '../contexts/CarbContext';
+import { ProteinContext } from '../contexts/ProteinContext';
+import { FatContext } from '../contexts/FatContext';
 import { NameContext } from '../contexts/NameContext';
 
 // image carousel slides and text
@@ -30,16 +29,13 @@ const App = () => {
   // values of calories (e.g. 1200, 1300, etc.)
   const calorieGoalContext = useContext(CalorieGoalContext);
 
-  // value of user's current weight
+  // value of user's current weight and weight goal
   const weightContext = useContext(WeightContext);
 
-  // value of user's current weight
-  const weightGoalContext = useContext(WeightGoalContext);
-
   // values of nutrition goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
-  const carbGoalContext = useContext(CarbGoalContext);
-  const proteinGoalContext = useContext(ProteinGoalContext);
-  const fatGoalContext = useContext(FatGoalContext);
+  const carbContext = useContext(CarbContext);
+  const proteinContext = useContext(ProteinContext);
+  const fatContext = useContext(FatContext);
 
   // total percentage of nutrition goals
   const [totalNutrition, setTotalNutrition] = useState(0);
@@ -120,10 +116,10 @@ const App = () => {
                 renderItem={({ item }) => (
                   // when item pressed, highlight item
                   <TouchableOpacity
-                    style={[styles.optionContainer, weightGoalContext.weightGoal === item ? styles.selectedOption : null]}
+                    style={[styles.optionContainer, weightContext.weightGoal === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected weight goal
-                      weightGoalContext.setWeightGoal(item);
+                      weightContext.setWeightGoal(item);
                     }}
                   >
                     <Text style={styles.optionText}>{item}</Text>
@@ -145,17 +141,17 @@ const App = () => {
             <View style={styles.nutritionGoalsContainer}>
               <View style={styles.carbsCol}>
                 <Text style={styles.optionText}>Carbs</Text>
-                <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (carbGoalContext.carbGoal/100)) + ' cal'}</Text>
+                <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (carbContext.carbGoal/100)) + ' cal'}</Text>
                 <FlatList
                 data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
                 renderItem={({ item }) => (
                   // when item pressed, highlight item
                   <TouchableOpacity
-                    style={[styles.optionContainer, (carbGoalContext.carbGoal + '%') === item ? styles.selectedOption : null]}
+                    style={[styles.optionContainer, (carbContext.carbGoal + '%') === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected carb goal
-                      carbGoalContext.setCarbGoal(Number(item.slice(0, -1)));
-                      setTotalNutrition(Number(item.slice(0, -1)) + proteinGoalContext.proteinGoal + fatGoalContext.fatGoal);
+                      carbContext.setCarbGoal(Number(item.slice(0, -1)));
+                      setTotalNutrition(Number(item.slice(0, -1)) + proteinContext.proteinGoal + fatContext.fatGoal);
                     }}
                   >
                     <Text style={styles.optionText}>{item}</Text>
@@ -168,17 +164,17 @@ const App = () => {
               </View>
               <View style={styles.proteinCol}>
                 <Text style={styles.optionText}>Protein</Text>
-                <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (proteinGoalContext.proteinGoal/100)) + ' cal'}</Text>
+                <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (proteinContext.proteinGoal/100)) + ' cal'}</Text>
                 <FlatList
                 data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
                 renderItem={({ item  }) => (
                   // when item pressed, highlight item
                   <TouchableOpacity
-                    style={[styles.optionContainer, (proteinGoalContext.proteinGoal + '%') === item ? styles.selectedOption : null]}
+                    style={[styles.optionContainer, (proteinContext.proteinGoal + '%') === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected protein goal
-                      proteinGoalContext.setProteinGoal(Number(item.slice(0, -1)));
-                      setTotalNutrition(carbGoalContext.carbGoal + Number(item.slice(0, -1)) + fatGoalContext.fatGoal);
+                      proteinContext.setProteinGoal(Number(item.slice(0, -1)));
+                      setTotalNutrition(carbContext.carbGoal + Number(item.slice(0, -1)) + fatContext.fatGoal);
                     }}
                   >
                     <Text style={styles.optionText}>{item}</Text>
@@ -191,17 +187,17 @@ const App = () => {
               </View>
               <View style={styles.fatCol}>
                 <Text style={styles.optionText}>Fat</Text>
-                <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (fatGoalContext.fatGoal/100)) + ' cal'}</Text>
+                <Text style={styles.cardSubText}>{Math.round(calorieGoalContext.calorieGoal * (fatContext.fatGoal/100)) + ' cal'}</Text>
                 <FlatList
                 data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
                 renderItem={({ item }) => (
                   // when item pressed, highlight item
                   <TouchableOpacity
-                    style={[styles.optionContainer, (fatGoalContext.fatGoal + '%') === item ? styles.selectedOption : null]}
+                    style={[styles.optionContainer, (fatContext.fatGoal + '%') === item ? styles.selectedOption : null]}
                     onPress={() => {
                       // set as currently selected fat goal
-                      fatGoalContext.setFatGoal(Number(item.slice(0, -1)));
-                      setTotalNutrition(carbGoalContext.carbGoal + proteinGoalContext.proteinGoal + Number(item.slice(0, -1)));
+                      fatContext.setFatGoal(Number(item.slice(0, -1)));
+                      setTotalNutrition(carbContext.carbGoal + proteinContext.proteinGoal + Number(item.slice(0, -1)));
                     }}
                   >
                     <Text style={styles.optionText}>{item}</Text>
@@ -242,11 +238,7 @@ const App = () => {
             <Text style={styles.cardSubText}>Name: {nameContext.name}</Text>
             <Text style={styles.cardSubText}>Calorie Goal: {calorieGoalContext.calorieGoal}</Text>
             <Text style={styles.cardSubText}>Current Weight: {weightContext.weight}</Text>
-            <Text style={styles.cardSubText}>Goal Weight: {weightGoalContext.weightGoal}</Text>
-            {/* unnecessary information for now */}
-            {/* <Text style={styles.cardSubText}>Carbs Goal: {Math.round(calorieGoalContext.calorieGoal * (carbGoalContext.carbGoal/100)) + ' cal'}</Text>
-            <Text style={styles.cardSubText}>Protein Goal: {Math.round(calorieGoalContext.calorieGoal * (proteinGoalContext.proteinGoal/100)) + ' cal'}</Text>
-            <Text style={styles.cardSubText}>Fat Goal: {Math.round(calorieGoalContext.calorieGoal * (fatGoalContext.fatGoal/100)) + ' cal'}</Text> */}
+            <Text style={styles.cardSubText}>Goal Weight: {weightContext.weightGoal}</Text>
             {/* button to go to Home screen */}
             <TouchableOpacity
               style={styles.finishButton}
@@ -290,7 +282,7 @@ const App = () => {
           onPress: () => console.log('Warning: Weight Goal not chosen yet'),
         }
       ]);
-    } else if (index > 3 && weightGoalContext.weightGoal === 0) {
+    } else if (index > 3 && weightContext.weightGoal === 0) {
       // brings user back to weight goal choice if it is not chosen and swiped past it
       setActiveIndex(3);
       carouselRef.current.snapToItem(3, false, false)
@@ -300,8 +292,8 @@ const App = () => {
           onPress: () => console.log('Warning: Weight Goal not chosen yet'),
         }
       ]);
-    } else if (index > 4 && carbGoalContext.carbGoal === 0 && proteinGoalContext.proteinGoal === 0
-      && fatGoalContext.fatGoal === 0) {
+    } else if (index > 4 && carbContext.carbGoal === 0 && proteinContext.proteinGoal === 0
+      && fatContext.fatGoal === 0) {
       // brings user back to nutrition goal choice if it is not chosen and swiped past it
       setActiveIndex(4);
       carouselRef.current.snapToItem(4, false, false)
@@ -311,8 +303,8 @@ const App = () => {
           onPress: () => console.log('Warning: Nutrition Goal not chosen yet'),
         }
       ]);
-    } else if (index > 4 && (carbGoalContext.carbGoal + proteinGoalContext.proteinGoal 
-      + fatGoalContext.fatGoal !== 100)) {
+    } else if (index > 4 && (carbContext.carbGoal + proteinContext.proteinGoal 
+      + fatContext.fatGoal !== 100)) {
         // brings user back to nutrition goal choice if nutrition percentages don't add up to 100%
       setActiveIndex(4);
       carouselRef.current.snapToItem(4, false, false)
@@ -351,9 +343,9 @@ const App = () => {
     } else if (direction === 'right' && activeIndex < cards.length - 1) {
       if ((activeIndex === 1 && calorieGoalContext.calorieGoal === 0)
         || (activeIndex === 2 && weightContext.weight === 0)
-        || (activeIndex === 3 && weightGoalContext.weightGoal === 0)
-        || (activeIndex === 4 && carbGoalContext.carbGoal + proteinGoalContext.proteinGoal 
-        + fatGoalContext.fatGoal !== 100)
+        || (activeIndex === 3 && weightContext.weightGoal === 0)
+        || (activeIndex === 4 && carbContext.carbGoal + proteinContext.proteinGoal 
+        + fatContext.fatGoal !== 100)
         || (activeIndex === 5 && nameContext.name === 0)) {
         // gray out right arrow when calorie goal, weight, nutrition goal, or name isn't chosen/correct yet
         return (

@@ -5,10 +5,6 @@ import { useNavigation } from '@react-navigation/native'
 // import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
-import { WeightGoalContext } from '../contexts/WeightGoalContext';
-import { CarbGoalContext } from '../contexts/CarbGoalContext';
-import { ProteinGoalContext } from '../contexts/ProteinGoalContext';
-import { FatGoalContext } from '../contexts/FatGoalContext';
 import { NameContext } from '../contexts/NameContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { CarbContext } from '../contexts/CarbContext';
@@ -21,18 +17,10 @@ const App = () => {
   // values of calories (e.g. 1200, 1300, etc.)
   const calorieGoalContext = useContext(CalorieGoalContext);
 
-  // value of user's current weight
+  // value of user's current weight and weight goal
   const weightContext = useContext(WeightContext);
 
-  // value of user's current weight
-  const weightGoalContext = useContext(WeightGoalContext);
-
-  // values of nutrition goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
-  const carbGoalContext = useContext(CarbGoalContext);
-  const proteinGoalContext = useContext(ProteinGoalContext);
-  const fatGoalContext = useContext(FatGoalContext);
-
-  // values of current macros (carbs, protein, fats) in calories
+  // values of nutrition goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal and current macros (carbs, protein, fats) in calories
   const carbContext = useContext(CarbContext);
   const proteinContext = useContext(ProteinContext);
   const fatContext = useContext(FatContext);
@@ -48,16 +36,23 @@ const App = () => {
 
   const navigation = useNavigation()
 
+  const radiusCalories = 80;
+  const circleCircumferenceCalories = 2 * Math.PI * radiusCalories;
+
   const radius = 50;
   const circleCircumference = 2 * Math.PI * radius;
 
-  const percentageCarbs = (carbContext.carbs / (calorieGoalContext.calorieGoal * (carbGoalContext.carbGoal / 100))) * 100;
+  const totalCalories = carbContext.carbs + proteinContext.protein + fatContext.fat;
+  const percentageCalories = (totalCalories / calorieGoalContext.calorieGoal) * 100;
+  const strokeDashoffsetCalories = circleCircumferenceCalories - (circleCircumferenceCalories * percentageCalories) / 100;
+
+  const percentageCarbs = (carbContext.carbs / (calorieGoalContext.calorieGoal * (carbContext.carbGoal / 100))) * 100;
   const strokeDashoffsetCarbs = circleCircumference - (circleCircumference * percentageCarbs) / 100;
 
-  const percentageProtein = (proteinContext.protein / (calorieGoalContext.calorieGoal * (proteinGoalContext.proteinGoal / 100))) * 100;
+  const percentageProtein = (proteinContext.protein / (calorieGoalContext.calorieGoal * (proteinContext.proteinGoal / 100))) * 100;
   const strokeDashoffsetProtein = circleCircumference - (circleCircumference * percentageProtein) / 100;
 
-  const percentageFat = (fatContext.fat / (calorieGoalContext.calorieGoal * (fatGoalContext.fatGoal / 100))) * 100;
+  const percentageFat = (fatContext.fat / (calorieGoalContext.calorieGoal * (fatContext.fatGoal / 100))) * 100;
   const strokeDashoffsetFat = circleCircumference - (circleCircumference * percentageFat) / 100;
 
     return (
@@ -65,11 +60,41 @@ const App = () => {
           <Text style={styles.title}>Food Tracker</Text>
           <View style={styles.container}>
             <Text style={styles.containerTitle}>Calories</Text>
+            <Text style={styles.equationText}>Remaining = Goal - Food + Exercise</Text>
+            <View style={styles.caloriesCol}>
+            <View style={styles.graphWrapperCalories}>
+                  <Svg height='160' width='160' viewBox='0 0 180 180'>
+                    <G rotation={-90} originX='90' originY='90'>
+                      <Circle
+                        cx='50%'
+                        cy='50%'
+                        r={radiusCalories}
+                        stroke='#F1F6F9'
+                        fill='transparent'
+                        strokeWidth='10'
+                      />
+                      <Circle
+                        cx='50%'
+                        cy='50%'
+                        r={radiusCalories}
+                        stroke='#38F358'
+                        fill='transparent'
+                        strokeWidth='10'
+                        strokeDasharray={circleCircumferenceCalories}
+                        strokeDashoffset={strokeDashoffsetCalories}
+                        strokeLinecap='round'
+                      />
+                    </G>
+                  </Svg>
+                  <Text style={styles.graphTextCalories}>{Intl.NumberFormat("en-US").format(calorieGoalContext.calorieGoal - (carbContext.carbs + proteinContext.protein + fatContext.fat))}</Text>
+                  <Text style={styles.graphSubTextCalories}>{"remaining"}</Text>
+                </View>
+            </View>
             <Text style={styles.caloriesText}>Base Goal</Text>
             <Text style={styles.caloriesText}>{calorieGoalContext.calorieGoal}</Text>
             <Text style={styles.caloriesText}>Food</Text>
             {/* replace below line with current food calories */}
-            <Text style={styles.caloriesText}>{calorieGoalContext.calorieGoal}</Text>
+            <Text style={styles.caloriesText}>{carbContext.carbs + proteinContext.protein + fatContext.fat}</Text>
             <Text style={styles.caloriesText}>Exercise</Text>
             {/* replace below line with current calories burned from exercise */}
             <Text style={styles.caloriesText}>{calorieGoalContext.calorieGoal}</Text>
@@ -191,7 +216,7 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 24,
       fontWeight: 'bold',
-      marginBottom: 16,
+      // marginBottom: 16,
       color: '#222222',
       marginTop: 50,
       textAlign: 'center',
@@ -205,15 +230,24 @@ const styles = StyleSheet.create({
       textAlign: 'left',
       color: 'white',
     },
+    equationText: {
+      fontSize: 12,
+      textAlign: 'left',
+      color: 'white',
+      marginLeft: 20,
+      bottom: '4%',
+    },
     caloriesText: {
       fontSize: 18,
-      marginBottom: 16,
-      textAlign: 'left',
+      marginBottom: 10,
       marginLeft: 32,
+      textAlign: 'left',
       color: 'white',
       left: '55%',
+      bottom: '8%',
     },
     containerText: {
+      fontWeight: 'bold',
       fontSize: 18,
       marginTop: 16,
       textAlign: 'center',
@@ -228,9 +262,30 @@ const styles = StyleSheet.create({
       minHeight: '35%',
       minWidth: '80%',
     },
+    graphWrapperCalories: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      transform: [{ translateY: -10 }],
+    },
     graphWrapper: {
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    graphTextCalories: {
+      position: 'absolute',
+      textAlign: 'center',
+      fontWeight: '600',
+      fontSize: 32,
+      color: 'white',
+      transform: [{ translateY: -15 }],
+    },
+    graphSubTextCalories: {
+      position: 'absolute',
+      textAlign: 'center',
+      fontWeight: '600',
+      fontSize: 18,
+      color: 'white',
+      transform: [{ translateY: 15 }],
     },
     graphText: {
       position: 'absolute',
@@ -238,6 +293,12 @@ const styles = StyleSheet.create({
       fontWeight: '600',
       fontSize: 18,
       color: 'white',
+    },
+    caloriesCol: {
+      flex: 1,
+      alignItems: 'center',
+      right: '18%',
+      top: '20%',
     },
     carbsCol: {
       flex: 1,
