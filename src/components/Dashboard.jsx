@@ -48,11 +48,17 @@ const App = () => {
 
   const navigation = useNavigation()
 
-  const radius = 70;
+  const radius = 50;
   const circleCircumference = 2 * Math.PI * radius;
 
-  const percentageCarbs = ((carbGoalContext.carbGoal - carbContext.carbs) / carbGoalContext.carbGoal) * 100;
-  const strokeDashoffsetCarbs = circleCircumference - (circleCircumference * (percentageCarbs)) / 100;
+  const percentageCarbs = (carbContext.carbs / (calorieGoalContext.calorieGoal * (carbGoalContext.carbGoal / 100))) * 100;
+  const strokeDashoffsetCarbs = circleCircumference - (circleCircumference * percentageCarbs) / 100;
+
+  const percentageProtein = (proteinContext.protein / (calorieGoalContext.calorieGoal * (proteinGoalContext.proteinGoal / 100))) * 100;
+  const strokeDashoffsetProtein = circleCircumference - (circleCircumference * percentageProtein) / 100;
+
+  const percentageFat = (fatContext.fat / (calorieGoalContext.calorieGoal * (fatGoalContext.fatGoal / 100))) * 100;
+  const strokeDashoffsetFat = circleCircumference - (circleCircumference * percentageFat) / 100;
 
     return (
         <View>
@@ -82,15 +88,15 @@ const App = () => {
                         r={radius}
                         stroke='#F1F6F9'
                         fill='transparent'
-                        strokeWidth='40'
+                        strokeWidth='10'
                       />
                       <Circle
                         cx='50%'
                         cy='50%'
                         r={radius}
-                        stroke='#14274E'
+                        stroke='#33E6FF'
                         fill='transparent'
-                        strokeWidth='40'
+                        strokeWidth='10'
                         strokeDasharray={circleCircumference}
                         strokeDashoffset={strokeDashoffsetCarbs}
                         strokeLinecap='round'
@@ -102,9 +108,61 @@ const App = () => {
               </View>
               <View style={styles.proteinCol}>
                 <Text style={styles.containerText}>Protein</Text>
+                <View style={styles.graphWrapper}>
+                  <Svg height='160' width='160' viewBox='0 0 180 180'>
+                    <G rotation={-90} originX='90' originY='90'>
+                      <Circle
+                        cx='50%'
+                        cy='50%'
+                        r={radius}
+                        stroke='#F1F6F9'
+                        fill='transparent'
+                        strokeWidth='10'
+                      />
+                      <Circle
+                        cx='50%'
+                        cy='50%'
+                        r={radius}
+                        stroke='#BC8CD1'
+                        fill='transparent'
+                        strokeWidth='10'
+                        strokeDasharray={circleCircumference}
+                        strokeDashoffset={strokeDashoffsetProtein}
+                        strokeLinecap='round'
+                      />
+                    </G>
+                  </Svg>
+                  <Text style={styles.graphText}>{proteinContext.protein}</Text>
+                </View>
               </View>
               <View style={styles.fatCol}>
                 <Text style={styles.containerText}>Fat</Text>
+                <View style={styles.graphWrapper}>
+                  <Svg height='160' width='160' viewBox='0 0 180 180'>
+                    <G rotation={-90} originX='90' originY='90'>
+                      <Circle
+                        cx='50%'
+                        cy='50%'
+                        r={radius}
+                        stroke='#F1F6F9'
+                        fill='transparent'
+                        strokeWidth='10'
+                      />
+                      <Circle
+                        cx='50%'
+                        cy='50%'
+                        r={radius}
+                        stroke='#F3A638'
+                        fill='transparent'
+                        strokeWidth='10'
+                        strokeDasharray={circleCircumference}
+                        strokeDashoffset={strokeDashoffsetFat}
+                        strokeLinecap='round'
+                      />
+                    </G>
+                  </Svg>
+                  <Text style={styles.graphText}>{fatContext.fat}</Text>
+                </View>
               </View>
             </View>
             {/* <Text style={styles.containerText}>{carbContext.carbs}</Text> */}
@@ -143,7 +201,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       marginTop: 16,
       marginBottom: 16,
-      marginLeft: 32,
+      marginLeft: 20,
       textAlign: 'left',
       color: 'white',
     },
@@ -157,7 +215,7 @@ const styles = StyleSheet.create({
     },
     containerText: {
       fontSize: 18,
-      margin: 16,
+      marginTop: 16,
       textAlign: 'center',
       color: 'white',
     },
@@ -169,10 +227,6 @@ const styles = StyleSheet.create({
       left: '5%',
       minHeight: '35%',
       minWidth: '80%',
-      borderWidth: 1,
-      borderColor: 'black',
-      backgroundColor: '#2E2E2E',
-      borderRadius: 10,
     },
     graphWrapper: {
       alignItems: 'center',

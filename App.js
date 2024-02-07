@@ -27,9 +27,9 @@ export default function App() {
   const [carbGoal, setCarbGoal] = useState(0);
   const [proteinGoal, setProteinGoal] = useState(0);
   const [fatGoal, setFatGoal] = useState(0);
-  const [carbs, setCarbs] = useState(0);
-  const [protein, setProtein] = useState(0);
-  const [fat, setFat] = useState(0);
+  const [carbs, setCarbs] = useState(150);
+  const [protein, setProtein] = useState(350);
+  const [fat, setFat] = useState(100);
   const [name, setName] = useState(0);
   const [theme, setTheme] = useState('light');
 
@@ -49,7 +49,7 @@ export default function App() {
                         <FatContext.Provider value={{fat, setFat}}>
                           <NavigationContainer>
                             <Stack.Navigator>
-                              {/* <Stack.Screen name="GettingStarted" component={GettingStarted} options={{headerShown: false}} /> */}
+                              <Stack.Screen name="GettingStarted" component={GettingStarted} options={{headerShown: false}} />
                               <Stack.Screen name="Dashboard" component={Dashboard} options={{headerShown: false}} />
                               <Stack.Screen name="LogFood" component={LogFood} options={{headerShown: false}} />
                               <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
