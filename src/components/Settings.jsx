@@ -28,11 +28,10 @@ const App = () => {
     return (
         <View>
           <Text style={styles.title}>Settings</Text>
-          <View style={theme === 'dark' ? styles.darkContainer : styles.lightContainer}>
-            <Text style={styles.title}>Settings</Text>
+          <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? 'black' : 'white' }]}>
             <View style={styles.settingsContainer}>
-              <Text style={styles.settingsText}>Dark Mode</Text>
-              <Switch value={theme === 'dark'} onValueChange={themeContext.setTheme} />
+              <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Dark Mode</Text>
+              <Switch style={styles.toggle} value={themeContext.theme === 'dark'} onValueChange={(value) => themeContext.setTheme(value ? 'dark' : 'light')} />
             </View>
           </View>
         </View>
@@ -40,17 +39,14 @@ const App = () => {
 }
 
 const styles = StyleSheet.create({
-    lightContainer: {
+    container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'white',
-    },
-    darkContainer: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'black',
+      width: '100%',
+      height: '88%',
+      minWidth: '80%',
+      minHeight: '88%',
     },
     settingsContainer: {
       flex: 1,
@@ -68,12 +64,11 @@ const styles = StyleSheet.create({
     },
     settingsText: {
       fontSize: 16,
+      flex: 1,
+      margin: 16,
     },
-    blackText: {
-      color: 'black',
-    },
-    whiteText: {
-      color: 'white',
+    toggle: {
+      flex: 1,
     },
 });
 

@@ -35,15 +35,22 @@ export default function App() {
 
   function Home() {
     return (
-      <Tab.Navigator>
+      <Tab.Navigator
+        style={styles.tabNavigator}
+        tabBarOptions={{
+          activeBackgroundColor: theme === 'light' ? 'lightgray' : 'darkgray',
+          inactiveBackgroundColor: theme === 'light' ? 'white' : 'lightgray',
+        }}
+      >
         <Tab.Screen
           name="Dashboard"
           component={Dashboard}
           options={{
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
+              <MaterialCommunityIcons name="home" color={'black'} size={size} />
             ),
+            tabBarLabelStyle: {color: 'black'},
           }}
         />
         <Tab.Screen
@@ -52,8 +59,9 @@ export default function App() {
           options={{
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="food" color={color} size={size} />
+              <MaterialCommunityIcons name="food" color={'black'} size={size} />
             ),
+            tabBarLabelStyle: {color: 'black'},
           }}
         />
         <Tab.Screen
@@ -62,8 +70,9 @@ export default function App() {
           options={{
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="account-circle" color={color} size={size} />
+              <MaterialCommunityIcons name="account-circle" color={'black'} size={size} />
             ),
+            tabBarLabelStyle: {color: 'black'},
           }}
         />
         <Tab.Screen
@@ -72,8 +81,9 @@ export default function App() {
           options={{
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="settings-helper" color={color} size={size} />
+              <MaterialCommunityIcons name="settings-helper" color={'black'} size={size} />
             ),
+            tabBarLabelStyle: {color: 'black'},
           }}
         />
       </Tab.Navigator>
@@ -115,4 +125,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  tabNavigator: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 100,
+  }
 });

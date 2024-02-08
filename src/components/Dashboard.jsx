@@ -55,11 +55,12 @@ const App = () => {
   const strokeDashoffsetFat = circleCircumference - (circleCircumference * percentageFat) / 100;
 
     return (
-        <View>
-          <Text style={styles.title}>Food Tracker</Text>
-          <View style={styles.container}>
-            <Text style={styles.containerTitle}>Calories</Text>
-            <Text style={styles.equationText}>Remaining = Goal - Food + Exercise</Text>
+      // for some reason making this whole screen the style screen shifts the containers
+        <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
+          <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Food Tracker</Text>
+          <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#A3A3A3' }]}>
+          <Text style={[styles.containerTitle, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Calories</Text>
+            <Text style={[styles.equationText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Remaining = Goal - Food + Exercise</Text>
             <View style={styles.caloriesCol}>
             <View style={styles.graphWrapperCalories}>
                   <Svg height='160' width='160' viewBox='0 0 180 180'>
@@ -85,24 +86,24 @@ const App = () => {
                       />
                     </G>
                   </Svg>
-                  <Text style={styles.graphTextCalories}>{Intl.NumberFormat("en-US").format(calorieGoalContext.calorieGoal - (carbContext.carbs + proteinContext.protein + fatContext.fat))}</Text>
-                  <Text style={styles.graphSubTextCalories}>{"remaining"}</Text>
+                  <Text style={[styles.graphTextCalories, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{Intl.NumberFormat("en-US").format(calorieGoalContext.calorieGoal - (carbContext.carbs + proteinContext.protein + fatContext.fat))}</Text>
+                  <Text style={[styles.graphSubTextCalories, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{"remaining"}</Text>
                 </View>
             </View>
-            <Text style={styles.caloriesText}>Base Goal</Text>
-            <Text style={styles.caloriesText}>{calorieGoalContext.calorieGoal}</Text>
-            <Text style={styles.caloriesText}>Food</Text>
+            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Base Goal</Text>
+            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{calorieGoalContext.calorieGoal}</Text>
+            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Food</Text>
             {/* replace below line with current food calories */}
-            <Text style={styles.caloriesText}>{carbContext.carbs + proteinContext.protein + fatContext.fat}</Text>
-            <Text style={styles.caloriesText}>Exercise</Text>
+            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{carbContext.carbs + proteinContext.protein + fatContext.fat}</Text>
+            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Exercise</Text>
             {/* replace below line with current calories burned from exercise */}
-            <Text style={styles.caloriesText}>{calorieGoalContext.calorieGoal}</Text>
+            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{calorieGoalContext.calorieGoal}</Text>
           </View>
-          <View style={styles.container}>
-            <Text style={styles.containerTitle}>Macros</Text>
+          <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#A3A3A3' }]}>
+            <Text style={[styles.containerTitle, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Macros</Text>
             <View style={styles.macrosContainer}>
               <View style={styles.carbsCol}>
-                <Text style={styles.containerText}>Carbs</Text>
+                <Text style={[styles.containerText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Carbs</Text>
                 <View style={styles.graphWrapper}>
                   <Svg height='160' width='160' viewBox='0 0 180 180'>
                     <G rotation={-90} originX='90' originY='90'>
@@ -127,11 +128,11 @@ const App = () => {
                       />
                     </G>
                   </Svg>
-                  <Text style={styles.graphText}>{carbContext.carbs}</Text>
+                  <Text style={[styles.graphText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{carbContext.carbs}</Text>
                 </View>
               </View>
               <View style={styles.proteinCol}>
-                <Text style={styles.containerText}>Protein</Text>
+                <Text style={[styles.containerText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Protein</Text>
                 <View style={styles.graphWrapper}>
                   <Svg height='160' width='160' viewBox='0 0 180 180'>
                     <G rotation={-90} originX='90' originY='90'>
@@ -156,11 +157,11 @@ const App = () => {
                       />
                     </G>
                   </Svg>
-                  <Text style={styles.graphText}>{proteinContext.protein}</Text>
+                  <Text style={[styles.graphText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{proteinContext.protein}</Text>
                 </View>
               </View>
               <View style={styles.fatCol}>
-                <Text style={styles.containerText}>Fat</Text>
+                <Text style={[styles.containerText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Fat</Text>
                 <View style={styles.graphWrapper}>
                   <Svg height='160' width='160' viewBox='0 0 180 180'>
                     <G rotation={-90} originX='90' originY='90'>
@@ -185,20 +186,21 @@ const App = () => {
                       />
                     </G>
                   </Svg>
-                  <Text style={styles.graphText}>{fatContext.fat}</Text>
+                  <Text style={[styles.graphText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{fatContext.fat}</Text>
                 </View>
               </View>
             </View>
-            {/* <Text style={styles.containerText}>{carbContext.carbs}</Text> */}
-            {/* <Text style={styles.containerText}>{proteinContext.protein}</Text> */}
-            {/* <Text style={styles.containerText}>{fatContext.fat}</Text> */}
           </View>
-          {/* need a bar at the bottom to go to Dashboard, Log Food, and Settings TAB NAVIGATION*/}
         </View>
       );
 }
 
 const styles = StyleSheet.create({
+    // screen: {
+    // flex: 1,
+    // minHeight: '100%',
+    // minWidth: '100%',
+    // },
     container: {
       flex: 1,
       height: '35%',
@@ -206,15 +208,12 @@ const styles = StyleSheet.create({
       left: '5%',
       minHeight: '35%',
       minWidth: '80%',
-      backgroundColor: '#2E2E2E',
       marginTop: 16,
       borderRadius: 10,
     },
     title: {
       fontSize: 24,
       fontWeight: 'bold',
-      // marginBottom: 16,
-      color: '#222222',
       marginTop: 50,
       textAlign: 'center',
     },
@@ -225,12 +224,10 @@ const styles = StyleSheet.create({
       marginBottom: 16,
       marginLeft: 20,
       textAlign: 'left',
-      color: 'white',
     },
     equationText: {
       fontSize: 12,
       textAlign: 'left',
-      color: 'white',
       marginLeft: 20,
       bottom: '4%',
     },
@@ -239,7 +236,6 @@ const styles = StyleSheet.create({
       marginBottom: 5,
       marginLeft: 32,
       textAlign: 'left',
-      color: 'white',
       left: '55%',
       bottom: '8%',
     },
@@ -248,7 +244,6 @@ const styles = StyleSheet.create({
       fontSize: 18,
       marginTop: 16,
       textAlign: 'center',
-      color: 'white',
     },
     macrosContainer: {
       flexDirection: 'row',
@@ -273,7 +268,6 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontWeight: '600',
       fontSize: 32,
-      color: 'white',
       transform: [{ translateY: -15 }],
     },
     graphSubTextCalories: {
@@ -281,7 +275,6 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontWeight: '600',
       fontSize: 18,
-      color: 'white',
       transform: [{ translateY: 15 }],
     },
     graphText: {
