@@ -26,9 +26,9 @@ const App = () => {
   const themeContext = useContext(ThemeContext);
 
     return (
-        <View>
-          <Text style={styles.title}>Settings</Text>
-          <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? 'black' : 'white' }]}>
+        <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
+          <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Settings</Text>
+          <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
             <View style={styles.settingsContainer}>
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Dark Mode</Text>
               <Switch style={styles.toggle} value={themeContext.theme === 'dark'} onValueChange={(value) => themeContext.setTheme(value ? 'dark' : 'light')} />
@@ -39,6 +39,11 @@ const App = () => {
 }
 
 const styles = StyleSheet.create({
+    screen: {
+    flex: 1,
+    minHeight: '100%',
+    minWidth: '100%',
+    },
     container: {
       flex: 1,
       alignItems: 'center',
@@ -58,7 +63,6 @@ const styles = StyleSheet.create({
       fontSize: 24,
       fontWeight: 'bold',
       marginBottom: 16,
-      color: '#222222',
       marginTop: 50,
       textAlign: 'center',
     },

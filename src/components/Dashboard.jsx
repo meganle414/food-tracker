@@ -58,7 +58,7 @@ const App = () => {
       // for some reason making this whole screen the style screen shifts the containers
         <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
           <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Food Tracker</Text>
-          <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#A3A3A3' }]}>
+          <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#C7C7C7' }]}>
           <Text style={[styles.containerTitle, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Calories</Text>
             <Text style={[styles.equationText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Remaining = Goal - Food + Exercise</Text>
             <View style={styles.caloriesCol}>
@@ -69,9 +69,8 @@ const App = () => {
                         cx='50%'
                         cy='50%'
                         r={radiusCalories}
-                        stroke='#F1F6F9'
                         fill='transparent'
-                        strokeWidth='10'
+                        style={[{stroke: themeContext.theme === 'dark' ? '#F1F6F9' : '#4F4F4F', strokeWidth: '10'}]}
                       />
                       <Circle
                         cx='50%'
@@ -90,20 +89,56 @@ const App = () => {
                   <Text style={[styles.graphSubTextCalories, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{"remaining"}</Text>
                 </View>
             </View>
-            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Base Goal</Text>
-            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{calorieGoalContext.calorieGoal}</Text>
-            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Food</Text>
+            <View style={styles.row}>
+              <Image
+              source={require('../images/flag.png')}
+              style={[styles.icon, { tintColor: themeContext.theme === 'dark' ? 'white' : '#222222' }]}
+              />
+              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Base Goal</Text>
+            </View>
+            <View style={styles.row}>
+              <Image
+                source={require('../images/flag.png')}
+                style={[styles.icon, { opacity: '0%' }]}
+              />
+              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{calorieGoalContext.calorieGoal}</Text>
+            </View>
             {/* replace below line with current food calories */}
-            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{carbContext.carbs + proteinContext.protein + fatContext.fat}</Text>
-            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Exercise</Text>
+            <View style={styles.row}>
+              <Image
+              source={require('../images/spoon_fork.png')}
+              style={[styles.icon, { tintColor: themeContext.theme === 'dark' ? 'white' : '#222222' }]}
+              />
+              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Food</Text>
+            </View>
+            <View style={styles.row}>
+              <Image
+                source={require('../images/spoon_fork.png')}
+                style={[styles.icon, { opacity: '0%' }]}
+              />
+              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{calorieGoalContext.calorieGoal}</Text>
+            </View>
             {/* replace below line with current calories burned from exercise */}
-            <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{calorieGoalContext.calorieGoal}</Text>
+            <View style={styles.row}>
+              <Image
+              source={require('../images/fire.png')}
+              style={styles.icon}
+              />
+              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Exercise</Text>
+            </View>
+            <View style={styles.row}>
+              <Image
+                source={require('../images/fire.png')}
+                style={[styles.icon, { opacity: '0%' }]}
+              />
+              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{calorieGoalContext.calorieGoal}</Text>
+            </View>
           </View>
-          <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#A3A3A3' }]}>
+          <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#C7C7C7', minHeight: '28%' }]}>
             <Text style={[styles.containerTitle, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Macros</Text>
             <View style={styles.macrosContainer}>
               <View style={styles.carbsCol}>
-                <Text style={[styles.containerText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Carbs</Text>
+                <Text style={[styles.containerText, { color: themeContext.theme === 'dark' ? 'white' : '#222222', marginTop: 0 }]}>Carbs</Text>
                 <View style={styles.graphWrapper}>
                   <Svg height='160' width='160' viewBox='0 0 180 180'>
                     <G rotation={-90} originX='90' originY='90'>
@@ -111,9 +146,8 @@ const App = () => {
                         cx='50%'
                         cy='50%'
                         r={radius}
-                        stroke='#F1F6F9'
                         fill='transparent'
-                        strokeWidth='10'
+                        style={[{stroke: themeContext.theme === 'dark' ? '#F1F6F9' : '#4F4F4F', strokeWidth: '10'}]}
                       />
                       <Circle
                         cx='50%'
@@ -132,7 +166,7 @@ const App = () => {
                 </View>
               </View>
               <View style={styles.proteinCol}>
-                <Text style={[styles.containerText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Protein</Text>
+                <Text style={[styles.containerText, { color: themeContext.theme === 'dark' ? 'white' : '#222222', marginTop: 0  }]}>Protein</Text>
                 <View style={styles.graphWrapper}>
                   <Svg height='160' width='160' viewBox='0 0 180 180'>
                     <G rotation={-90} originX='90' originY='90'>
@@ -140,17 +174,15 @@ const App = () => {
                         cx='50%'
                         cy='50%'
                         r={radius}
-                        stroke='#F1F6F9'
                         fill='transparent'
-                        strokeWidth='10'
+                        style={[{stroke: themeContext.theme === 'dark' ? '#F1F6F9' : '#4F4F4F', strokeWidth: '10'}]}
                       />
                       <Circle
                         cx='50%'
                         cy='50%'
                         r={radius}
-                        stroke='#BC8CD1'
                         fill='transparent'
-                        strokeWidth='10'
+                        style={[{stroke: themeContext.theme === 'dark' ? '#BC8CD1' : '#AD55D1', strokeWidth: '10'}]}
                         strokeDasharray={circleCircumference}
                         strokeDashoffset={strokeDashoffsetProtein}
                         strokeLinecap='round'
@@ -161,7 +193,7 @@ const App = () => {
                 </View>
               </View>
               <View style={styles.fatCol}>
-                <Text style={[styles.containerText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Fat</Text>
+                <Text style={[styles.containerText, { color: themeContext.theme === 'dark' ? 'white' : '#222222', marginTop: 0  }]}>Fat</Text>
                 <View style={styles.graphWrapper}>
                   <Svg height='160' width='160' viewBox='0 0 180 180'>
                     <G rotation={-90} originX='90' originY='90'>
@@ -169,17 +201,15 @@ const App = () => {
                         cx='50%'
                         cy='50%'
                         r={radius}
-                        stroke='#F1F6F9'
                         fill='transparent'
-                        strokeWidth='10'
+                        style={[{stroke: themeContext.theme === 'dark' ? '#F1F6F9' : '#4F4F4F', strokeWidth: '10'}]}
                       />
                       <Circle
                         cx='50%'
                         cy='50%'
                         r={radius}
-                        stroke='#F3A638'
                         fill='transparent'
-                        strokeWidth='10'
+                        style={[{stroke: themeContext.theme === 'dark' ? '#FF9700' : '#F3A638', strokeWidth: '10'}]}
                         strokeDasharray={circleCircumference}
                         strokeDashoffset={strokeDashoffsetFat}
                         strokeLinecap='round'
@@ -191,16 +221,19 @@ const App = () => {
               </View>
             </View>
           </View>
+          <View style={[styles.buttonContainer, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#C7C7C7' }]}>
+
+          </View>
         </View>
       );
 }
 
 const styles = StyleSheet.create({
-    // screen: {
-    // flex: 1,
-    // minHeight: '100%',
-    // minWidth: '100%',
-    // },
+    screen: {
+    flex: 1,
+    minHeight: '100%',
+    minWidth: '100%',
+    },
     container: {
       flex: 1,
       height: '35%',
@@ -209,6 +242,17 @@ const styles = StyleSheet.create({
       minHeight: '35%',
       minWidth: '80%',
       marginTop: 16,
+      borderRadius: 10,
+    },
+    buttonContainer: {
+      flex: 1,
+      height: '10%',
+      width: '90%',
+      left: '5%',
+      minHeight: '10%',
+      minWidth: '80%',
+      marginTop: 16,
+      marginBottom: 16,
       borderRadius: 10,
     },
     title: {
@@ -225,6 +269,10 @@ const styles = StyleSheet.create({
       marginLeft: 20,
       textAlign: 'left',
     },
+    row: {
+      flex: 1,
+      flexDirection: 'row',
+    },
     equationText: {
       fontSize: 12,
       textAlign: 'left',
@@ -232,11 +280,11 @@ const styles = StyleSheet.create({
       bottom: '4%',
     },
     caloriesText: {
+      flex: 1,
       fontSize: 18,
       marginBottom: 5,
-      marginLeft: 32,
       textAlign: 'left',
-      left: '55%',
+      left: '150%',
       bottom: '8%',
     },
     containerText: {
@@ -282,7 +330,17 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontWeight: '600',
       fontSize: 18,
-      color: 'white',
+    },
+    icon: {
+      flex: 1,
+      width: 30,
+      height: 30,
+      marginRight: 5,
+      marginLeft: 32,
+      textAlign: 'left',
+      left: '400%',
+      bottom: '9%',
+      resizeMode: 'contain',
     },
     caloriesCol: {
       flex: 1,

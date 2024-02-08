@@ -22,17 +22,22 @@ const App = () => {
   // // values of nutritional goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
   // const nutritionGoalContext = useContext(NutritionGoalContext);
 
-  // // setting for light/dark mode
-  // const themeContext = useContext(themeContext);
+  // setting for light/dark mode
+  const themeContext = useContext(ThemeContext);
 
     return (
-        <View>
-          <Text style={styles.title}>Profile</Text>
-        </View>
-      );
+      <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
+        <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Profile</Text>
+      </View>
+    );
 }
 
 const styles = StyleSheet.create({
+    screen: {
+    flex: 1,
+    minHeight: '100%',
+    minWidth: '100%',
+    },
     container: {
       flex: 1,
       alignItems: 'center',
@@ -42,7 +47,6 @@ const styles = StyleSheet.create({
       fontSize: 24,
       fontWeight: 'bold',
       marginBottom: 16,
-      color: '#222222',
       marginTop: 50,
       textAlign: 'center',
     },

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator, useHeaderHeight } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import GettingStarted from './src/components/GettingStarted'
@@ -104,7 +104,7 @@ export default function App() {
                           <Stack.Screen
                             name="Home"
                             component={Home}
-                            options={{ headerShown: false }}
+                            options={{ headerShown: false, cardStyle: { marginBottom: 0 } }}
                           />
                         </Stack.Navigator>
                     </NavigationContainer>
@@ -130,6 +130,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 100,
+    // height: 100,
   }
 });
