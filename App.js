@@ -9,6 +9,7 @@ import Dashboard from './src/components/Dashboard'
 import LogFood from './src/components/LogFood'
 import Profile from './src/components/Profile'
 import Settings from './src/components/Settings'
+import Goals from './src/components/Goals'
 import { CalorieGoalContext } from './src/contexts/CalorieGoalContext';
 import { WeightContext } from './src/contexts/WeightContext';
 import { CarbContext } from './src/contexts/CarbContext';
@@ -106,6 +107,7 @@ export default function App() {
                             component={Home}
                             options={{ headerShown: false, cardStyle: { marginBottom: 0 } }}
                           />
+                          <Stack.Screen name="Goals" component={Goals} options={{headerShown: false}} />
                         </Stack.Navigator>
                     </NavigationContainer>
                   </NameContext.Provider>

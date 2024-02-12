@@ -1,7 +1,7 @@
 import React, { useRef, useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Alert, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Alert, TextInput, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
-import { GestureHandlerRootView} from 'react-native-gesture-handler'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import Carousel from 'react-native-snap-carousel';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
@@ -20,6 +20,9 @@ const cards = [
   { id: 6, image: require('../images/name.png'), text: 'What is your name?\n', subtext: '\n\n\n\n\n\n\n\n\n\n\n\n' },
   { id: 7, image: require('../images/celebrate.png'), text: 'All set!\n', subtext: '\n\n\n\n\n\n' },
 ];
+
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
 const App = () => {
   const carouselRef = useRef(null);
@@ -45,13 +48,13 @@ const App = () => {
   const navigation = useNavigation();
 
   function handleFinish() {  // change screen to Home screen
-    navigation.navigate('Dashboard')
+    navigation.navigate('Home');
   }
 
   const renderItem = ({ item }) => {
     if (item.id === 2) {  // if at calorie intake goal selection card, provide calories choices
       return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        // <GestureHandlerRootView style={{ flex: 1 }}>
           <View style={styles.cardContainer}>
             <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardText}>{item.text}</Text>
@@ -75,7 +78,7 @@ const App = () => {
               extraData={activeIndex}
             />
           </View>
-        </GestureHandlerRootView>
+        // </GestureHandlerRootView>
       );
     } else if (item.id === 3) {  // if at current weight selection card, provide weight choices
       return (
@@ -388,8 +391,8 @@ const App = () => {
         ref={carouselRef}
         data={cards}
         renderItem={renderItem}
-        sliderWidth={300}
-        itemWidth={300}
+        sliderWidth={screenWidth}
+        itemWidth={screenWidth * 0.9}
         onSnapToItem={onSnapToItem}
       />
       <View style={styles.arrowContainerLeft}>{renderArrow('left')}</View>
@@ -414,8 +417,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   cardContainer: {
-    width: 300,
-    height: 600,
+    width: screenWidth * 0.9,
+    height: screenHeight * 0.71,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -468,18 +471,16 @@ const styles = StyleSheet.create({
   arrowContainerLeft: {
     position: 'absolute',
     left: 25,
-    top: '50%',
-    transform: [{ translateY: 325 }],
-    width: 50,
-    height: 50,
+    top: '88.5%',
+    width: screenWidth * 0.125,
+    height: screenWidth * 0.125,
     alignItems: 'center',
     justifyContent: 'center',
   },
   arrowContainerRight: {
     position: 'absolute',
     right: 25,
-    top: '50%',
-    transform: [{ translateY: 325 }],
+    top: '88.5%',
     width: 50,
     height: 50,
     alignItems: 'center',
@@ -532,13 +533,11 @@ const styles = StyleSheet.create({
     marginTop: 16,
     height: 50,
     width: 300,
-    // alignItems: 'center',
     alignContent: 'center',
     flexDirection: 'row',
   },
   selectedWeight: {
     fontWeight: 'bold',
-    // backgroundColor: 'lightgray',
   },
   finishButton: {
     position: 'absolute',

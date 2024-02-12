@@ -29,26 +29,27 @@ const App = () => {
 
   const navigation = useNavigation();
 
+  function handleBack() {  // change screen to Settings
+    navigation.navigate('Settings');
+  }
+
   function handleGoals() {  // change screen to Goals
     navigation.navigate('Goals');
   }
 
     return (
         <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
-          <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Settings</Text>
+          <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Goals</Text>
+          <TouchableOpacity
+              style={styles.settingsButton}
+              onPress={handleBack}
+              >
+              <Text style={styles.backButtonText}>Back</Text>
+            </TouchableOpacity>
           <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
             <View style={styles.settingsContainer}>
-              <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Dark Mode</Text>
-              <Switch style={styles.toggle} value={themeContext.theme === 'dark'} onValueChange={(value) => themeContext.setTheme(value ? 'dark' : 'light')} />
-            </View>
-            <View style={styles.settingsContainer}>
-              <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Goals</Text>
-              <TouchableOpacity
-              style={styles.settingsButton}
-              onPress={handleGoals}
-              >
-              <Text style={[styles.finishButtonText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Finish</Text>
-            </TouchableOpacity>
+              <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Weight Goal</Text>
+              <Switch style={styles.toggle} value={themeContext.theme === 'dark'} />
             </View>
           </View>
         </View>
@@ -76,10 +77,6 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       flexDirection: 'row',
     },
-    settingsButton: {
-      flex: 1,
-      left: screenWidth * 0.1,
-    },
     title: {
       fontSize: 24,
       fontWeight: 'bold',
@@ -87,14 +84,15 @@ const styles = StyleSheet.create({
       marginTop: 50,
       textAlign: 'center',
     },
+    backButtonText: {
+        fontSize: 16,
+        margin: 16,
+    },
     settingsText: {
       fontSize: 16,
       flex: 1,
       margin: 16,
       textAlign: 'center',
-    },
-    finishButtonText: {
-      fontSize: 16,
     },
     toggle: {
       flex: 1,

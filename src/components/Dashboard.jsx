@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Dimensions } from 'react-native';
 import Svg, { G, Circle } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native'
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
@@ -33,12 +33,13 @@ const App = () => {
   // theme (light/dark mode)
   const themeContext = useContext(ThemeContext);
 
-  const navigation = useNavigation();
+  const screenWidth = Dimensions.get('window').width;
+  const screenHeight = Dimensions.get('window').height;
 
-  const radiusCalories = 80;
+  const radiusCalories = screenWidth * 0.2;
   const circleCircumferenceCalories = 2 * Math.PI * radiusCalories;
 
-  const radius = 50;
+  const radius = screenWidth * 0.125;
   const circleCircumference = 2 * Math.PI * radius;
 
   const totalCalories = carbContext.carbs + proteinContext.protein + fatContext.fat;
@@ -57,7 +58,7 @@ const App = () => {
     return (
       // for some reason making this whole screen the style screen shifts the containers
         <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
-          <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Food Tracker</Text>
+          <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{nameContext.name}'s Food Tracker</Text>
           <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#C7C7C7' }]}>
           <Text style={[styles.containerTitle, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Calories</Text>
             <Text style={[styles.equationText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Remaining = Goal - Food + Exercise</Text>
@@ -99,11 +100,10 @@ const App = () => {
             <View style={styles.row}>
               <Image
                 source={require('../images/flag.png')}
-                style={[styles.icon, { opacity: '0%' }]}
+                style={[styles.icon, { opacity: 0 }]}
               />
-              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{calorieGoalContext.calorieGoal}</Text>
+              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{Intl.NumberFormat("en-US").format(calorieGoalContext.calorieGoal)}</Text>
             </View>
-            {/* replace below line with current food calories */}
             <View style={styles.row}>
               <Image
               source={require('../images/spoon_fork.png')}
@@ -114,9 +114,9 @@ const App = () => {
             <View style={styles.row}>
               <Image
                 source={require('../images/spoon_fork.png')}
-                style={[styles.icon, { opacity: '0%' }]}
+                style={[styles.icon, { opacity: 0 }]}
               />
-              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{calorieGoalContext.calorieGoal}</Text>
+              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{Intl.NumberFormat("en-US").format(carbContext.carbs + proteinContext.protein + fatContext.fat)}</Text>
             </View>
             {/* replace below line with current calories burned from exercise */}
             <View style={styles.row}>
@@ -129,9 +129,9 @@ const App = () => {
             <View style={styles.row}>
               <Image
                 source={require('../images/fire.png')}
-                style={[styles.icon, { opacity: '0%' }]}
+                style={[styles.icon, { opacity: 0 }]}
               />
-              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{calorieGoalContext.calorieGoal}</Text>
+              <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{Intl.NumberFormat("en-US").format(calorieGoalContext.calorieGoal)}</Text>
             </View>
           </View>
           <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#C7C7C7', minHeight: '28%' }]}>
@@ -162,7 +162,7 @@ const App = () => {
                       />
                     </G>
                   </Svg>
-                  <Text style={[styles.graphText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{carbContext.carbs}</Text>
+                  <Text style={[styles.graphText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{Intl.NumberFormat("en-US").format(carbContext.carbs)}</Text>
                 </View>
               </View>
               <View style={styles.proteinCol}>
@@ -189,7 +189,7 @@ const App = () => {
                       />
                     </G>
                   </Svg>
-                  <Text style={[styles.graphText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{proteinContext.protein}</Text>
+                  <Text style={[styles.graphText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{Intl.NumberFormat("en-US").format(proteinContext.protein)}</Text>
                 </View>
               </View>
               <View style={styles.fatCol}>
@@ -216,7 +216,7 @@ const App = () => {
                       />
                     </G>
                   </Svg>
-                  <Text style={[styles.graphText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{fatContext.fat}</Text>
+                  <Text style={[styles.graphText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{Intl.NumberFormat("en-US").format(fatContext.fat)}</Text>
                 </View>
               </View>
             </View>
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
       fontSize: 18,
       marginBottom: 5,
       textAlign: 'left',
-      left: '150%',
+      left: '160%',
       bottom: '8%',
     },
     containerText: {
@@ -337,8 +337,7 @@ const styles = StyleSheet.create({
       height: 30,
       marginRight: 5,
       marginLeft: 32,
-      textAlign: 'left',
-      left: '400%',
+      left: '380%',
       bottom: '9%',
       resizeMode: 'contain',
     },
