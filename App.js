@@ -82,7 +82,7 @@ export default function App() {
           options={{
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="settings-helper" color={'black'} size={size} />
+              <MaterialCommunityIcons name="wrench" color={'black'} size={size} />
             ),
             tabBarLabelStyle: {color: 'black'},
           }}

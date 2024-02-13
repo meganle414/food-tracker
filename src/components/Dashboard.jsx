@@ -34,7 +34,7 @@ const App = () => {
   const themeContext = useContext(ThemeContext);
 
   const screenWidth = Dimensions.get('window').width;
-  const screenHeight = Dimensions.get('window').height;
+  // const screenHeight = Dimensions.get('window').height;
 
   const radiusCalories = screenWidth * 0.2;
   const circleCircumferenceCalories = 2 * Math.PI * radiusCalories;
@@ -54,6 +54,12 @@ const App = () => {
 
   const percentageFat = (fatContext.fat / (calorieGoalContext.calorieGoal * (fatContext.fatGoal / 100))) * 100;
   const strokeDashoffsetFat = circleCircumference - (circleCircumference * percentageFat) / 100;
+
+  const navigation = useNavigation();
+
+  function handleLogFood() {  // change screen to Log Food
+    navigation.navigate('LogFood');
+  }
 
     return (
       // for some reason making this whole screen the style screen shifts the containers
@@ -93,7 +99,7 @@ const App = () => {
             <View style={styles.row}>
               <Image
               source={require('../images/flag.png')}
-              style={[styles.icon, { tintColor: themeContext.theme === 'dark' ? 'white' : '#222222' }]}
+              style={[styles.icon, { tintColor: '#1275E5'}]}
               />
               <Text style={[styles.caloriesText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Base Goal</Text>
             </View>
@@ -222,7 +228,12 @@ const App = () => {
             </View>
           </View>
           <View style={[styles.buttonContainer, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#C7C7C7' }]}>
-
+            <TouchableOpacity
+                style={styles.logFoodButton}
+                onPress={handleLogFood}
+                >
+                <Text style={styles.logFoodButtonText}>Log Food</Text>
+            </TouchableOpacity>
           </View>
         </View>
       );
@@ -359,6 +370,16 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
     },
+    logFoodButton: {
+      height: '100%',
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    logFoodButtonText: {
+      fontSize: 24,
+      fontWeight: 'bold',
+    }
 });
 
 export default App;

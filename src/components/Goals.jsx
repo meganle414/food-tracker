@@ -1,6 +1,7 @@
 import React, { useRef, useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Switch, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
+// import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { NameContext } from '../contexts/NameContext';
@@ -45,9 +46,11 @@ const App = () => {
               onPress={handleBack}
               >
               <Text style={styles.backButtonText}>Back</Text>
-            </TouchableOpacity>
+          </TouchableOpacity>
           <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
             <View style={styles.settingsContainer}>
+              {/* <MaterialCommunityIcons name="dumbbell" color={themeContext.theme === 'dark' ? 'white' : 'black'} /> */}
+              {/* <Image source={require('../images/spoon_fork.png')} style={styles.icon}  /> */}
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Weight Goal</Text>
               <Switch style={styles.toggle} value={themeContext.theme === 'dark'} />
             </View>

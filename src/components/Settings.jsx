@@ -1,6 +1,7 @@
 import React, { useRef, useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Switch, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { NameContext } from '../contexts/NameContext';
@@ -38,16 +39,18 @@ const App = () => {
           <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Settings</Text>
           <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
             <View style={styles.settingsContainer}>
+            <MaterialCommunityIcons name="theme-light-dark" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Dark Mode</Text>
               <Switch style={styles.toggle} value={themeContext.theme === 'dark'} onValueChange={(value) => themeContext.setTheme(value ? 'dark' : 'light')} />
             </View>
             <View style={styles.settingsContainer}>
+              <MaterialCommunityIcons name="dumbbell" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Goals</Text>
               <TouchableOpacity
               style={styles.settingsButton}
               onPress={handleGoals}
               >
-              <Text style={[styles.finishButtonText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Finish</Text>
+                <MaterialCommunityIcons name="chevron-right" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.12}/>
             </TouchableOpacity>
             </View>
           </View>
@@ -91,7 +94,8 @@ const styles = StyleSheet.create({
       fontSize: 16,
       flex: 1,
       margin: 16,
-      textAlign: 'center',
+      left: '10%',
+      textAlign: 'left',
     },
     finishButtonText: {
       fontSize: 16,
