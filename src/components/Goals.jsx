@@ -1,7 +1,7 @@
 import React, { useRef, useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Switch, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { NameContext } from '../contexts/NameContext';
@@ -40,13 +40,23 @@ const App = () => {
 
     return (
         <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
-          <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Goals</Text>
+          <View style={styles.titleContainer}>
           <TouchableOpacity
               style={styles.settingsButton}
               onPress={handleBack}
               >
-              <Text style={styles.backButtonText}>Back</Text>
+              <MaterialCommunityIcons style={styles.backButton} name="chevron-left" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.12}/>
           </TouchableOpacity>
+          <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Goals</Text>
+          </View>
+          {/* <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Goals</Text>
+          <TouchableOpacity
+              style={styles.settingsButton}
+              onPress={handleBack}
+              >
+              <MaterialCommunityIcons name="chevron-left" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.12}/>
+              {/* <Text style={styles.backButtonText}>Back</Text>
+          </TouchableOpacity> */}
           <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
             <View style={styles.settingsContainer}>
               {/* <MaterialCommunityIcons name="dumbbell" color={themeContext.theme === 'dark' ? 'white' : 'black'} /> */}
@@ -64,6 +74,9 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: '100%',
     minWidth: '100%',
+    },
+    titleContainer: {
+      flexDirection: 'row',
     },
     container: {
       flex: 1,
@@ -85,11 +98,12 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       marginBottom: 16,
       marginTop: 50,
+      left: '120%',
       textAlign: 'center',
     },
-    backButtonText: {
-        fontSize: 16,
-        margin: 16,
+    backButton: {
+      flex: 1,
+      marginTop: 40,
     },
     settingsText: {
       fontSize: 16,
