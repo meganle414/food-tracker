@@ -25,6 +25,9 @@ const App = () => {
     return (
         <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
           <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Log Food</Text>
+          <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
+            {/* maybe have past 7 days worth of food here as a step graph */}
+          </View>
         </View>
       );
 }

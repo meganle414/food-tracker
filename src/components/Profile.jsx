@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Dimensions }
 import Svg, { G, Circle } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Dialog from "react-native-dialog";
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { NameContext } from '../contexts/NameContext';
@@ -13,6 +14,16 @@ import { FatContext } from '../contexts/FatContext';
 
 
 const App = () => {
+  const [visible, setVisible] = useState(false);
+  const [newName, setNewName] = useState('');
+
+  const showDialog = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
 
   // // values of calories (e.g. 1200, 1300, etc.)
   // const calorieGoalContext = useContext(CalorieGoalContext);
@@ -28,8 +39,9 @@ const App = () => {
   
     const screenWidth = Dimensions.get('window').width;
 
-    function handleEditName() {  // change name
-      nameContext.setName('Apple2');
+    const handleEditName = (newName) => {  // change name
+      nameContext.setName(newName);
+      setVisible(false);
     }
 
     return (
@@ -40,10 +52,27 @@ const App = () => {
           <View style={styles.row}>
             <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }, {flex: 1}]}>{nameContext.name}</Text>
             <TouchableOpacity
-              onPress={handleEditName}
+              onPress={showDialog}
               >
               <MaterialCommunityIcons name="pencil" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.05} left='10%' flex={1} marginTop={38} />
             </TouchableOpacity>
+          </View>
+          <View>
+            <Dialog.Container visible={visible}>
+              <Dialog.Title titleStyle={{ color: themeContext.theme === 'dark' ? 'white' : 'black' }}>Account Name Change</Dialog.Title>
+                <Dialog.Description>What do you want to change your name to?</Dialog.Description>
+                <Dialog.Input onChangeText={(text) => setNewName(text)} />
+                <Dialog.Button
+                  label='Cancel'
+                  onPress={handleCancel}
+                  containerStyle={{ backgroundColor: themeContext.theme === 'dark' ? 'black' : 'white', color: themeContext.theme === 'dark' ? 'white' : 'black' }}
+                />
+                <Dialog.Button
+                  label='Set Name'
+                  onPress={() => handleEditName(newName)}
+                  containerStyle={{ backgroundColor: themeContext.theme === 'dark' ? 'black' : 'white', color: themeContext.theme === 'dark' ? 'white' : 'black' }}
+                />
+            </Dialog.Container>
           </View>
         </View>
       </View>
@@ -60,7 +89,6 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      
     },
     row: {
       flex: 1,
