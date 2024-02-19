@@ -6,7 +6,7 @@ import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { NameContext } from '../contexts/NameContext';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { CarbContext } from '../contexts/CarbContext';
+import { CarbContext, CarbGoalContext } from '../contexts/CarbContext';
 import { ProteinContext } from '../contexts/ProteinContext';
 import { FatContext } from '../contexts/FatContext';
 import { StatusBar } from 'expo-status-bar';
@@ -16,13 +16,18 @@ const screenHeight = Dimensions.get('window').height;
 
 const App = () => {
 
-  // // values of calories (e.g. 1200, 1300, etc.)
-  // const calorieGoalContext = useContext(CalorieGoalContext);
+  // values of calories (e.g. 1200, 1300, etc.)
+  const calorieGoalContext = useContext(CalorieGoalContext);
 
   // // values of user's current weight
   // const weightContext = useContext(WeightContext);
 
-  // // values of nutritional goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
+  // values of nutrition goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal and current macros (carbs, protein, fats) in calories
+  const carbContext = useContext(CarbContext);
+  const proteinContext = useContext(ProteinContext);
+  const fatContext = useContext(FatContext);
+
+  // values of nutritional goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
   // const nutritionGoalContext = useContext(NutritionGoalContext);
 
   // setting for light/dark mode
@@ -32,10 +37,6 @@ const App = () => {
 
   function handleBack() {  // change screen to Settings
     navigation.navigate('Settings');
-  }
-
-  function handleGoals() {  // change screen to Goals
-    navigation.navigate('Goals');
   }
 
     return (
@@ -49,20 +50,26 @@ const App = () => {
           </TouchableOpacity>
           <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Goals</Text>
           </View>
-          {/* <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Goals</Text>
-          <TouchableOpacity
-              style={styles.settingsButton}
-              onPress={handleBack}
-              >
-              <MaterialCommunityIcons name="chevron-left" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.12}/>
-              {/* <Text style={styles.backButtonText}>Back</Text>
-          </TouchableOpacity> */}
           <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
             <View style={styles.settingsContainer}>
-              {/* <MaterialCommunityIcons name="dumbbell" color={themeContext.theme === 'dark' ? 'white' : 'black'} /> */}
-              {/* <Image source={require('../images/spoon_fork.png')} style={styles.icon}  /> */}
-              <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Weight Goal</Text>
+              <MaterialCommunityIcons name="food" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
+              <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Calories</Text>
               <Switch style={styles.toggle} value={themeContext.theme === 'dark'} />
+            </View>
+            <View style={styles.settingsContainer}>
+              <MaterialCommunityIcons name="food-croissant" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
+              <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }, { right: '15%' }]}>Carbs</Text>
+              <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{Math.round(calorieGoalContext.calorieGoal * (carbContext.carbGoal/100)) + ' g'}</Text>
+            </View>
+            <View style={styles.settingsContainer}>
+              <MaterialCommunityIcons name="food-steak" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
+              <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Protein</Text>
+              <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{Math.round(calorieGoalContext.calorieGoal * (proteinContext.proteinGoal/100)) + ' g'}</Text>
+            </View>
+            <View style={styles.settingsContainer}>
+              <MaterialCommunityIcons name="cupcake" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
+              <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Fat</Text>
+              <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{Math.round(calorieGoalContext.calorieGoal * (fatContext.fatGoal/100)) + ' g'}</Text>
             </View>
           </View>
         </View>
@@ -103,13 +110,20 @@ const styles = StyleSheet.create({
     },
     backButton: {
       flex: 1,
-      marginTop: 40,
+      marginTop: 41,
     },
     settingsText: {
-      fontSize: 16,
       flex: 1,
+      fontSize: 16,
       margin: 16,
       textAlign: 'center',
+    },
+    nutritionCalText: {
+      flex: 1,
+      fontSize: 16,
+      textAlign: 'left',
+      color: 'gray',
+
     },
     toggle: {
       flex: 1,

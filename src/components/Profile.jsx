@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Dimensions } from 'react-native';
 import Svg, { G, Circle } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { NameContext } from '../contexts/NameContext';
@@ -19,15 +20,32 @@ const App = () => {
   // // values of user's current weight
   // const weightContext = useContext(WeightContext);
 
-  // // values of nutritional goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
-  // const nutritionGoalContext = useContext(NutritionGoalContext);
+    // user's name
+    const nameContext = useContext(NameContext);
 
-  // setting for light/dark mode
-  const themeContext = useContext(ThemeContext);
+    // theme (light/dark mode)
+    const themeContext = useContext(ThemeContext);
+  
+    const screenWidth = Dimensions.get('window').width;
+
+    function handleEditName() {  // change name
+      nameContext.setName('Apple2');
+    }
 
     return (
       <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
         <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Profile</Text>
+        <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
+          <Image style={styles.profileImage} source={require('../images/profile_pic.png')} />
+          <View style={styles.row}>
+            <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }, {flex: 1}]}>{nameContext.name}</Text>
+            <TouchableOpacity
+              onPress={handleEditName}
+              >
+              <MaterialCommunityIcons name="pencil" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.05} left='10%' flex={1} marginTop={38} />
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     );
 }
@@ -42,6 +60,13 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      
+    },
+    row: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     title: {
       fontSize: 24,
@@ -49,6 +74,13 @@ const styles = StyleSheet.create({
       marginBottom: 16,
       marginTop: 50,
       textAlign: 'center',
+    },
+    profileImage: {
+      width: 150,
+      height: 150,
+      resizeMode: 'contain',
+      top: '5%',
+      borderRadius: 100,
     },
 });
 

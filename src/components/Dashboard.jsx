@@ -25,7 +25,7 @@ const App = () => {
   const fatContext = useContext(FatContext);
 
   // total percentage of nutrition goals
-  const [totalNutrition, setTotalNutrition] = useState(0);
+  // const [totalNutrition, setTotalNutrition] = useState(0);
 
   // user's name
   const nameContext = useContext(NameContext);
@@ -232,7 +232,7 @@ const App = () => {
                 style={styles.logFoodButton}
                 onPress={handleLogFood}
                 >
-                <Text style={styles.logFoodButtonText}>Log Food</Text>
+                <Text style={[styles.logFoodButtonText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Log Food</Text>
             </TouchableOpacity>
           </View>
         </View>
