@@ -39,12 +39,12 @@ const App = () => {
           <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Settings</Text>
           <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
             <View style={styles.settingsContainer}>
-            <MaterialCommunityIcons name="theme-light-dark" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
+            <MaterialCommunityIcons name="theme-light-dark" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Dark Mode</Text>
               <Switch style={styles.toggle} value={themeContext.theme === 'dark'} onValueChange={(value) => themeContext.setTheme(value ? 'dark' : 'light')} />
             </View>
             <View style={styles.settingsContainer}>
-              <MaterialCommunityIcons name="dumbbell" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
+              <MaterialCommunityIcons name="dumbbell" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Goals</Text>
               <TouchableOpacity
               style={styles.settingsButton}
@@ -66,22 +66,24 @@ const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+      // alignItems: 'center',
+      // justifyContent: 'center',
       width: '100%',
       height: '88%',
       minWidth: '80%',
       minHeight: '88%',
     },
     settingsContainer: {
-      flex: 1,
+      // flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
       flexDirection: 'row',
+      marginTop: 16,
+      marginBottom: 16,
     },
     settingsButton: {
       flex: 1,
-      left: screenWidth * 0.1,
+      left: screenWidth * 0.15,
     },
     title: {
       fontSize: 24,
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       flex: 1,
       margin: 16,
-      left: '10%',
+      left: '50%',
       textAlign: 'left',
     },
     finishButtonText: {
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
     },
     toggle: {
       flex: 1,
-      left: screenWidth * 0.1,
+      left: screenWidth * 0.15,
     },
 });
 

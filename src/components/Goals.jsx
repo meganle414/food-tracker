@@ -52,24 +52,34 @@ const App = () => {
           </View>
           <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
             <View style={styles.settingsContainer}>
-              <MaterialCommunityIcons name="food" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
+              <MaterialCommunityIcons name="food" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Calories</Text>
-              <Switch style={styles.toggle} value={themeContext.theme === 'dark'} />
+              <View style={styles.settingsTextContainer}></View>
+              <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : 'skyblue' }]}>{Intl.NumberFormat("en-US").format(calorieGoalContext.calorieGoal) + ' g'}</Text>
             </View>
             <View style={styles.settingsContainer}>
-              <MaterialCommunityIcons name="food-croissant" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
+              <MaterialCommunityIcons name="food-croissant" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }, { right: '15%' }]}>Carbs</Text>
-              <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{Math.round(calorieGoalContext.calorieGoal * (carbContext.carbGoal/100)) + ' g'}</Text>
+              <View style={styles.settingsTextContainer}>
+                <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'lightgray' : '#6A6A6A' }]}>{Intl.NumberFormat("en-US").format(Math.round(calorieGoalContext.calorieGoal * (carbContext.carbGoal/100))) + ' g'}</Text>
+              </View>
+              <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : 'skyblue' }]}>{carbContext.carbGoal + '%'}</Text>
             </View>
             <View style={styles.settingsContainer}>
-              <MaterialCommunityIcons name="food-steak" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
+              <MaterialCommunityIcons name="food-steak" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Protein</Text>
-              <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{Math.round(calorieGoalContext.calorieGoal * (proteinContext.proteinGoal/100)) + ' g'}</Text>
+              <View style={styles.settingsTextContainer}>
+                <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'lightgray' : '#6A6A6A' }]}>{Intl.NumberFormat("en-US").format(Math.round(calorieGoalContext.calorieGoal * (proteinContext.proteinGoal/100))) + ' g'}</Text>
+              </View>
+              <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : 'skyblue' }]}>{proteinContext.proteinGoal + '%'}</Text>
             </View>
             <View style={styles.settingsContainer}>
-              <MaterialCommunityIcons name="cupcake" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='10%' />
+              <MaterialCommunityIcons name="cupcake" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Fat</Text>
-              <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{Math.round(calorieGoalContext.calorieGoal * (fatContext.fatGoal/100)) + ' g'}</Text>
+              <View style={styles.settingsTextContainer}>
+                <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'lightgray' : '#6A6A6A' }]}>{Intl.NumberFormat("en-US").format(Math.round(calorieGoalContext.calorieGoal * (fatContext.fatGoal/100))) + ' g'}</Text>
+              </View>
+              <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : 'skyblue' }]}>{fatContext.fatGoal + '%'}</Text>
             </View>
           </View>
         </View>
@@ -87,18 +97,28 @@ const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+      // alignItems: 'center',
+      // justifyContent: 'center',
       width: '100%',
       height: '88%',
       minWidth: '80%',
       minHeight: '88%',
+      // borderWidth: 1,
     },
     settingsContainer: {
-      flex: 1,
+      // flex: 1,
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       flexDirection: 'row',
+      marginTop: 16,
+      marginBottom: 16,
+      // borderWidth: 1,
+    },
+    settingsTextContainer: {
+      flex: 1,
+      marginLeft: 16,
+      marginRight: '30%',
+      // borderWidth: 1,
     },
     title: {
       fontSize: 24,
@@ -115,19 +135,22 @@ const styles = StyleSheet.create({
     settingsText: {
       flex: 1,
       fontSize: 16,
-      margin: 16,
-      textAlign: 'center',
+      marginTop: 16,
+      marginBottom: 16,
+      marginLeft: 8,
+      left: '50%',
+      fontWeight: 'bold',
+      textAlign: 'left',
     },
     nutritionCalText: {
-      flex: 1,
       fontSize: 16,
       textAlign: 'left',
-      color: 'gray',
-
+      right: '10%',
     },
-    toggle: {
-      flex: 1,
-      left: screenWidth * 0.1,
+    nutritionPercentageText: {
+      fontSize: 16,
+      textAlign: 'left',
+      right: '50%',
     },
 });
 

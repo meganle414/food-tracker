@@ -12,6 +12,8 @@ import { CarbContext } from '../contexts/CarbContext';
 import { ProteinContext } from '../contexts/ProteinContext';
 import { FatContext } from '../contexts/FatContext';
 
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
 const App = () => {
   const [visible, setVisible] = useState(false);
@@ -36,8 +38,6 @@ const App = () => {
 
     // theme (light/dark mode)
     const themeContext = useContext(ThemeContext);
-  
-    const screenWidth = Dimensions.get('window').width;
 
     const handleEditName = (newName) => {  // change name
       nameContext.setName(newName);
@@ -50,11 +50,11 @@ const App = () => {
         <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
           <Image style={styles.profileImage} source={require('../images/profile_pic.png')} />
           <View style={styles.row}>
-            <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }, {flex: 1}]}>{nameContext.name}</Text>
+            <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{nameContext.name}</Text>
             <TouchableOpacity
               onPress={showDialog}
               >
-              <MaterialCommunityIcons name="pencil" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.05} left='10%' flex={1} marginTop={38} />
+              <MaterialCommunityIcons name="pencil" style={styles.pencilIcon} color={themeContext.theme === 'dark' ? '#23AAF2' : '#06619C'} size={screenWidth * 0.06} />
             </TouchableOpacity>
           </View>
           <View>
@@ -73,6 +73,15 @@ const App = () => {
                   containerStyle={{ backgroundColor: themeContext.theme === 'dark' ? 'black' : 'white', color: themeContext.theme === 'dark' ? 'white' : 'black' }}
                 />
             </Dialog.Container>
+          </View>
+          <View style={styles.row}>
+
+          </View>
+          <View style={styles.row}>
+
+          </View>
+          <View style={styles.row}>
+
           </View>
         </View>
       </View>
@@ -94,7 +103,10 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
+      // width: screenWidth * 0.9,
+      backgroundColor: 'gray',
+      borderWidth: 1,
     },
     title: {
       fontSize: 24,
@@ -109,6 +121,10 @@ const styles = StyleSheet.create({
       resizeMode: 'contain',
       top: '5%',
       borderRadius: 100,
+    },
+    pencilIcon: {
+      marginLeft: 10,
+      marginTop: 38,
     },
 });
 
