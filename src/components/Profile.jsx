@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Dimensions } from 'react-native';
 import Svg, { G, Circle } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native'
+import UploadImage from '../UploadImage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Dialog from "react-native-dialog";
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
@@ -48,7 +49,8 @@ const App = () => {
       <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
         <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Profile</Text>
         <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
-          <Image style={styles.profileImage} source={require('../images/profile_pic.png')} />
+          <UploadImage/>
+          {/* <Image style={styles.profileImage} source={require('../images/profile_pic.png')} /> */}
           <View style={styles.row}>
             <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{nameContext.name}</Text>
             <TouchableOpacity
@@ -105,8 +107,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'flex-start',
       // width: screenWidth * 0.9,
-      backgroundColor: 'gray',
-      borderWidth: 1,
+      // backgroundColor: 'gray',
+      // borderWidth: 1,
     },
     title: {
       fontSize: 24,
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
       width: 150,
       height: 150,
       resizeMode: 'contain',
-      top: '5%',
+      top: '3%',
       borderRadius: 100,
     },
     pencilIcon: {
