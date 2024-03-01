@@ -10,11 +10,11 @@ import { FatContext } from '../contexts/FatContext';
 
 const App = () => {
 
-  // // values of calories (e.g. 1200, 1300, etc.)
-  // const calorieGoalContext = useContext(CalorieGoalContext);
+  // values of calories (e.g. 1200, 1300, etc.)
+  const calorieGoalContext = useContext(CalorieGoalContext);
 
-  // // values of user's current weight
-  // const weightContext = useContext(WeightContext);
+  // values of user's current weight
+  const weightContext = useContext(WeightContext);
 
   // // values of nutritional goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal
   // const nutritionGoalContext = useContext(NutritionGoalContext);

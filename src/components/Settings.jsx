@@ -9,7 +9,6 @@ import { ThemeContext } from '../contexts/ThemeContext';
 import { CarbContext } from '../contexts/CarbContext';
 import { ProteinContext } from '../contexts/ProteinContext';
 import { FatContext } from '../contexts/FatContext';
-import { StatusBar } from 'expo-status-bar';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -34,6 +33,10 @@ const App = () => {
     navigation.navigate('Goals');
   }
 
+  function handleWeight() {  // change screen to Weight Settings
+    navigation.navigate('Weight');
+  }
+
     return (
         <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
           <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Settings</Text>
@@ -51,7 +54,17 @@ const App = () => {
               onPress={handleGoals}
               >
                 <MaterialCommunityIcons name="chevron-right" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.12}/>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.settingsContainer}>
+              <MaterialCommunityIcons name="scale-bathroom" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
+              <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Weight</Text>
+              <TouchableOpacity
+              style={styles.settingsButton}
+              onPress={handleWeight}
+              >
+                <MaterialCommunityIcons name="chevron-right" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.12}/>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

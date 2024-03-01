@@ -10,6 +10,7 @@ import LogFood from './src/components/LogFood'
 import Profile from './src/components/Profile'
 import Settings from './src/components/Settings'
 import Goals from './src/components/Goals'
+import Weight from './src/components/Weight'
 import { CalorieGoalContext } from './src/contexts/CalorieGoalContext';
 import { WeightContext } from './src/contexts/WeightContext';
 import { CarbContext } from './src/contexts/CarbContext';
@@ -29,6 +30,7 @@ export default function App() {
   const [protein, setProtein] = useState(350);
   const [fat, setFat] = useState(100);
   const [name, setName] = useState('Apple');
+  // const [avatar, setAvatar] = useState('../images/person1.png');
   const [theme, setTheme] = useState('light');
 
   const Stack = createStackNavigator()
@@ -108,6 +110,7 @@ export default function App() {
                             options={{ headerShown: false, cardStyle: { marginBottom: 0 } }}
                           />
                           <Stack.Screen name="Goals" component={Goals} options={{headerShown: false}} />
+                          <Stack.Screen name="Weight" component={Weight} options={{headerShown: false}} />
                         </Stack.Navigator>
                     </NavigationContainer>
                   </NameContext.Provider>

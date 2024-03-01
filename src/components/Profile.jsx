@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Dimensions } from 'react-native';
 import Svg, { G, Circle } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native'
-import UploadImage from '../UploadImage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Dialog from "react-native-dialog";
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
@@ -49,8 +48,7 @@ const App = () => {
       <View style={[styles.screen, {backgroundColor: themeContext.theme === 'dark' ? '#101010' : '#F2F2F2'}]}>
         <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Profile</Text>
         <View style={[styles.container, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }]}>
-          <UploadImage/>
-          {/* <Image style={styles.profileImage} source={require('../images/profile_pic.png')} /> */}
+          <Image style={styles.profileImage} source={require('../images/profile_pic.png')} />
           <View style={styles.row}>
             <Text style={[styles.title, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>{nameContext.name}</Text>
             <TouchableOpacity
@@ -63,7 +61,17 @@ const App = () => {
             <Dialog.Container visible={visible}>
               <Dialog.Title titleStyle={{ color: themeContext.theme === 'dark' ? 'white' : 'black' }}>Account Name Change</Dialog.Title>
                 <Dialog.Description>What do you want to change your name to?</Dialog.Description>
-                <Dialog.Input onChangeText={(text) => setNewName(text)} />
+                <Dialog.Input
+                  onChangeText={(text) => setNewName(text)}
+                  value={newName}
+                  keyboardType='default'
+                />
+                {newName.length < 3 && newName.length > 0 && (
+                  <Text style={{ color: 'red', fontSize: 12, left: '7%', bottom: '3%', }}>Name must be at least 3 characters long</Text>
+                )}
+                {newName.length > 25 && (
+                  <Text style={{ color: 'red', fontSize: 12, left: '7%', bottom: '3%', }}>Name must be 25 or less characters long</Text>
+                )}
                 <Dialog.Button
                   label='Cancel'
                   onPress={handleCancel}
@@ -71,7 +79,12 @@ const App = () => {
                 />
                 <Dialog.Button
                   label='Set Name'
-                  onPress={() => handleEditName(newName)}
+                  onPress={() => {
+                    if (newName.length < 3 || newName.length > 25) {
+                      return;
+                    }
+                    handleEditName(newName);
+                  }}
                   containerStyle={{ backgroundColor: themeContext.theme === 'dark' ? 'black' : 'white', color: themeContext.theme === 'dark' ? 'white' : 'black' }}
                 />
             </Dialog.Container>
@@ -127,6 +140,25 @@ const styles = StyleSheet.create({
     pencilIcon: {
       marginLeft: 10,
       marginTop: 38,
+    },
+    iconContainer: {
+      position: 'absolute',
+      // left: '10%',
+      bottom: '10%',
+      top: '5%',
+      width: screenWidth * 0.15,
+      height: screenWidth * 0.15,
+      justifyContent: 'center',
+      alignItems: 'center',
+      // backgroundColor: 'gray',
+      // borderWidth: 1,
+    },
+    circleIcon: {
+      position: 'absolute',
+      bottom: 0,
+    },
+    shimmerIcon: {
+      position: 'relative',
     },
 });
 

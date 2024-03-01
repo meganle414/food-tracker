@@ -1,27 +1,28 @@
 import React, { useRef, useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Switch, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Alert, Switch, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
-import { NameContext } from '../contexts/NameContext';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { CarbContext, CarbGoalContext } from '../contexts/CarbContext';
+import { CarbContext } from '../contexts/CarbContext';
 import { ProteinContext } from '../contexts/ProteinContext';
 import { FatContext } from '../contexts/FatContext';
-import { StatusBar } from 'expo-status-bar';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 const App = () => {
+  const [visibleCalories, setVisibleCalories] = useState(false);
+  const [visibleNutrition, setVisibleNutrition] = useState(false);
+  const [calorieGoalVisible, setCalorieGoalVisible] = useState(false);
+  const [calorieGoalButtonVisible, setCalorieGoalButtonVisible] = useState(false);
+  const [nutritionGoalsVisible, setNutritionGoalsVisible] = useState(false);
+  const [nutritionGoalsButtonVisible, setNutritionGoalsButtonVisible] = useState(false);
 
   // values of calories (e.g. 1200, 1300, etc.)
   const calorieGoalContext = useContext(CalorieGoalContext);
-
-  // // values of user's current weight
-  // const weightContext = useContext(WeightContext);
 
   // values of nutrition goals (carbs, protein, fats) in percentages, adding up to 100% of calorie goal and current macros (carbs, protein, fats) in calories
   const carbContext = useContext(CarbContext);
@@ -36,8 +37,17 @@ const App = () => {
 
   const navigation = useNavigation();
 
-  function handleBack() {  // change screen to Settings
-    navigation.navigate('Settings');
+  function handleBack() {  // change screen to Settings or give warning if nutrition goals don't add up to 100%
+    if (totalNutrition !== 100) {
+      Alert.alert('Warning', 'The nutrition goals you have chosen do not add up to 100%', [
+        {
+          text: 'OK',
+          onPress: () => console.log('Warning: Nutrition Goals chosen do not add up to 100%'),
+        }
+      ]);
+    } else {
+      navigation.navigate('Settings');
+    }
   }
 
     return (
@@ -55,8 +65,46 @@ const App = () => {
             <View style={styles.settingsContainer}>
               <MaterialCommunityIcons name="food" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
               <Text style={[styles.settingsText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Calories</Text>
-              <View style={styles.settingsTextContainer}></View>
-              <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : '#6896E5' }]}>{Intl.NumberFormat("en-US").format(calorieGoalContext.calorieGoal) + ' g'}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setCalorieGoalVisible(true);
+                  setCalorieGoalButtonVisible(true);
+                }}>
+                <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : '#6896E5' }]}>{Intl.NumberFormat("en-US").format(calorieGoalContext.calorieGoal) + ' g'}</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={[styles.calorieContainer, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#F2F2F2' }, {display: calorieGoalVisible ? 'block' : 'none'}]}>
+              {calorieGoalVisible && (
+                <FlatList
+                  data={Array.from({ length: 29 }, (_, i) => i * 100 + 1200)}
+                  renderItem={({ item }) => (
+                    // when item pressed, highlight item
+                    <TouchableOpacity
+                      style={[styles.optionContainer, calorieGoalContext.calorieGoal === item ? {backgroundColor: themeContext.theme === 'dark' ? 'darkgray' : 'lightgray'} : null]}
+                      onPress={() => {
+                        // set as currently selected calorie goal
+                        calorieGoalContext.setCalorieGoal(item);
+                      }}
+                    >
+                      <Text style={[styles.optionText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{item}</Text>
+                    </TouchableOpacity>
+                  )}
+                  keyExtractor={item => item.toString()}
+                  contentContainerStyle={styles.optionList}
+                  extraData={calorieGoalContext.calorieGoal}
+                />
+              )}
+            </View>
+            <View style={[styles.check, {display: calorieGoalButtonVisible ? 'flex' : 'none'}]}>
+              {calorieGoalButtonVisible && (
+                <TouchableOpacity
+                  onPress={() => {
+                    setCalorieGoalVisible(false);
+                    setCalorieGoalButtonVisible(false);
+                  }}>
+                  <MaterialCommunityIcons name="check" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
+              </TouchableOpacity>
+              )}
             </View>
             <View style={styles.settingsContainer}>
               <MaterialCommunityIcons name="food-croissant" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
@@ -64,7 +112,13 @@ const App = () => {
               <View style={styles.settingsTextContainer}>
                 <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'lightgray' : '#6A6A6A' }]}>{Intl.NumberFormat("en-US").format(Math.round(calorieGoalContext.calorieGoal * (carbContext.carbGoal/100))) + ' g'}</Text>
               </View>
-              <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : '#6896E5' }]}>{carbContext.carbGoal + '%'}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setNutritionGoalsVisible(true);
+                  setNutritionGoalsButtonVisible(true);
+                }}>
+                <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : '#6896E5' }]}>{carbContext.carbGoal + '%'}</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.settingsContainer}>
               <MaterialCommunityIcons name="food-steak" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
@@ -72,7 +126,13 @@ const App = () => {
               <View style={styles.settingsTextContainer}>
                 <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'lightgray' : '#6A6A6A' }]}>{Intl.NumberFormat("en-US").format(Math.round(calorieGoalContext.calorieGoal * (proteinContext.proteinGoal/100))) + ' g'}</Text>
               </View>
-              <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : '#6896E5' }]}>{proteinContext.proteinGoal + '%'}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setNutritionGoalsVisible(true);
+                  setNutritionGoalsButtonVisible(true);
+                }}>
+                <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : '#6896E5' }]}>{proteinContext.proteinGoal + '%'}</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.settingsContainer}>
               <MaterialCommunityIcons name="cupcake" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
@@ -80,83 +140,104 @@ const App = () => {
               <View style={styles.settingsTextContainer}>
                 <Text style={[styles.nutritionCalText, { color: themeContext.theme === 'dark' ? 'lightgray' : '#6A6A6A' }]}>{Intl.NumberFormat("en-US").format(Math.round(calorieGoalContext.calorieGoal * (fatContext.fatGoal/100))) + ' g'}</Text>
               </View>
-              <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : '#6896E5' }]}>{fatContext.fatGoal + '%'}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setNutritionGoalsVisible(true);
+                  setNutritionGoalsButtonVisible(true);
+                }}>
+                <Text style={[styles.nutritionPercentageText, { color: themeContext.theme === 'dark' ? 'skyblue' : '#6896E5' }]}>{fatContext.fatGoal + '%'}</Text>
+              </TouchableOpacity>
             </View>
-            <GestureHandlerRootView style={[{ flex: 1 }, { backgroundColor: 'lightgray' }]}>
-              <View style={styles.nutritionGoalsContainer}>
-                <View style={styles.carbsCol}>
-                  <Text style={styles.optionText}>Carbs</Text>
-                  <Text style={styles.subText}>{Math.round(calorieGoalContext.calorieGoal * (carbContext.carbGoal/100)) + ' cal'}</Text>
-                  <FlatList
-                  data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
-                  renderItem={({ item }) => (
-                    // when item pressed, highlight item
-                    <TouchableOpacity
-                      style={[styles.optionContainer, (carbContext.carbGoal + '%') === item ? styles.selectedOption : null]}
-                      onPress={() => {
-                        // set as currently selected carb goal
-                        carbContext.setCarbGoal(Number(item.slice(0, -1)));
-                        setTotalNutrition(Number(item.slice(0, -1)) + proteinContext.proteinGoal + fatContext.fatGoal);
-                      }}
-                    >
-                      <Text style={styles.optionText}>{item}</Text>
+            <View style={[{ flex: 1 }]}>
+              {nutritionGoalsVisible && (
+                <GestureHandlerRootView style={[{ flex: 1 }]}>
+                  <View style={styles.nutritionGoalsContainer}>
+                    <View style={styles.carbsCol}>
+                      <Text style={[styles.optionText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Carbs</Text>
+                      <Text style={[styles.subText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{Math.round(calorieGoalContext.calorieGoal * (carbContext.carbGoal/100)) + ' cal'}</Text>
+                      <FlatList
+                      data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
+                      renderItem={({ item }) => (
+                        // when item pressed, highlight item
+                        <TouchableOpacity
+                          style={[styles.optionContainer, (carbContext.carbGoal + '%') === item ? {backgroundColor: themeContext.theme === 'dark' ? 'darkgray' : 'lightgray'} : null]}
+                          onPress={() => {
+                            // set as currently selected carb goal
+                            carbContext.setCarbGoal(Number(item.slice(0, -1)));
+                            setTotalNutrition(Number(item.slice(0, -1)) + proteinContext.proteinGoal + fatContext.fatGoal);
+                          }}
+                        >
+                          <Text style={[styles.optionText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{item}</Text>
+                        </TouchableOpacity>
+                      )}
+                      keyExtractor={item => item.toString()}
+                      contentContainerStyle={styles.optionList}
+                      extraData={carbContext.carbGoal}
+                      />
+                    </View>
+                    <View style={styles.proteinCol}>
+                      <Text style={[styles.optionText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Protein</Text>
+                      <Text style={[styles.subText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{Math.round(calorieGoalContext.calorieGoal * (proteinContext.proteinGoal/100)) + ' cal'}</Text>
+                      <FlatList
+                      data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
+                      renderItem={({ item  }) => (
+                        // when item pressed, highlight item
+                        <TouchableOpacity
+                          style={[styles.optionContainer, (proteinContext.proteinGoal + '%') === item ? {backgroundColor: themeContext.theme === 'dark' ? 'darkgray' : 'lightgray'} : null]}
+                          onPress={() => {
+                            // set as currently selected protein goal
+                            proteinContext.setProteinGoal(Number(item.slice(0, -1)));
+                            setTotalNutrition(carbContext.carbGoal + Number(item.slice(0, -1)) + fatContext.fatGoal);
+                          }}
+                        >
+                          <Text style={[styles.optionText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{item}</Text>
+                        </TouchableOpacity>
+                      )}
+                      keyExtractor={item => item.toString()}
+                      contentContainerStyle={styles.optionList}
+                      extraData={proteinContext.proteinGoal}
+                    />
+                    </View>
+                    <View style={styles.fatCol}>
+                      <Text style={[styles.optionText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Fat</Text>
+                      <Text style={[styles.subText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{Math.round(calorieGoalContext.calorieGoal * (fatContext.fatGoal/100)) + ' cal'}</Text>
+                      <FlatList
+                      data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
+                      renderItem={({ item }) => (
+                        // when item pressed, highlight item
+                        <TouchableOpacity
+                          style={[styles.optionContainer, (fatContext.fatGoal + '%') === item ? {backgroundColor: themeContext.theme === 'dark' ? 'darkgray' : 'lightgray'} : null]}
+                          onPress={() => {
+                            // set as currently selected fat goal
+                            fatContext.setFatGoal(Number(item.slice(0, -1)));
+                            setTotalNutrition(carbContext.carbGoal + proteinContext.proteinGoal + Number(item.slice(0, -1)));
+                          }}
+                        >
+                          <Text style={[styles.optionText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{item}</Text>
+                        </TouchableOpacity>
+                      )}
+                      keyExtractor={item => item.toString()}
+                      contentContainerStyle={styles.optionList}
+                      extraData={fatContext.fatGoal}
+                      />
+                    </View>
+                  </View>
+                  <Text style={[styles.totalNutrition, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Calorie Goal: {calorieGoalContext.calorieGoal}</Text>
+                  <Text style={[styles.totalNutrition, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>Total: {totalNutrition}%</Text>
+                  <View style={[styles.check, { top: '4%' }]}>
+                    {nutritionGoalsButtonVisible && (
+                      <TouchableOpacity
+                        onPress={() => {
+                          setNutritionGoalsVisible(false);
+                          setNutritionGoalsButtonVisible(false);
+                        }}>
+                        <MaterialCommunityIcons name="check" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} left='50%' />
                     </TouchableOpacity>
-                  )}
-                  keyExtractor={item => item.toString()}
-                  contentContainerStyle={styles.optionList}
-                  extraData={carbContext.carbGoal}
-                  />
-                </View>
-                <View style={styles.proteinCol}>
-                  <Text style={styles.optionText}>Protein</Text>
-                  <Text style={styles.subText}>{Math.round(calorieGoalContext.calorieGoal * (proteinContext.proteinGoal/100)) + ' cal'}</Text>
-                  <FlatList
-                  data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
-                  renderItem={({ item  }) => (
-                    // when item pressed, highlight item
-                    <TouchableOpacity
-                      style={[styles.optionContainer, (proteinContext.proteinGoal + '%') === item ? styles.selectedOption : null]}
-                      onPress={() => {
-                        // set as currently selected protein goal
-                        proteinContext.setProteinGoal(Number(item.slice(0, -1)));
-                        setTotalNutrition(carbContext.carbGoal + Number(item.slice(0, -1)) + fatContext.fatGoal);
-                      }}
-                    >
-                      <Text style={styles.optionText}>{item}</Text>
-                    </TouchableOpacity>
-                  )}
-                  keyExtractor={item => item.toString()}
-                  contentContainerStyle={styles.optionList}
-                  extraData={proteinContext.proteinGoal}
-                />
-                </View>
-                <View style={styles.fatCol}>
-                  <Text style={styles.optionText}>Fat</Text>
-                  <Text style={styles.subText}>{Math.round(calorieGoalContext.calorieGoal * (fatContext.fatGoal/100)) + ' cal'}</Text>
-                  <FlatList
-                  data={Array.from({ length: 21 }, (_, i) => i * 5 + '%')}
-                  renderItem={({ item }) => (
-                    // when item pressed, highlight item
-                    <TouchableOpacity
-                      style={[styles.optionContainer, (fatContext.fatGoal + '%') === item ? styles.selectedOption : null]}
-                      onPress={() => {
-                        // set as currently selected fat goal
-                        fatContext.setFatGoal(Number(item.slice(0, -1)));
-                        setTotalNutrition(carbContext.carbGoal + proteinContext.proteinGoal + Number(item.slice(0, -1)));
-                      }}
-                    >
-                      <Text style={styles.optionText}>{item}</Text>
-                    </TouchableOpacity>
-                  )}
-                  keyExtractor={item => item.toString()}
-                  contentContainerStyle={styles.optionList}
-                  extraData={fatContext.fatGoal}
-                  />
-                </View>
-              </View>
-              <Text style={styles.totalNutrition}>Calorie Goal: {calorieGoalContext.calorieGoal}</Text>
-              <Text style={styles.totalNutrition}>Total: {totalNutrition}%</Text>
-            </GestureHandlerRootView>
+                    )}
+                  </View>
+                </GestureHandlerRootView>
+              )}
+            </View>
           </View>
         </View>
       );
@@ -179,6 +260,15 @@ const styles = StyleSheet.create({
       height: '88%',
       minWidth: '80%',
       minHeight: '88%',
+      // borderWidth: 1,
+    },
+    calorieContainer: {
+      width: screenWidth * 0.25,
+      height: screenHeight * 0.2,
+      alignItems: 'center',
+      justifyContent: 'center',
+      left: '37.5%',
+      bottom: '2%',
       // borderWidth: 1,
     },
     settingsContainer: {
@@ -232,10 +322,17 @@ const styles = StyleSheet.create({
       fontSize: 18,
       marginBottom: 16,
     },
+    check: {
+      width: screenWidth * 0.1,
+      height: screenWidth * 0.1,
+      left: '40%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     nutritionGoalsContainer: {
       flexDirection: 'row',
-      height: 175,
-      backgroundColor: 'darkgray',
+      height: screenHeight * 0.25,
+      top: '4%',
     },
     carbsCol: {
       flex: 1,
@@ -263,9 +360,6 @@ const styles = StyleSheet.create({
     },
     optionList: {
       marginTop: 16,
-    },
-    selectedOption: {
-      backgroundColor: 'lightgray',
     },
 });
 
