@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Dimensions } from 'react-native';
 import Svg, { G, Circle } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { NameContext } from '../contexts/NameContext';
@@ -229,10 +230,13 @@ const App = () => {
           </View>
           <View style={[styles.buttonContainer, { backgroundColor: themeContext.theme === 'dark' ? '#2E2E2E' : '#C7C7C7' }]}>
             <TouchableOpacity
-                style={styles.logFoodButton}
-                onPress={handleLogFood}
-                >
+              style={styles.logFoodButton}
+              onPress={handleLogFood}
+            >
+              <View style={[{flexDirection: 'row'}, {alignItems: 'center'}]}>
+                <MaterialCommunityIcons name="plus" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1}/>
                 <Text style={[styles.logFoodButtonText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]}>Log Food</Text>
+              </View>
             </TouchableOpacity>
           </View>
         </View>

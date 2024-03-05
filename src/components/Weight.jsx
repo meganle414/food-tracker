@@ -78,11 +78,10 @@ const App = () => {
                     renderItem={({ item }) => (
                     // when item pressed, highlight item
                     <TouchableOpacity
-                        style={[styles.optionContainer, weightContext.weight === item ? styles.selectedOption : null]}
+                        style={[styles.optionContainer, weightContext.weight === item ? {backgroundColor: themeContext.theme === 'dark' ? 'darkgray' : 'lightgray'} : null]}
                         onPress={() => {
                         // set as currently selected weight
                         weightContext.setWeight(item);
-                        setWeightModified(true);
                         }}
                     >
                         <Text style={[styles.optionText, { color: themeContext.theme === 'dark' ? 'white' : 'black' }]}>{item}</Text>
@@ -123,7 +122,7 @@ const App = () => {
                     renderItem={({ item }) => (
                     // when item pressed, highlight item
                     <TouchableOpacity
-                        style={[styles.optionContainer, weightContext.weight === item ? styles.selectedOption : null]}
+                        style={[styles.optionContainer, weightContext.weightGoal === item ? {backgroundColor: themeContext.theme === 'dark' ? 'darkgray' : 'lightgray'} : null]}
                         onPress={() => {
                         // set as currently selected weight
                         weightContext.setWeightGoal(item);
