@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, useHeaderHeight } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import SQLite from 'react-native-sqlite-storage';
 import GettingStarted from './src/components/GettingStarted'
 import Dashboard from './src/components/Dashboard'
 import LogFood from './src/components/LogFood'
@@ -30,7 +31,6 @@ export default function App() {
   const [protein, setProtein] = useState(350);
   const [fat, setFat] = useState(100);
   const [name, setName] = useState('Apple');
-  // const [avatar, setAvatar] = useState('../images/person1.png');
   const [theme, setTheme] = useState('light');
 
   const Stack = createStackNavigator()

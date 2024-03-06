@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, Dimensions }
 import Svg, { G, Circle } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import SQLite from 'react-native-sqlite-storage';
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { NameContext } from '../contexts/NameContext';
