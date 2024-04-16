@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1.0">
+    <title>New Food</title>
+</head>
+<body>
+    <form action="/nutrients" method="POST">
+        <label>New Food
+            <input type="text" name="foodName" value="<%= locals.foodName %>" />
+        </label><br><br>
+        <label>Measure
+            <input type="text" name="foodMeasure" value="<%= locals.foodMeasure %>" />
+        </label><br><br>
+        <label>Grams
+            <input type="text" name="foodWeight" value="<%= locals.foodWeight %>" />
+        </label><br><br>
+        <label>Calories
+            <input type="number" name="foodCalories" value="<%= locals.foodCalories %>" />
+        </label><br><br>
+        <label>Protein
+            <input type="number" name="foodProtein" value="<%= locals.foodProtein %>" />
+        </label><br><br>
+        <label>Fat
+            <input type="number" name="foodFat" value="<%= locals.foodFat %>" />
+        </label><br><br>
+        <label>Carbs
+            <input type="number" name="foodCarbs" value="<%= locals.foodCarbs %>" />
+        </label><br><br>
+        <label for="category">Category
+            <select name="foodCategory" id="category"> 
+                <option value="Dairy products">Dairy products</option>
+                <option value="Fats, Oils, Shortenings">Fats, Oils, Shortenings</option>
+                <option value="Meat, Poultry">Meat, Poultry</option>
+                <option value="Fish, Seafood">Fish, Seafood</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Breads, cereals, fastfood,grains">Breads, cereals, fastfood,grains</option>
+                <option value="Soups">Soups</option>
+                <option value="Desserts, sweets">Desserts, sweets</option>
+                <option value="Jams, Jellies">Jams, Jellies</option>
+                <option value="Seeds and Nuts">Seeds and Nuts</option>
+                <option value="Drinks,Alcohol, Beverages">Drinks,Alcohol, Beverages</option>
+                <option value="Other">Other</option>
+            </select>
+        </label><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

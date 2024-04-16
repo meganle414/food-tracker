@@ -1,14 +1,28 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const PORT = process.env.PORT || 3000;
+const express = require('express')
+const app = express()
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
+app.set('view engine', 'ejs')
+app.use(logger)
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+    res.render('index')
+})
 
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
+const userRouter = require('./routes/users')
+const nutrientsRouter = require('./routes/nutrients')
+// const postRouter = require('./routes/posts')
+
+app.use('/users', userRouter)
+app.use('/nutrients', nutrientsRouter)
+// app.use('/posts', postRouter)
+
+function logger(req, res, next) {
+  console.log(req.originalUrl)
+  next()
+}
+
+app.listen(3000)

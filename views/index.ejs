@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Nutrient Information</title>
+    </head>
+    <body>
+        <!-- <h1>Nutrient Information</h1> -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Food</th>
+                    <th>Measure</th>
+                    <th>Grams</th>
+                    <th>Calories</th>
+                    <th>Protein (g)</th>
+                    <th>Fat (g)</th>
+                    <th>Carbs (g)</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < nutrients.length; i++) { %>
+                    <tr>
+                        <td><%= nutrients[i].Food %></td>
+                        <td><%= nutrients[i].Measure %></td>
+                        <td><%= nutrients[i].Grams %></td>
+                        <td><%= nutrients[i].Calories %></td>
+                        <td><%= nutrients[i].Protein %></td>
+                        <td><%= nutrients[i].Fat %></td>
+                        <td><%= nutrients[i].Carbs %></td>
+                        <td><%= nutrients[i].Category %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </body>
+</html>
