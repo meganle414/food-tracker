@@ -25,6 +25,7 @@
     "expo-status-bar": "~1.11.1",
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
+    "node": "^18.20.2",
     "npm-run-all": "^4.1.5",
     "papaparse": "^5.4.1",
     "pg": "^8.11.3",
