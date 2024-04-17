@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import * as FileSystem from 'expo-file-system';
 import Papa from 'papaparse';
-// import fs from 'fs'0
 import { CalorieGoalContext } from '../contexts/CalorieGoalContext';
 import { WeightContext } from '../contexts/WeightContext';
 import { NameContext } from '../contexts/NameContext';
@@ -27,69 +25,27 @@ const App = () => {
   // setting for light/dark mode
   const themeContext = useContext(ThemeContext);
 
-  const parseCSV = async () => {
-    const results = await Papa.parse('nutrients.csv', {
-      delimiter: ',',
-      header: true,
-    });
-    console.log('results:', results);
-    setFoodData(results.data);
-    console.log('foodData:', foodData);
-  };
-
   useEffect(() => {
-    parseCSV();
+    fetch('foodtracker.heroku.com')
+   .then(response => response.text())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network request failed');
+        }
+        return response.text();
+      })
+     .then(text => {
+        Papa.parse(text, {
+          complete: results => {
+            setFoodData(results.data);
+          },
+          header: true,
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching nutrients.csv:', error);
+      });
   }, []);
-
-  // const parseCSV = async () => {
-  //   const response = await fetch('http://localhost:3000/');
-  //   const text = await response.text();
-  //   const results = Papa.parse(text, {
-  //     header: true,
-  //   });
-  //   console.log('results:', results);
-  //   setFoodData(results.data);
-  //   console.log('foodData:', foodData);
-  // };
-  
-  // useEffect(() => {
-  //   parseCSV();
-  // }, []);
-
-  // const csv = require('csv-parser')
-  // const fs = require('fs')
-  // const results = []
-
-  // fs.createReadStream('nutrients.csv')
-  //   .pipe(csv())
-  //   .on('data', (data) => results.push(data))
-  //   .on('end', () => {
-  //     console.log(results)
-  //   })
-
-  // useEffect(() => {
-  //   // fetch('nutrients.csv')
-  //   // fetch('https://www.kaggle.com/datasets/niharika41298/nutrition-details-for-most-common-foods')
-  //   fetch('http://localhost:3000/')
-  //  .then(response => response.text())
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error('Network request failed');
-  //       }
-  //       return response.text();
-  //     })
-  //    .then(text => {
-  //       Papa.parse(text, {
-  //         complete: results => {
-  //           setFoodData(results.data);
-  //         },
-  //         header: true,
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching nutrients.csv:', error);
-  //     });
-  // }, []);
 
   const FoodItem = ({ item }) => (
     <View key={item.Food}>
@@ -118,12 +74,7 @@ const App = () => {
               <MaterialCommunityIcons name="magnify" color={themeContext.theme === 'dark' ? 'white' : 'black'} size={screenWidth * 0.1} />
               <TextInput style={[styles.searchText, { color: themeContext.theme === 'dark' ? 'white' : '#222222' }]} placeholder='Search' />
             </View>
-            <View>
-              <Text>HELLO</Text>
-            </View> */}
-            {/* <ScrollView nestedScrollEnabled={true}>
-              <Text>{JSON.stringify(foodData)}</Text>
-            </ScrollView> */}
+            */}
             <FlatList
               style={styles.foodData}
               data={foodData}
