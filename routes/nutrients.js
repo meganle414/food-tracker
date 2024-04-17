@@ -79,7 +79,7 @@ nutrients = [
       "Grams": 984,
       "Calories": 360,
       "Protein": 36,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 52,
       "Category": "Dairy products"
     },
@@ -129,7 +129,7 @@ nutrients = [
       "Grams": 85,
       "Calories": 290,
       "Protein": 30,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 42,
       "Category": "Dairy products"
     },
@@ -139,7 +139,7 @@ nutrients = [
       "Grams": 85,
       "Calories": 290,
       "Protein": 30,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 42,
       "Category": "Dairy products"
     },
@@ -259,7 +259,7 @@ nutrients = [
       "Grams": 225,
       "Calories": 195,
       "Protein": 38,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 6,
       "Category": "Dairy products"
     },
@@ -270,7 +270,7 @@ nutrients = [
       "Calories": 70,
       "Protein": 4,
       "Fat": 6,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Dairy products"
     },
     {
@@ -300,7 +300,7 @@ nutrients = [
       "Calories": 105,
       "Protein": 7,
       "Fat": 9,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Dairy products"
     },
     {
@@ -310,7 +310,7 @@ nutrients = [
       "Calories": 105,
       "Protein": 6,
       "Fat": 9,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Dairy products"
     },
     {
@@ -320,7 +320,7 @@ nutrients = [
       "Calories": 105,
       "Protein": 7,
       "Fat": 8,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Dairy products"
     },
     {
@@ -330,7 +330,7 @@ nutrients = [
       "Calories": 150,
       "Protein": 12,
       "Fat": 12,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Dairy products"
     },
     {
@@ -350,7 +350,7 @@ nutrients = [
       "Calories": 120,
       "Protein": 6,
       "Fat": 10,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Fats, Oils, Shortenings"
     },
     {
@@ -358,9 +358,9 @@ nutrients = [
       "Measure": "1T.",
       "Grams": 14,
       "Calories": 100,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 11,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Fats, Oils, Shortenings"
     },
     {
@@ -408,9 +408,9 @@ nutrients = [
       "Measure": "1/2 cup",
       "Grams": 112,
       "Calories": 806,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 91,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Fats, Oils, Shortenings"
     },
     {
@@ -418,9 +418,9 @@ nutrients = [
       "Measure": "1 T.",
       "Grams": 14,
       "Calories": 100,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 11,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Fats, Oils, Shortenings"
     },
     {
@@ -428,9 +428,9 @@ nutrients = [
       "Measure": "1 T.",
       "Grams": 15,
       "Calories": 110,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 12,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Fats, Oils, Shortenings"
     },
     {
@@ -468,7 +468,7 @@ nutrients = [
       "Measure": "1 T.",
       "Grams": 15,
       "Calories": 60,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 6,
       "Carbs": 2,
       "Category": "Fats, Oils, Shortenings"
@@ -478,7 +478,7 @@ nutrients = [
       "Measure": "1 T.",
       "Grams": 15,
       "Calories": 75,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 8,
       "Carbs": 1,
       "Category": "Fats, Oils, Shortenings"
@@ -870,7 +870,7 @@ nutrients = [
       "Calories": 92,
       "Protein": 18,
       "Fat": 1,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Fish, Seafood"
     },
     {
@@ -979,7 +979,7 @@ nutrients = [
       "Grams": 100,
       "Calories": "8-44",
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 10,
       "Category": "Vegetables"
     },
@@ -989,7 +989,7 @@ nutrients = [
       "Grams": 96,
       "Calories": 18,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 3,
       "Category": "Vegetables"
     },
@@ -999,7 +999,7 @@ nutrients = [
       "Grams": 125,
       "Calories": 25,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 6,
       "Category": "Vegetables"
     },
@@ -1009,7 +1009,7 @@ nutrients = [
       "Grams": 160,
       "Calories": 140,
       "Protein": 8,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 24,
       "Category": "Vegetables"
     },
@@ -1019,7 +1019,7 @@ nutrients = [
       "Grams": 192,
       "Calories": 260,
       "Protein": 16,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 48,
       "Category": "Vegetables"
     },
@@ -1049,7 +1049,7 @@ nutrients = [
       "Grams": 50,
       "Calories": 17,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 3,
       "Category": "Vegetables"
     },
@@ -1059,7 +1059,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 27,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 6,
       "Category": "Vegetables"
     },
@@ -1079,7 +1079,7 @@ nutrients = [
       "Grams": 150,
       "Calories": 45,
       "Protein": 5,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 8,
       "Category": "Vegetables"
     },
@@ -1089,7 +1089,7 @@ nutrients = [
       "Grams": 130,
       "Calories": 60,
       "Protein": 6,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 12,
       "Category": "Vegetables"
     },
@@ -1099,7 +1099,7 @@ nutrients = [
       "Grams": 150,
       "Calories": 32,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 7,
       "Category": "Vegetables"
     },
@@ -1109,7 +1109,7 @@ nutrients = [
       "Grams": 170,
       "Calories": 40,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 9,
       "Category": "Vegetables"
     },
@@ -1119,7 +1119,7 @@ nutrients = [
       "Grams": 150,
       "Calories": 45,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 10,
       "Category": "Vegetables"
     },
@@ -1129,7 +1129,7 @@ nutrients = [
       "Grams": 110,
       "Calories": 45,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 10,
       "Category": "Vegetables"
     },
@@ -1138,8 +1138,8 @@ nutrients = [
       "Measure": "1 mad.",
       "Grams": 50,
       "Calories": 20,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 5,
       "Category": "Vegetables"
     },
@@ -1149,7 +1149,7 @@ nutrients = [
       "Grams": 120,
       "Calories": 30,
       "Protein": 3,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 6,
       "Category": "Vegetables"
     },
@@ -1159,7 +1159,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 20,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 4,
       "Category": "Vegetables"
     },
@@ -1169,7 +1169,7 @@ nutrients = [
       "Grams": 40,
       "Calories": 5,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 1,
       "Category": "Vegetables"
     },
@@ -1179,7 +1179,7 @@ nutrients = [
       "Grams": 150,
       "Calories": 30,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 7,
       "Category": "Vegetables"
     },
@@ -1189,7 +1189,7 @@ nutrients = [
       "Grams": 150,
       "Calories": 51,
       "Protein": 5,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 8,
       "Category": "Vegetables"
     },
@@ -1209,7 +1209,7 @@ nutrients = [
       "Grams": 200,
       "Calories": 170,
       "Protein": 5,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 41,
       "Category": "Vegetables"
     },
@@ -1218,7 +1218,7 @@ nutrients = [
       "Measure": 8,
       "Grams": 50,
       "Calories": 6,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 1,
       "Category": "Vegetables"
@@ -1239,7 +1239,7 @@ nutrients = [
       "Grams": 180,
       "Calories": 30,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 9,
       "Category": "Vegetables"
     },
@@ -1249,7 +1249,7 @@ nutrients = [
       "Grams": 57,
       "Calories": 10,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 2,
       "Category": "Vegetables"
     },
@@ -1269,7 +1269,7 @@ nutrients = [
       "Grams": 140,
       "Calories": 40,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 9,
       "Category": "Vegetables"
     },
@@ -1279,7 +1279,7 @@ nutrients = [
       "Grams": 150,
       "Calories": 48,
       "Protein": 5,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 7,
       "Category": "Vegetables"
     },
@@ -1289,7 +1289,7 @@ nutrients = [
       "Grams": 200,
       "Calories": 212,
       "Protein": 15,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 38,
       "Category": "Vegetables"
     },
@@ -1299,7 +1299,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 14,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 2,
       "Category": "Vegetables"
     },
@@ -1308,8 +1308,8 @@ nutrients = [
       "Measure": "1/4 head",
       "Grams": 100,
       "Calories": 13,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 3,
       "Category": "Vegetables"
     },
@@ -1319,7 +1319,7 @@ nutrients = [
       "Grams": 120,
       "Calories": 12,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 4,
       "Category": "Vegetables"
     },
@@ -1329,7 +1329,7 @@ nutrients = [
       "Grams": 140,
       "Calories": 30,
       "Protein": 3,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 6,
       "Category": "Vegetables"
     },
@@ -1339,7 +1339,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 32,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 7,
       "Category": "Vegetables"
     },
@@ -1349,7 +1349,7 @@ nutrients = [
       "Grams": 210,
       "Calories": 80,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 18,
       "Category": "Vegetables"
     },
@@ -1358,8 +1358,8 @@ nutrients = [
       "Measure": "6 small",
       "Grams": 50,
       "Calories": 22,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 5,
       "Category": "Vegetables"
     },
@@ -1368,9 +1368,9 @@ nutrients = [
       "Measure": "2 T.",
       "Grams": 50,
       "Calories": 2,
-      "Protein": "0",
-      "Fat": "0",
-      "Carbs": "0",
+      "Protein": 0,
+      "Fat": 0,
+      "Carbs": 0,
       "Category": "Vegetables"
     },
     {
@@ -1389,7 +1389,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 66,
       "Protein": 3,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 13,
       "Category": "Vegetables"
     },
@@ -1399,7 +1399,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 70,
       "Protein": 5,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 12,
       "Category": "Vegetables"
     },
@@ -1409,7 +1409,7 @@ nutrients = [
       "Grams": 100,
       "Calories": "",
       "Protein": 5,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 12,
       "Category": "Vegetables"
     },
@@ -1419,7 +1419,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 115,
       "Protein": 8,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 21,
       "Category": "Vegetables"
     },
@@ -1429,7 +1429,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 53,
       "Protein": 3,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 10,
       "Category": "Vegetables"
     },
@@ -1438,8 +1438,8 @@ nutrients = [
       "Measure": "1 pod",
       "Grams": 38,
       "Calories": 10,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 2,
       "Category": "Vegetables"
     },
@@ -1449,7 +1449,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 25,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 6,
       "Category": "Vegetables"
     },
@@ -1469,7 +1469,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 100,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 22,
       "Category": "Vegetables"
     },
@@ -1519,7 +1519,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 80,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 19,
       "Category": "Vegetables"
     },
@@ -1538,7 +1538,7 @@ nutrients = [
       "Measure": "5 small",
       "Grams": 50,
       "Calories": 10,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 2,
       "Category": "Vegetables"
@@ -1548,7 +1548,7 @@ nutrients = [
       "Measure": "4 cups",
       "Grams": 100,
       "Calories": 32,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 8,
       "Category": "Vegetables"
@@ -1569,7 +1569,7 @@ nutrients = [
       "Grams": 100,
       "Calories": 26,
       "Protein": 3,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 3,
       "Category": "Vegetables"
     },
@@ -1579,7 +1579,7 @@ nutrients = [
       "Grams": 210,
       "Calories": 35,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 8,
       "Category": "Vegetables"
     },
@@ -1589,7 +1589,7 @@ nutrients = [
       "Grams": 200,
       "Calories": 95,
       "Protein": 4,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 23,
       "Category": "Vegetables"
     },
@@ -1619,7 +1619,7 @@ nutrients = [
       "Grams": 240,
       "Calories": 50,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 9,
       "Category": "Vegetables"
     },
@@ -1629,7 +1629,7 @@ nutrients = [
       "Grams": 150,
       "Calories": 30,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 6,
       "Category": "Vegetables"
     },
@@ -1639,7 +1639,7 @@ nutrients = [
       "Grams": 240,
       "Calories": 50,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 10,
       "Category": "Vegetables"
     },
@@ -1648,8 +1648,8 @@ nutrients = [
       "Measure": "1 T.",
       "Grams": 17,
       "Calories": 15,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 4,
       "Category": "Vegetables"
     },
@@ -1669,7 +1669,7 @@ nutrients = [
       "Grams": 155,
       "Calories": 40,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 9,
       "Category": "Vegetables"
     },
@@ -1679,7 +1679,7 @@ nutrients = [
       "Grams": 50,
       "Calories": 9,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 1,
       "Category": "Fruits"
     },
@@ -1688,7 +1688,7 @@ nutrients = [
       "Measure": "1 cup",
       "Grams": 250,
       "Calories": 125,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 34,
       "Category": "Fruits"
@@ -1698,7 +1698,7 @@ nutrients = [
       "Measure": "1/3 cup",
       "Grams": 100,
       "Calories": 14,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 3,
       "Category": "Fruits"
@@ -1708,8 +1708,8 @@ nutrients = [
       "Measure": "1 med",
       "Grams": 130,
       "Calories": 70,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 18,
       "Category": "Fruits"
     },
@@ -1718,8 +1718,8 @@ nutrients = [
       "Measure": "1 cup",
       "Grams": 240,
       "Calories": 100,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 26,
       "Category": "Fruits"
     },
@@ -1729,7 +1729,7 @@ nutrients = [
       "Grams": 250,
       "Calories": 220,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 57,
       "Category": "Fruits"
     },
@@ -1739,7 +1739,7 @@ nutrients = [
       "Grams": 75,
       "Calories": 220,
       "Protein": 4,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 50,
       "Category": "Fruits"
     },
@@ -1749,7 +1749,7 @@ nutrients = [
       "Grams": 114,
       "Calories": 55,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 14,
       "Category": "Fruits"
     },
@@ -1759,7 +1759,7 @@ nutrients = [
       "Grams": 250,
       "Calories": 140,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 36,
       "Category": "Fruits"
     },
@@ -1779,7 +1779,7 @@ nutrients = [
       "Grams": 150,
       "Calories": 85,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 23,
       "Category": "Fruits"
     },
@@ -1799,7 +1799,7 @@ nutrients = [
       "Grams": 250,
       "Calories": 245,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 65,
       "Category": "Fruits"
     },
@@ -1809,7 +1809,7 @@ nutrients = [
       "Grams": 380,
       "Calories": 40,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 9,
       "Category": "Fruits"
     },
@@ -1829,7 +1829,7 @@ nutrients = [
       "Grams": 114,
       "Calories": 65,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 15,
       "Category": "Fruits"
     },
@@ -1838,8 +1838,8 @@ nutrients = [
       "Measure": "1 cup",
       "Grams": 277,
       "Calories": 530,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 142,
       "Category": "Fruits"
     },
@@ -1849,7 +1849,7 @@ nutrients = [
       "Grams": 178,
       "Calories": 505,
       "Protein": 4,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 134,
       "Category": "Fruits"
     },
@@ -1859,7 +1859,7 @@ nutrients = [
       "Grams": 42,
       "Calories": 120,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 30,
       "Category": "Fruits"
     },
@@ -1869,7 +1869,7 @@ nutrients = [
       "Grams": 114,
       "Calories": 90,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 22,
       "Category": "Fruits"
     },
@@ -1879,7 +1879,7 @@ nutrients = [
       "Grams": 115,
       "Calories": 130,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 32,
       "Category": "Fruits"
     },
@@ -1889,7 +1889,7 @@ nutrients = [
       "Grams": 256,
       "Calories": 195,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 50,
       "Category": "Fruits"
     },
@@ -1899,7 +1899,7 @@ nutrients = [
       "Grams": 250,
       "Calories": 170,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 44,
       "Category": "Fruits"
     },
@@ -1909,7 +1909,7 @@ nutrients = [
       "Grams": 285,
       "Calories": 50,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 14,
       "Category": "Fruits"
     },
@@ -1919,7 +1919,7 @@ nutrients = [
       "Grams": 250,
       "Calories": 100,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 24,
       "Category": "Fruits"
     },
@@ -1929,7 +1929,7 @@ nutrients = [
       "Grams": 153,
       "Calories": 70,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 16,
       "Category": "Fruits"
     },
@@ -1939,7 +1939,7 @@ nutrients = [
       "Grams": 160,
       "Calories": 100,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 26,
       "Category": "Fruits"
     },
@@ -1949,7 +1949,7 @@ nutrients = [
       "Grams": 250,
       "Calories": 160,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 42,
       "Category": "Fruits"
     },
@@ -1958,8 +1958,8 @@ nutrients = [
       "Measure": "1/2 cup",
       "Grams": 125,
       "Calories": 30,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 10,
       "Category": "Fruits"
     },
@@ -1968,8 +1968,8 @@ nutrients = [
       "Measure": "6-oz. can",
       "Grams": 220,
       "Calories": 430,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 112,
       "Category": "Fruits"
     },
@@ -1978,8 +1978,8 @@ nutrients = [
       "Measure": "6-oz. can",
       "Grams": 218,
       "Calories": 405,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 108,
       "Category": "Fruits"
     },
@@ -2009,7 +2009,7 @@ nutrients = [
       "Grams": 180,
       "Calories": 60,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 16,
       "Category": "Fruits"
     },
@@ -2019,7 +2019,7 @@ nutrients = [
       "Grams": 250,
       "Calories": 112,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 25,
       "Category": "Fruits"
     },
@@ -2029,7 +2029,7 @@ nutrients = [
       "Grams": 210,
       "Calories": 330,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 78,
       "Category": "Fruits"
     },
@@ -2039,7 +2039,7 @@ nutrients = [
       "Grams": 200,
       "Calories": 75,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 18,
       "Category": "Fruits"
     },
@@ -2049,7 +2049,7 @@ nutrients = [
       "Grams": 257,
       "Calories": 200,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 52,
       "Category": "Fruits"
     },
@@ -2059,7 +2059,7 @@ nutrients = [
       "Grams": 114,
       "Calories": 35,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 10,
       "Category": "Fruits"
     },
@@ -2069,7 +2069,7 @@ nutrients = [
       "Grams": 255,
       "Calories": 195,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 50,
       "Category": "Fruits"
     },
@@ -2089,7 +2089,7 @@ nutrients = [
       "Grams": 125,
       "Calories": 75,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 20,
       "Category": "Fruits"
     },
@@ -2098,8 +2098,8 @@ nutrients = [
       "Measure": "1 large slice",
       "Grams": 122,
       "Calories": 95,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 26,
       "Category": "Fruits"
     },
@@ -2109,7 +2109,7 @@ nutrients = [
       "Grams": 260,
       "Calories": 205,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 55,
       "Category": "Fruits"
     },
@@ -2129,7 +2129,7 @@ nutrients = [
       "Grams": 250,
       "Calories": 120,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 32,
       "Category": "Fruits"
     },
@@ -2139,7 +2139,7 @@ nutrients = [
       "Grams": 256,
       "Calories": 185,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 50,
       "Category": "Fruits"
     },
@@ -2148,8 +2148,8 @@ nutrients = [
       "Measure": 1,
       "Grams": 60,
       "Calories": 30,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 7,
       "Category": "Fruits"
     },
@@ -2169,7 +2169,7 @@ nutrients = [
       "Grams": 240,
       "Calories": 170,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 45,
       "Category": "Fruits"
     },
@@ -2179,7 +2179,7 @@ nutrients = [
       "Grams": 88,
       "Calories": 230,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 82,
       "Category": "Fruits"
     },
@@ -2188,8 +2188,8 @@ nutrients = [
       "Measure": "1/2 cup",
       "Grams": 100,
       "Calories": 100,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 25,
       "Category": "Fruits"
     },
@@ -2198,8 +2198,8 @@ nutrients = [
       "Measure": "3/4 cup",
       "Grams": 100,
       "Calories": 57,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 14,
       "Category": "Fruits"
     },
@@ -2209,7 +2209,7 @@ nutrients = [
       "Grams": 270,
       "Calories": 385,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 98,
       "Category": "Fruits"
     },
@@ -2219,7 +2219,7 @@ nutrients = [
       "Grams": 227,
       "Calories": 242,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 60,
       "Category": "Fruits"
     },
@@ -2228,8 +2228,8 @@ nutrients = [
       "Measure": "1 cup",
       "Grams": 149,
       "Calories": 54,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 12,
       "Category": "Fruits"
     },
@@ -2239,7 +2239,7 @@ nutrients = [
       "Grams": 114,
       "Calories": 40,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 10,
       "Category": "Fruits"
     },
@@ -2269,7 +2269,7 @@ nutrients = [
       "Grams": 25,
       "Calories": 117,
       "Protein": 3,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 32,
       "Category": "Breads, cereals, fastfood,grains"
     },
@@ -2339,7 +2339,7 @@ nutrients = [
       "Grams": 25,
       "Calories": 110,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 25,
       "Category": "Breads, cereals, fastfood,grains"
     },
@@ -2349,7 +2349,7 @@ nutrients = [
       "Grams": 242,
       "Calories": 120,
       "Protein": 8,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 27,
       "Category": "Breads, cereals, fastfood,grains"
     },
@@ -2389,7 +2389,7 @@ nutrients = [
       "Grams": 238,
       "Calories": 105,
       "Protein": 3,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 22,
       "Category": "Breads, cereals, fastfood,grains"
     },
@@ -2518,8 +2518,8 @@ nutrients = [
       "Measure": "1 cup",
       "Grams": 14,
       "Calories": 55,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 12,
       "Category": "Breads, cereals, fastfood,grains"
     },
@@ -2529,7 +2529,7 @@ nutrients = [
       "Grams": 28,
       "Calories": 105,
       "Protein": 1,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 26,
       "Category": "Breads, cereals, fastfood,grains"
     },
@@ -2549,7 +2549,7 @@ nutrients = [
       "Grams": 187,
       "Calories": 677,
       "Protein": 14,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 142,
       "Category": "Breads, cereals, fastfood,grains"
     },
@@ -2559,7 +2559,7 @@ nutrients = [
       "Grams": 191,
       "Calories": 692,
       "Protein": 14,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 150,
       "Category": "Breads, cereals, fastfood,grains"
     },
@@ -2569,7 +2569,7 @@ nutrients = [
       "Grams": 30,
       "Calories": 115,
       "Protein": 2,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 26,
       "Category": "Breads, cereals, fastfood,grains"
     },
@@ -2829,7 +2829,7 @@ nutrients = [
       "Grams": 40,
       "Calories": 110,
       "Protein": 3,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 23,
       "Category": "Desserts, sweets"
     },
@@ -2898,7 +2898,7 @@ nutrients = [
       "Measure": 5,
       "Grams": 25,
       "Calories": 104,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 3,
       "Carbs": 19,
       "Category": "Desserts, sweets"
@@ -2908,7 +2908,7 @@ nutrients = [
       "Measure": 2,
       "Grams": 30,
       "Calories": 130,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 4,
       "Carbs": 24,
       "Category": "Desserts, sweets"
@@ -2918,7 +2918,7 @@ nutrients = [
       "Measure": "2 pieces",
       "Grams": 90,
       "Calories": 370,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 12,
       "Carbs": 80,
       "Category": "Desserts, sweets"
@@ -2928,7 +2928,7 @@ nutrients = [
       "Measure": "1 oz.",
       "Grams": 28,
       "Calories": 90,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 28,
       "Category": "Desserts, sweets"
@@ -2958,8 +2958,8 @@ nutrients = [
       "Measure": "2 T.",
       "Grams": 40,
       "Calories": 80,
-      "Protein": "0",
-      "Fat": "0",
+      "Protein": 0,
+      "Fat": 0,
       "Carbs": 22,
       "Category": "Desserts, sweets"
     },
@@ -2979,7 +2979,7 @@ nutrients = [
       "Grams": 239,
       "Calories": 155,
       "Protein": 4,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 36,
       "Category": "Desserts, sweets"
     },
@@ -2988,7 +2988,7 @@ nutrients = [
       "Measure": "2 T.",
       "Grams": 42,
       "Calories": 120,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 30,
       "Category": "Jams, Jellies"
@@ -3139,7 +3139,7 @@ nutrients = [
       "Grams": 220,
       "Calories": 815,
       "Protein": 0,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 210,
       "Category": "Jams, Jellies"
     },
@@ -3298,7 +3298,7 @@ nutrients = [
       "Measure": "2 cups",
       "Grams": 480,
       "Calories": 228,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 8,
       "Category": "Drinks,Alcohol, Beverages"
@@ -3310,7 +3310,7 @@ nutrients = [
       "Calories": 70,
       "Protein": 0,
       "Fat": 0,
-      "Carbs": "0",
+      "Carbs": 0,
       "Category": "Drinks,Alcohol, Beverages"
     },
     {
@@ -3318,7 +3318,7 @@ nutrients = [
       "Measure": "1/2 cup",
       "Grams": 120,
       "Calories": 164,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 9,
       "Category": "Drinks,Alcohol, Beverages"
@@ -3328,7 +3328,7 @@ nutrients = [
       "Measure": "1/2 cup",
       "Grams": 120,
       "Calories": 100,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 5,
       "Category": "Drinks,Alcohol, Beverages"
@@ -3398,7 +3398,7 @@ nutrients = [
       "Measure": "1 cup",
       "Grams": 230,
       "Calories": 3,
-      "Protein": "0",
+      "Protein": 0,
       "Fat": 0,
       "Carbs": 1,
       "Category": "Drinks,Alcohol, Beverages"
@@ -3409,7 +3409,7 @@ nutrients = [
       "Grams": 230,
       "Calories": 4,
       "Protein": 0,
-      "Fat": "0",
+      "Fat": 0,
       "Carbs": 1,
       "Category": "Drinks,Alcohol, Beverages"
     }
