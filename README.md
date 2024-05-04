@@ -17,7 +17,7 @@
 
 * Food tracking mobile app using React Native to track nutritional values (calories, protein, fat, and carbs)
 
-![Screenshot](https://github.com/meganle414/food-tracker/blob/main/images/light_mode.png)
+![Screenshot](https://github.com/meganle414/food-tracker/blob/main/images/light_mode.png | width=100)
 ![Screenshot](https://github.com/meganle414/food-tracker/blob/main/images/dark_mode.png?raw=true)
 ![Screenshot](https://github.com/meganle414/food-tracker/blob/main/images/profile?raw=true)
 ![Screenshot](https://github.com/meganle414/food-tracker/blob/main/images/name_change.png?raw=true)
