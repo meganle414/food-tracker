@@ -17,8 +17,7 @@
 
 * Food tracking mobile app using React Native to track nutritional values (calories, protein, fat, and carbs)
 
-<img src="images/light_mode.png" width="300">
-<img src="images/dark_mode.png" width="300">
+<img src="images/light_mode.png" width="300"><img src="images/dark_mode.png" width="300">
 <img src="images/profile.png" width="300">
 <img src="images/name_change.png" width="300">
 <img src="images/settings.png" width="300">
@@ -29,7 +28,7 @@
 <img src="images/current_weight.png" width="300">
 <img src="images/goal_weight.png" width="300">
 <img src="images/nutrients_json.png" width="300">
-<img src="images/adding_nutrients.png" width="300">
+<img src="images/adding_nutrient.png" width="300">
 <img src="images/new_nutrient_json.png" width="300">
 <img src="images/search_existing_json.png" width="300">
 <img src="images/updated_nutrients_json.png" width="300">
