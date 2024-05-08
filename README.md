@@ -33,6 +33,8 @@
 <img src="images/search_existing_json.png" width="300">
 <img src="images/updated_nutrients_json.png" width="300">
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Built With
 
 * React Native
@@ -40,6 +42,8 @@
 * HTML
 * CSS
 * Express JS
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
 ## Contact
@@ -49,3 +53,5 @@ Email: meganle414@gmail.com
 Project Link: [https://github.com/meganle414/food-tracker](https://github.com/meganle414/food-tracker)
 
 [linkedin-url]: https://linkedin.com/in/meganle414/
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
